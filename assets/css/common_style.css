@@ -137,11 +137,10 @@ nav::-webkit-scrollbar-thumb {
 /* Footer que representa todo el reproductor de la canción actual (portada, título, datos, botones, etc) */
 footer{
     width: 100%;
-    height: 175px;
+    height: 170px;
     display: flex;
     padding-left: var(--global-separation);
     padding-bottom: var(--global-separation);
-    z-index: 2;
 }
 
 /* Contenedor que representa la imagen de la playlist donde la canción apareció por primera vez al público */
@@ -173,7 +172,7 @@ footer{
 
 /* Contenedor que incluye los iconos controladores de la canción actual */
 #controls-playing-song{
-    height: 125px;
+    height: 120px;
     display: flex;
     flex-direction: row;
     padding: 0 var(--global-separation);
@@ -207,13 +206,17 @@ footer{
     align-items: center;
     justify-content: left;
     font-size: 35px;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#playing-song-buttons span:active {
+    transform: scale(0.75);
 }
 
 /* El span del icono del menú, tiene un margen izquierdo adicional */
 #menu{
     margin-left: 15px;
 }
-
 
 /* Contenedor en donde el input del cambio de volumen se encuentra */
 .range-input-container{
@@ -222,7 +225,6 @@ footer{
     justify-content: center;
     height: 10px;
 }
-
 
 /* Aparecia del input de rango */
 input[type="range"] {
@@ -275,6 +277,51 @@ input[type="range"]::-moz-range-thumb {
     box-shadow: -3007px 0 0 3000px var(--mid-lilac);
 }
 
+/* El input de rango que actuará como cambiador de volumen, tiene margen adicional (necesario para el diseño de interfaz) */
 #volume-input{
     margin: 0 15px 0 5px;
+}
+
+header{
+    height: calc(var(--global-separation)*2);
+    display: flex;
+    flex-direction: row;
+    gap: var(--global-separation);
+}
+
+#home{
+    color: var(--mid-lilac);
+    font-size: calc(var(--global-separation)*2);
+    width: calc(var(--global-separation)*2);
+    height: calc(var(--global-separation)*2);
+}
+
+#search-input {
+    padding: 12px;
+    border-radius: var(--global-radius);
+    background-color: var(--low-lilac);
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    font-size: 15px;
+    flex: 1;
+}
+
+#search-input::placeholder{
+    font-size: 15px;
+}
+  
+
+/* Contenedor del icono del usuario */
+#user-icon{
+    width: calc(var(--global-separation)*2);
+    height: calc(var(--global-separation)*2);
+    border-radius: var(--global-radius);
+}
+
+#user-icon img{
+    width: inherit;
+    height: inherit;
+    border-radius: var(--global-radius);
 }

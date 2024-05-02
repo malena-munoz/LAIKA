@@ -19,7 +19,48 @@
         <div id="main-divider">
             <!-- Página del encabezado de navegación principal y otros controles que interaccionará el usuario -->
             <?php include 'head_interaction.php';?>
-            <h1>HOLA</h1>
+
+            <!-- <div class='main-content'>
+                <h3 style="margin: var(--global-separation) 0 2px 0;">Los albumes mas escuchados</h3>
+                <div>
+                    <button id="scroll-left">&lt;</button>
+                    <div id="main-albums">
+
+                    </div>
+                    <button id="scroll-right">&gt;</button>
+                </div>
+
+                <h3 style="margin: var(--global-separation) 0 2px 0;">Los artistas del momento</h3>
+                <div>
+                    <div id="main-artists">
+                        
+                    </div>
+                </div>
+            </div> -->
+
+            <div class='main-content'>
+                <h3 style="margin: var(--global-separation) 0 2px 0;">Los albumes mas escuchados</h3>
+                <div id="albums-container" class="scroll-container">
+                    <button id="albums-scroll-left" class="scroll-left">&lt;</button>
+                    <div id="main-albums">
+
+                    </div>
+                    <button id="albums-scroll-right" class="scroll-right">&gt;</button>
+                </div>
+
+                <h3 style="margin: var(--global-separation) 0 2px 0;">Los artistas del momento</h3>
+                <div id="artists-container" class="scroll-container">
+                    <button id="artists-scroll-left" class="scroll-left">&lt;</button>
+                    <div id="main-artists">
+                        
+                    </div>
+                    <button id="artists-scroll-right" class="scroll-right">&gt;</button>
+                </div>
+            </div>
+
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="./assets/js/main-albums.js"></script>
         </div>
         <!-- Página del controlador de la canción actual -->
         <?php include 'footer_playing_song.php';?>

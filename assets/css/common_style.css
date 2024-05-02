@@ -69,11 +69,106 @@ span{
 
 
 #main-divider{
-    background-color: palevioletred;
     flex: 1;
     margin: var(--global-separation) var(--global-separation) 2px var(--global-separation);
+    overflow-y: auto;
 }
 
+#main-albums {
+    display: flex;
+    overflow-x: hidden; /* Cambiado a hidden para ocultar la barra de desplazamiento */
+    position: relative; /* Añadido para posicionar correctamente los botones */
+}
+
+#scroll-left, #scroll-right {
+    position: absolute; /* Añadido para posicionar los botones dentro del div */
+    top: 30%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Centra verticalmente */
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    opacity: 0; /* Inicialmente invisibles */
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Para que estén sobre las cards */
+    color: pink;
+}
+
+#scroll-left {
+    left: 50;
+}
+
+#scroll-right {
+    right: 0;
+}
+
+
+.album-a{
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 220px;
+    margin: 0 var(--global-separation) 0 0;
+    transition: 300ms;
+}
+
+.album-a:hover{
+    background-color: var(--high-lilac);
+}
+
+.album{
+    max-width: 200px;
+    margin: 0 40px 0 0;
+}
+
+.artist{
+    max-width: 200px;
+    margin: 0 45px 0 0;
+}
+
+.album h3{
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+    font-size: 20px;
+}
+
+.album img{
+    width: 200px;
+    border-radius: 10px;
+}
+
+
+#main-artists{
+    display: flex;
+    overflow-x: hidden; /* Cambiado a hidden para ocultar la barra de desplazamiento */
+}
+
+.artist {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: black;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: 300ms;
+}
+
+.artist h3 {
+    font-size: 43px;
+    position: absolute;
+    bottom: 0;
+    display: block;
+}
+
+.artist.h3-oculto h3 {
+    font-size: 43px;
+    position: absolute;
+    bottom: 0;
+    display: none;
+}
 
 /* Navegación izquierda que incluye el contenedor de la lista de playlists del usuario */
 nav{

@@ -24,6 +24,7 @@ function changeVolume() {
 
 // Cambia el estado de la canción en base al icono (play o pause)
 function changeSongStatus() {
+    changeVolume();
     if(play_pause_icon.textContent==="play_arrow"){
         play_pause_icon.textContent = "pause";
         playing_song_audio.play();

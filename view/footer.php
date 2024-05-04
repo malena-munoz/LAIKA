@@ -1,7 +1,4 @@
 <footer> 
-    <div id="img-playing-song">
-        <img src="assets\img\image.png" alt="Album of the playing song">
-    </div>
     <div id="playing-song-controller">
         <div class="range-input-container" id="main-range-input">
             <input type="range" min="0" max="100" value="0" id="song-process-input" oninput="refreshProgressSong()">

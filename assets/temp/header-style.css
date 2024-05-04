@@ -1,0 +1,104 @@
+:root{
+    /* COLORES */
+    --low-lilac: #E8DAED;
+    --mid-lilac: #AD88B0;
+    --high-lilac: #755B7D;
+    --slate-lilac: #4A404E;
+    --low-lavender: #D1B8E0;
+    --mid-lavender: #8774A4;
+    --high-lavender: #4F4A6E;
+    --slate-lavender: #373A51;
+    --low-blue-slate-gray: #929CB0;
+    --high-blue-slate-gray: #2A313E;
+    --low-lilac-slate-gray: #36353C;
+    --high-lilac-slate-gray: #242A29;
+    /* MEDIDAS */
+    --img-playlist-nav-size: 95px;
+    --img-playing-song-size: 150px;
+    --radius: 5px;
+    --separation: 20px;
+}
+
+header{
+    height: 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: var(--global-separation);
+    background: linear-gradient(to top right, var(--high-lilac-slate-gray), 70%, var(--slate-lavender)) fixed no-repeat;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+header .material-symbols-rounded{
+    color: var(--mid-lilac);
+    font-size: 40px;
+    width: auto;
+    height: 40px;
+    margin-right: 10px;
+}
+
+header .centered:first-child{
+    justify-content: left;
+    margin-right: 15px;
+    flex: 1;
+  
+}
+
+header .centered:first-child span{
+    transition: all ease-in 0.2s;
+}
+
+header .centered:first-child span:hover{
+    color: var(--high-lilac);
+}
+
+header .centered:nth-child(2){
+    margin-top: 3px;
+    border-bottom: 3px solid var(--mid-lilac);
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+header .centered:nth-child(2):active {
+    transform: scale(0.95);
+}
+
+#search{
+    margin-bottom: -5px;
+    font-size: 30px;
+}
+
+#search-input {
+    width: 400px;
+    height: 40px;
+    background-color: transparent;
+    outline: none;
+    transition: all ease 0.3s;
+    color: var(--low-lilac);
+    font-size: 15px;
+    flex: 1;
+}
+
+#search-input::placeholder{
+    font-size: 15px;
+    color: var(--low-blue-slate-gray);
+}
+  
+
+/* Contenedor del icono del usuario */
+#user-icon{
+    flex: 1;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: inherit;
+    border-radius: var(--global-radius);
+}
+
+#user-icon img{
+    width: 40px;
+    height: 40px;
+    border-radius: 30%;
+}
+

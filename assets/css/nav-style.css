@@ -1,0 +1,93 @@
+.container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+.section {
+    flex-grow: 1;   
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  
+  
+  .scrollable-content {
+    flex-grow: 1;
+    margin: 0 calc(100% - 130px) -2px 15px;
+    overflow: auto;
+    
+    /* for Firefox */
+    min-height: 0;
+  }
+
+  
+/* Componentes que muestran las imágenes de las playlists en la barra de navegación izquierda */
+#playlist-list .playlist{
+    width: 95px;
+    height: 95px;
+    background-color: deeppink;
+    border-radius: var(--global-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--global-separation)
+}
+
+#playlist-list li:last-child .playlist{
+    margin-bottom: 0;
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Fondo de la barra vertical de la navegación */
+.scrollable-content::-webkit-scrollbar-track {
+    background-color: var(--high-lilac);
+}
+
+/* Cursor de la barra vertical de la navegación */
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: var(--mid-lilac);
+    border-radius: 2px;
+}
+
+/* Contenedor para rellenar la navegación (necesario para el diseño de interfaz) */
+.nav-filler{
+    width: inherit;
+    height: 15px;
+    background: linear-gradient(to top right, var(--high-lilac-slate-gray), 70%, var(--slate-lavender)) fixed no-repeat;
+    position: sticky;
+}
+
+.scrollable-content .nav-filler:first-child{
+    top: 0;
+}
+
+.scrollable-content .nav-filler:last-child{
+    height: 17px;
+    bottom: 0;
+}
+footer{
+    z-index: 2;
+    padding: 0 0 15px 15px;
+    height: 165px;
+    display: flex;
+    flex-direction: row;
+}
+ 
+#img-playing-song{
+    height: 120px;
+}
+
+/* Imagen de la playlist donde la canción apareció por primera vez al público */
+#img-playing-song img{
+    width: 130px;
+    border-radius: var(--global-radius);
+    border: 5px solid var(--mid-lilac);
+}

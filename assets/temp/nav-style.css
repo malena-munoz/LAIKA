@@ -1,0 +1,99 @@
+:root{
+    /* COLORES */
+    --low-lilac: #E8DAED;
+    --mid-lilac: #AD88B0;
+    --high-lilac: #755B7D;
+    --slate-lilac: #4A404E;
+    --low-lavender: #D1B8E0;
+    --mid-lavender: #8774A4;
+    --high-lavender: #4F4A6E;
+    --slate-lavender: #373A51;
+    --low-blue-slate-gray: #929CB0;
+    --high-blue-slate-gray: #2A313E;
+    --low-lilac-slate-gray: #36353C;
+    --high-lilac-slate-gray: #242A29;
+    /* MEDIDAS */
+    --img-playlist-nav-size: 95px;
+    --img-playing-song-size: 150px;
+    --radius: 5px;
+    --separation: 20px;
+}
+
+nav{
+    width: 140px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+}
+
+#vertical-container{
+    flex-grow: 1;   
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+#scrollable-content{
+    flex-grow: 1;
+    overflow: auto;
+    min-height: 0;
+    padding-left: var(--separation);
+}
+
+#scrollable-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Fondo de la barra vertical de la navegación */
+#scrollable-content::-webkit-scrollbar-track {
+    background-color: var(--high-lilac);
+}
+
+/* Cursor de la barra vertical de la navegación */
+#scrollable-content::-webkit-scrollbar-thumb {
+    background-color: var(--mid-lilac);
+    border-radius: 2px;
+}
+
+#playlist-list li:last-child .playlist{
+    margin-bottom: 0;
+}
+
+#img-current-song{
+    height: 140px;
+    padding: 0 0 var(--separation) var(--separation);
+}
+
+#img-current-song img{
+    width: 100%; 
+    height: auto;
+    border: 5px solid var(--mid-lilac);
+    border-radius: var(--radius);
+    border-top-right-radius: 0px;
+}
+
+.playlist{
+    width: 95px;
+    height: 95px;
+    background-color: deeppink;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--separation)
+}
+
+#scrollable-content .filler:first-child {
+    position: sticky;
+    top: 0;
+}
+
+#scrollable-content .filler:last-child {
+    position: sticky;
+    bottom: 0;
+    height: 24px;
+}

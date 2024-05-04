@@ -1,0 +1,136 @@
+
+footer{
+    background: linear-gradient(to top right, var(--high-lilac-slate-gray), 70%, var(--slate-lavender) fixed no-repeat);
+    height: 140px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 7;
+    display: flex;
+    flex-direction: column;
+    padding-left: 140px;
+}
+
+
+/* Modificaciones en el propio input de rango que actúa como la barra de progreso de la canción actual */
+#main-range-input input{
+    height: 5px;
+    flex-grow: 1;
+    border-radius: 0;
+}
+
+#main-range-input input::-webkit-slider-thumb {
+    box-shadow: -3007px 0 0 3000px var(--mid-lilac);
+}
+
+#main-range-input input::-moz-range-thumb {
+    box-shadow: -3007px 0 0 3000px var(--mid-lilac);
+}
+
+/* Contenedor que incluye los iconos controladores de la canción actual */
+#controls-playing-song{
+    height: 110px;
+    display: flex;
+    flex-direction: row;
+    padding: 0 var(--separation);
+}
+
+/* Contenedor que incluye el título y los artistas de la canción actual */
+#playing-song-info{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#playing-song-buttons{
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+}
+
+/* Iconos que representan los botones para manipular la canción */
+#playing-song-buttons span{
+    color: var(--mid-lilac);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 35px;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#playing-song-buttons span:active {
+    transform: scale(0.75);
+}
+
+/* El span del icono del menú, tiene un margen izquierdo adicional */
+#menu{
+    margin-left: 15px;
+}
+
+/* Contenedor en donde el input del cambio de volumen se encuentra */
+.range-input-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Aparecia del input de rango */
+input[type="range"] {
+    width: 100px;
+    height: 10px;
+    background: var(--high-lilac);
+    border-radius: var(--radius);
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+}
+
+/* Cursor del input de rango (Chrome) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background: var(--mid-lilac);
+    border-radius: 50%;
+    box-shadow: -107px 0 0 100px var(--mid-lilac);
+}
+
+/* Cursor del input de rango (Mozilla) */
+input[type="range"]::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    background: var(--mid-lilac);
+    border-radius: 50%;
+    box-shadow: -107px 0 0 100px var(--mid-lilac);
+}
+
+/* Modificaciones en el contenedor del input de rango que actúa como la barra de progreso de la canción actual */
+#main-range-input{
+    display: flex;
+    align-items: end;
+}
+
+/* Modificaciones en el propio input de rango que actúa como la barra de progreso de la canción actual */
+#main-range-input input{
+    height: 5px;
+    flex-grow: 1;
+    border-radius: 0;
+}
+
+#main-range-input input::-webkit-slider-thumb {
+    box-shadow: -3007px 0 0 3000px var(--mid-lilac);
+}
+
+#main-range-input input::-moz-range-thumb {
+    box-shadow: -3007px 0 0 3000px var(--mid-lilac);
+}
+
+/* El input de rango que actuará como cambiador de volumen, tiene margen adicional (necesario para el diseño de interfaz) */
+#volume-input{
+    margin: 0 15px 0 5px;
+}

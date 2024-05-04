@@ -1,0 +1,116 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');   
+
+:root{
+    /* COLORES */
+    --low-lilac: #E8DAED;
+    --mid-lilac: #AD88B0;
+    --high-lilac: #755B7D;
+    --slate-lilac: #4A404E;
+    --low-lavender: #D1B8E0;
+    --mid-lavender: #8774A4;
+    --high-lavender: #4F4A6E;
+    --slate-lavender: #373A51;
+    --low-blue-slate-gray: #929CB0;
+    --high-blue-slate-gray: #2A313E;
+    --low-lilac-slate-gray: #36353C;
+    --high-lilac-slate-gray: #242A29;
+    /* MEDIDAS */
+    --img-playlist-nav-size: 100px;
+    --img-playing-song-size: 150px;
+    --radius: 7px;
+    --separation: 20px;
+}
+
+/* Atributos que afectan a todas las etiquetas */
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Satoshi', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background: linear-gradient(to top right, var(--high-lilac-slate-gray), 70%, var(--slate-lavender));
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+h3{
+    font-size: 35px;
+    color: var(--low-lilac);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+h4{
+    font-size: 15px;
+    color: var(--low-blue-slate-gray);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+span{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
+.filler{
+    width: inherit;
+    height: var(--separation);
+    background: linear-gradient(to top right, var(--high-lilac-slate-gray), 70%, var(--slate-lavender)) fixed no-repeat;
+    position: sticky;
+}
+
+.centered{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="range"] {
+    width: 100px;
+    height: 10px;
+    background: var(--high-lilac);
+    border-radius: var(--global-radius);
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+}
+
+.range-input-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Cursor del input de rango (Chrome) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background: var(--mid-lilac);
+    border-radius: 50%;
+    box-shadow: -107px 0 0 100px var(--mid-lilac);
+}
+
+/* Cursor del input de rango (Mozilla) */
+input[type="range"]::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    background: var(--mid-lilac);
+    border-radius: 50%;
+    box-shadow: -107px 0 0 100px var(--mid-lilac);
+}

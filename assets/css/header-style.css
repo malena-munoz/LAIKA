@@ -1,24 +1,4 @@
-:root{
-    /* COLORES */
-    --low-lilac: #E8DAED;
-    --mid-lilac: #AD88B0;
-    --high-lilac: #755B7D;
-    --slate-lilac: #4A404E;
-    --low-lavender: #D1B8E0;
-    --mid-lavender: #8774A4;
-    --high-lavender: #4F4A6E;
-    --slate-lavender: #373A51;
-    --low-blue-slate-gray: #929CB0;
-    --high-blue-slate-gray: #2A313E;
-    --low-lilac-slate-gray: #36353C;
-    --high-lilac-slate-gray: #242A29;
-    /* MEDIDAS */
-    --img-playlist-nav-size: 95px;
-    --img-playing-song-size: 150px;
-    --radius: 5px;
-    --separation: 20px;
-}
-
+/* Encabezado principal, contendrá con controladores para hacer búsquedas, acceder a tu usuario y volver al menú principal */
 header{
     height: 80px;
     display: flex;
@@ -31,6 +11,8 @@ header{
     z-index: 10;
 }
 
+
+/* Los contenedore4s de la clase 'material-symbols-rounded',  */
 header .material-symbols-rounded{
     color: var(--mid-lilac);
     font-size: 40px;
@@ -39,6 +21,8 @@ header .material-symbols-rounded{
     margin-right: 10px;
 }
 
+
+/* Primer contenedor de la clase 'centered', cogerá el espacio restante */
 header .centered:first-child{
     justify-content: left;
     margin-right: 15px;
@@ -46,29 +30,41 @@ header .centered:first-child{
   
 }
 
+
+/* Etiqueta SPAN del primer contenedor de la clase 'centered' */
 header .centered:first-child span{
     transition: all ease-in 0.2s;
 }
 
+
+/* Etiqueta SPAN del primer contenedor de la clase 'centered' AL TENER EL PUNTERO ENCIMA */
 header .centered:first-child span:hover{
     color: var(--high-lilac);
 }
 
+
+/* Segundo contenedor de la clase 'centered' */
 header .centered:nth-child(2){
     margin-top: 3px;
     border-bottom: 3px solid var(--mid-lilac);
     transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+
+/* Segundo contenedor de la clase 'centered' AL HACER CLIC */
 header .centered:nth-child(2):active {
     transform: scale(0.95);
 }
 
+
+/* Icono 'search' */
 #search{
     margin-bottom: -5px;
     font-size: 30px;
 }
 
+
+/* Input de búsqueda */
 #search-input {
     width: 400px;
     height: 40px;
@@ -80,6 +76,8 @@ header .centered:nth-child(2):active {
     flex: 1;
 }
 
+
+/* Marca de texto del input de búsqueda */
 #search-input::placeholder{
     font-size: 15px;
     color: var(--low-blue-slate-gray);
@@ -96,9 +94,10 @@ header .centered:nth-child(2):active {
     border-radius: var(--global-radius);
 }
 
+
+/* Estilos de la etiqueta imagen, que se encuentra dentro del contenedor 'user-icon' */
 #user-icon img{
     width: 40px;
     height: 40px;
     border-radius: 30%;
 }
-

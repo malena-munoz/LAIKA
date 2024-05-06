@@ -1,4 +1,5 @@
 #main-divider{
+    overflow-x: hidden;
     overflow-y: auto;
     margin-left: 160px;
     padding-right: 20px;
@@ -9,6 +10,7 @@
     position: sticky;
     bottom: 0;
     height: 24px;
+    background: linear-gradient(to top right, var(--high-lilac-slate-gray), 70%, var(--slate-lavender)) fixed no-repeat;
 }
 
 #main-divider::-webkit-scrollbar {

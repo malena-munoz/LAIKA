@@ -15,9 +15,9 @@
     --low-lilac-slate-gray: #36353C;
     --high-lilac-slate-gray: #242A29;
     /* MEDIDAS */
-    --img-playlist-nav-size: 100px;
+    --img-playlist-nav-size: 95px;
     --img-playing-song-size: 150px;
-    --radius: 7px;
+    --radius: 5px;
     --separation: 20px;
 }
 

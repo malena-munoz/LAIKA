@@ -14,6 +14,7 @@ $(document).ready(function() {
             data: 'grant_type=client_credentials',
             success: function(response) {
                 var accessToken = response.access_token;
+                console.log('Token de acceso obtenido:', accessToken);
                 callback(accessToken);
             },
             error: function(err) {
@@ -31,7 +32,7 @@ $(document).ready(function() {
                 'Authorization': 'Bearer ' + accessToken
             },
             success: function(data) {
-                // console.log('Álbumes más populares:', data);
+                console.log('Álbumes más populares:', data);
                 var albums = data.albums.items;
 
                 albums.forEach(function(album) {
@@ -41,13 +42,14 @@ $(document).ready(function() {
                         html += '<img src="' + album.images[0].url + '" alt="' + album.name + '">';
                     }
                     html += '<h3 alt='+albumName+'>' + albumName + '</h4>';
-                    if (album.artists) {
-                        html += '<h4>';
-                        album.artists.forEach(function(artist) {
-                            html += ' ' + artist.name;
-                        });
-                        html += '</h4>';
-                    }
+                    html += '<h4>';
+                    album.artists.forEach(function(artist, index) {
+                        html += artist.name;
+                        if (index < album.artists.length - 1) {
+                            html += ', ';
+                        }
+                    });
+                    html += '</h4>';
                     html += '</div></a>';
                     $('#main-albums').append(html);
                 });
@@ -57,6 +59,70 @@ $(document).ready(function() {
             },
             error: function(err) {
                 console.error('Error al obtener los álbumes:', err);
+            }
+        });
+    }
+
+    // Función para imprimir las playlists más populares
+    function printPlaylists(accessToken) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/browse/featured-playlists?limit=6',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(data) {
+                console.log('Playlists más populares:', data);
+                var playlists = data.playlists.items;
+
+                playlists.forEach(function(playlist) {
+                    var html = '<a href="#" class="playlist-div-a"><div class="playlist-div">';
+                    if (playlist.images.length > 0) {
+                        html += '<img src="' + playlist.images[0].url + '">';
+                    }
+                    html += '<h3>' + playlist.name + '</h3>';
+                    html += '<h4>' + playlist.description + '</h4>';
+                    html += '</div></a>';
+                    $('#main-playlists').append(html);
+                });
+            },
+            error: function(err) {
+                console.error('Error al obtener las playlists:', err);
+            }
+        });
+    }
+    // Función para imprimir las canciones de la playlist "Top 50"
+    function printTop50(accessToken) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(data) {
+                console.log('Canciones del Top 50:', data);
+                var tracks = data.items;
+
+                tracks.forEach(function(track) {
+                    var html = '<a href="#" class="track-a"><div class="track">';
+                    if (track.track.album.images.length > 0) {
+                        html += '<img src="' + track.track.album.images[0].url + '" alt="' + track.track.name + '">';
+                    }
+                    html += '<h3>' + track.track.name + '</h3>';
+                    html += '<h4>';
+                    track.track.artists.forEach(function(artist, index) {
+                        html += artist.name;
+                        if (index < track.track.artists.length - 1) {
+                            html += ', ';
+                        }
+                    });
+                    html += '</h4>';
+                    html += '</div></a>';
+                    $('#top-50-songs').append(html);
+                });
+            },
+            error: function(err) {
+                console.error('Error al obtener las canciones del Top 50:', err);
             }
         });
     }
@@ -72,7 +138,7 @@ $(document).ready(function() {
                         'Authorization': 'Bearer ' + accessToken
                     },
                     success: function(data) {
-                        //console.log('Información del artista:', data);
+                        console.log('Información del artista:', data);
                         var html = '<a href="#"><div class="artist" style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(' + data.images[0].url + ')">';
                         html += '<h3>' + data.name + '</h3>';
                         html += '</div></a>';
@@ -86,11 +152,14 @@ $(document).ready(function() {
         });
     }
 
-    // Obtener el token de acceso y llamar a la función para imprimir los datos
+    // Obtener el token de acceso y llamar a las funciones para imprimir los datos
     getAccessToken(function(accessToken) {
         printAlbums(accessToken);
+        printPlaylists(accessToken);
+        printTop50(accessToken);
     });
 });
+
 
 
 
@@ -116,14 +185,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
         scrollLeft.addEventListener("click", function() {
             mainContentDiv.scrollBy({
-                left: -250, // Ajusta la cantidad de desplazamiento según tus necesidades
+                left: -1500, // Ajusta la cantidad de desplazamiento según tus necesidades
                 behavior: "smooth"
             });
         });
 
         scrollRight.addEventListener("click", function() {
             mainContentDiv.scrollBy({
-                left: 250, // Ajusta la cantidad de desplazamiento según tus necesidades
+                left: 1500, // Ajusta la cantidad de desplazamiento según tus necesidades
                 behavior: "smooth"
             });
         });

@@ -28,12 +28,6 @@
     border-radius: 2px;
 }
 
-#main-albums {
-    display: flex;
-    overflow-x: hidden; /* Cambiado a hidden para ocultar la barra de desplazamiento */
-    position: relative; /* Añadido para posicionar correctamente los botones */
-}
-
 #scroll-left, #scroll-right {
     position: absolute; /* Añadido para posicionar los botones dentro del div */
     top: 30%; /* Centra verticalmente */
@@ -56,8 +50,17 @@
     right: 0;
 }
 
+/* ,---------- ALBUM PLAYLIST ----------, */
 
-.album-a{
+#main-albums,
+#main-playlists{
+    display: flex;
+    overflow-x: hidden; /* Cambiado a hidden para ocultar la barra de desplazamiento */
+    position: relative; /* Añadido para posicionar correctamente los botones */
+}
+
+.album-a,
+.playlist-div-a{
     padding: 10px;
     border-radius: 10px;
     max-width: 220px;
@@ -65,21 +68,18 @@
     transition: 300ms;
 }
 
-.album-a:hover{
+.album-a:hover,
+.playlist-div-a:hover{
     background-color: var(--high-lilac);
 }
 
-.album{
+.album,
+.playlist-div{
     max-width: 200px;
-    margin: 0 40px 0 0;
 }
 
-.artist{
-    max-width: 200px;
-    margin: 0 45px 0 0;
-}
-
-.album h3{
+.album h3,
+.playlist-div h3{
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -87,11 +87,24 @@
     font-size: 20px;
 }
 
-.album img{
+.album h4,
+.playlist-div h4{
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+}
+
+.album img,
+.playlist-div img{
     width: 200px;
     border-radius: 10px;
 }
 
+/* ^---------- ALBUM PLAYLIST ----------^ */
+
+
+/* ,---------- ARTIST ----------, */
 
 #main-artists{
     display: flex;
@@ -99,8 +112,10 @@
 }
 
 .artist {
+    margin: 10px;
     position: relative;
     width: 200px;
+    max-width: 200px;
     height: 200px;
     border-radius: 10px;
     padding: 15px;
@@ -124,3 +139,45 @@
     display: none;
 }
 
+/* ^---------- ARTIST ----------^ */
+
+
+/* ,---------- TRACKS ----------, */
+
+#top-50-songs{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.track-a{
+    margin: 10px;
+    flex: 0 0 auto;
+    margin: 5px; /* Espacio entre los elementos */
+    padding: 10px;
+    /* Establece el tamaño relativo del elemento */
+    width: calc((100% / 7) - 10px); /* Por ejemplo, tres elementos por fila */
+    /* Ajusta este valor según el número de elementos que desees mostrar por fila */
+}
+
+.track img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.track h3{
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+    font-size: 20px;
+}
+
+.track h4{
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+}
+
+/* ^---------- TRACKS ----------^ */

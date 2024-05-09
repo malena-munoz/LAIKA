@@ -1,4 +1,4 @@
-footer{
+.main-footer{
     background: linear-gradient(to top right, var(--high-lilac-slate-gray), 70%, var(--slate-lavender) fixed no-repeat);
     height: 140px;
     width: 100%;

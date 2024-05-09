@@ -14,7 +14,7 @@ $(document).ready(function() {
             data: 'grant_type=client_credentials',
             success: function(response) {
                 var accessToken = response.access_token;
-                console.log('Token de acceso obtenido:', accessToken);
+                // console.log('Token de acceso obtenido:', accessToken);
                 callback(accessToken);
             },
             error: function(err) {
@@ -32,7 +32,7 @@ $(document).ready(function() {
                 'Authorization': 'Bearer ' + accessToken
             },
             success: function(data) {
-                console.log('Álbumes más populares:', data);
+                // console.log('Álbumes más populares:', data);
                 var albums = data.albums.items;
 
                 albums.forEach(function(album) {
@@ -72,7 +72,7 @@ $(document).ready(function() {
                 'Authorization': 'Bearer ' + accessToken
             },
             success: function(data) {
-                console.log('Playlists más populares:', data);
+                // console.log('Playlists más populares:', data);
                 var playlists = data.playlists.items;
 
                 playlists.forEach(function(playlist) {
@@ -100,11 +100,11 @@ $(document).ready(function() {
                 'Authorization': 'Bearer ' + accessToken
             },
             success: function(data) {
-                console.log('Canciones del Top 50:', data);
+                // console.log('Canciones del Top 50:', data);
                 var tracks = data.items;
 
-                tracks.forEach(function(track) {
-                    var html = '<a href="#" class="track-a"><div class="track">';
+                tracks.forEach(function(track, index) {
+                    var html = '<a href="#" class="track-a" data-name="' + track.track.name + '" data-artists="' + track.track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.track.preview_url + '"><div class="track">';
                     if (track.track.album.images.length > 0) {
                         html += '<img src="' + track.track.album.images[0].url + '" alt="' + track.track.name + '">';
                     }
@@ -119,6 +119,21 @@ $(document).ready(function() {
                     html += '</h4>';
                     html += '</div></a>';
                     $('#top-50-songs').append(html);
+                });
+
+                // Agregar el evento clic a cada elemento de canción
+                $('.track-a').on('click', function(e) {
+                    e.preventDefault();
+                    var songName = $(this).data('name');
+                    var artists = $(this).data('artists');
+                    var previewUrl = $(this).data('preview');
+                    var imageUrl = $(this).find('img').attr('src'); // Get the image URL of the clicked song
+                    // Actualizar la información de la canción en el reproductor
+                    $('#playing-song-info h3').text(songName);
+                    $('#playing-song-info h4').text(artists);
+                    playing_song_audio.src = previewUrl;
+                    $('#img-current-song img').attr('src', imageUrl); // Update the image of the playing song
+                    changeSongStatus(); // Reproducir la canción automáticamente
                 });
             },
             error: function(err) {
@@ -138,7 +153,7 @@ $(document).ready(function() {
                         'Authorization': 'Bearer ' + accessToken
                     },
                     success: function(data) {
-                        console.log('Información del artista:', data);
+                        // console.log('Información del artista:', data);
                         var html = '<a href="#"><div class="artist" style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(' + data.images[0].url + ')">';
                         html += '<h3>' + data.name + '</h3>';
                         html += '</div></a>';
@@ -212,3 +227,31 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+
+
+
+
+
+// -----------------------------------------------------------------------------------------------------------------------------------------
+
+function obtenerSaludo() {
+    var hora = new Date().getHours();
+    var saludo;
+
+    if (hora >= 7 && hora < 14) {
+        saludo = "¡Buenos días!";
+    } else if (hora >= 14 && hora < 20) {
+        saludo = "¡Buenas tardes!";
+    } else {
+        saludo = "¡Buenas noches!";
+    }
+
+    return saludo;
+}
+
+// Obtener el elemento donde mostrar el saludo
+var mensajeSaludo = document.getElementById("saludo"); // Ajusta el ID según tu HTML
+
+// Mostrar el saludo
+mensajeSaludo.textContent = obtenerSaludo();

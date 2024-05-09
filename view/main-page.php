@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="assets/css/home-style.css"/>
     </head>
     <body>
+        <div class="loader-overlay" id="loader-overlay">
+            <div class="spinner"></div>
+        </div>
         <audio id="playing-song-audio" ontimeupdate="refreshProgressBar(), changeMaxValueSongProgress()">
             <source src="./assets/audio/paid.mp3" type="audio/mp3">
         </audio>
@@ -24,7 +27,10 @@
         </div>
         <?php include 'footer.php';?>
     </body>
-    <script src="./assets/js/playing-song-script.js"></script>
+    <script src="https://widget.deezer.com/widget/dynamic/deezer-widget-loader.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/playing-song-script.js"></script>
+    <script src="./assets/js/common-script.js"></script>
+    <script src="./assets/js/search-script.js"></script>
     <script src="./assets/js/main-albums.js"></script>
 </html> 

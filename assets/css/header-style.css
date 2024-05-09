@@ -76,13 +76,11 @@ header .centered:nth-child(2):active {
     flex: 1;
 }
 
-
 /* Marca de texto del input de búsqueda */
 #search-input::placeholder{
     font-size: 15px;
     color: var(--low-blue-slate-gray);
 }
-  
 
 /* Contenedor del icono del usuario */
 #user-icon{

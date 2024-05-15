@@ -1,25 +1,62 @@
-// Función para mostrar el loader
-function showLoader() {
-    document.getElementById('loader-overlay').style.display = 'block';
-}
-
-// Función para ocultar el loader
-function hideLoader() {
-    document.getElementById('loader-overlay').style.display = 'none';
-}
-
-// Muestra el loader cuando se está cargando contenido
-window.addEventListener('load', hideLoader); // Oculta el loader cuando la página se ha cargado completamente
-document.addEventListener('DOMContentLoaded', showLoader); // Muestra el loader cuando se ha cargado el DOM
-window.addEventListener('beforeunload', showLoader); // Muestra el loader antes de que la página se cierre o recargue
-
-// AJAX request example
-function fetchImages() {
-    showLoader(); // Mostrar el loader antes de la solicitud AJAX
-    // Realizar la solicitud AJAX para obtener imágenes
-    // Supongamos que aquí se hace la llamada AJAX para obtener imágenes
-    // Una vez que se reciban las imágenes, se debe ocultar el loader
+// Espera a que se cargue todo el contenido de la página
+document.addEventListener("DOMContentLoaded", function() {
+    // Simula una carga de contenido
     setTimeout(function() {
-        hideLoader(); // Ocultar el loader después de recibir las imágenes (simulado con setTimeout)
-    }, 2000); // Simulación de tiempo de espera de 2 segundos (ajustar según la realidad)
-}
+        // Muestra las cards y oculta el skeleton loader
+        var cards = document.querySelectorAll(".card_loader");
+        cards.forEach(function(card) {
+            card.style.display = "none";
+        });
+    }, 1200); // Simula un tiempo de carga de 2 segundos, ajusta según sea necesario
+});
+
+//---------------------------------------------------------------------------------------
+
+document.addEventListener('DOMContentLoaded', function () {
+    var modal = document.getElementById('modal');
+    var formUI = document.getElementById('form-ui');
+
+    // Abrir el modal
+    function openModal() {
+        modal.classList.remove('fadeOut');
+        modal.style.display = 'block';
+    }
+
+    // Cerrar el modal
+    function closeModal() {
+        modal.classList.add('fadeOut');
+        setTimeout(function () {
+            modal.style.display = 'none';
+        }, 300); // Tiempo de duración de la animación
+    }
+
+    // Evento clic en la "x" para cerrar el modal
+    var closeButton = document.querySelector('#close-modal .close');
+    closeButton.addEventListener('click', closeModal);
+
+    // Evento clic fuera del formulario para cerrar el modal
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Evento clic en el botón "Login" dentro del formulario
+    var loginButton = document.getElementById('submit-button');
+    loginButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        // Aquí podrías agregar la lógica para enviar los datos del formulario
+        closeModal();
+    });
+
+    // Evento clic en el botón "Forgot password?"
+    var forgotPasswordLink = document.getElementById('forgot-pass');
+    forgotPasswordLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        // Aquí podrías agregar la lógica para el enlace "Forgot password?"
+    });
+
+    // Evento clic en el botón para abrir el modal
+    document.querySelector('.sparkle-button').addEventListener('click', openModal);
+});
+

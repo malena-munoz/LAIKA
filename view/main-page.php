@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+// Lógica para iniciar sesión del usuario...
+
+$_SESSION['loggedin'] = false; // Establecer la variable de sesión
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -11,10 +18,13 @@
         <link rel="stylesheet" href="assets/css/footer-style.css"/>
         <link rel="stylesheet" href="assets/css/header-style.css"/>
         <link rel="stylesheet" href="assets/css/home-style.css"/>
+        <link rel="stylesheet" href="assets/css/register-style.css"/>
     </head>
     <body>
-        <div class="loader-overlay" id="loader-overlay">
-            <div class="spinner"></div>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <?php include 'register.php'; ?>
+            </div>
         </div>
         <audio id="playing-song-audio" ontimeupdate="refreshProgressBar(), changeMaxValueSongProgress()">
             <source src="./assets/audio/paid.mp3" type="audio/mp3">

@@ -8,7 +8,12 @@
             <input placeholder="Buscar en Spotify..." type="text" name="text" id="search-input">
         </form>
     </section>
-    <div id="user-icon">
-        <img src="assets\img\uwu.png" alt="Icono de usuario">
-    </div>
+
+    <?php
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
+        include 'components/header-user-icon.php';
+    } else {
+        include 'components/header-buttons.php';
+    }
+    ?>
 </header>

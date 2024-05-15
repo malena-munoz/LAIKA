@@ -1,4 +1,4 @@
-<nav>
+<nav class="nav-playlists">
     <div id="vertical-container">
         <div id="scrollable-content">
             <section class="filler"></section>

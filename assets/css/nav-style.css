@@ -1,5 +1,5 @@
 /* Contenedor vertical izquierdo que muestra las playlists del usuario y el álbum de la canción que se está reproduciendo */
-nav{
+.nav-playlists{
     width: 140px;
     position: fixed;
     top: 0;

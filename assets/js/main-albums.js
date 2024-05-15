@@ -26,7 +26,7 @@ $(document).ready(function() {
     // Función para imprimir los álbumes
     function printAlbums(accessToken) {
         $.ajax({
-            url: 'https://api.spotify.com/v1/browse/new-releases?limit=20',
+            url: 'https://api.spotify.com/v1/browse/new-releases?limit=30',
             type: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -215,15 +215,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function toggleScrollButtonsVisibility(mainContentDiv, scrollLeft, scrollRight) {
         if (mainContentDiv.scrollLeft > 0) {
-            scrollLeft.style.opacity = 1;
+            scrollLeft.style.display = 'block';
         } else {
-            scrollLeft.style.opacity = 0;
+            scrollLeft.style.display = 'none';
         }
-
+    
         if (mainContentDiv.scrollLeft < (mainContentDiv.scrollWidth - mainContentDiv.clientWidth)) {
-            scrollRight.style.opacity = 1;
+            scrollRight.style.display = 'block';
         } else {
-            scrollRight.style.opacity = 0;
+            scrollRight.style.display = 'none';
         }
     }
 });

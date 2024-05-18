@@ -91,7 +91,8 @@
     font-size: 40px;
 }
 
-#welcome-line-2 {
+#welcome-line-2,
+.instruccion {
     color: #ffffff;
     font-size: 18px;
     margin-top: 17px;
@@ -134,7 +135,8 @@
     margin-top: 20px;
 }
 
-#submit-button {
+#submit-button,
+#continuar-button {
     display: block;
     width: 100%;
     color: var(--mid-lilac);
@@ -151,7 +153,8 @@
     transition: all ease-in-out .3s;
 }
 
-#submit-button:hover {
+#submit-button:hover,
+#continuar-button:hover {
     transition: all ease-in-out .3s;
     background-color: var(--mid-lilac);
     color: #161616;

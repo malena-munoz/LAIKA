@@ -1,4 +1,4 @@
-<footer class='main-footer'>
+<div class='player'>
     <div class="range-input-container" id="main-range-input">
         <input type="range" min="0" max="100" value="0" id="song-process-input" oninput="refreshProgressSong()">
     </div>
@@ -18,4 +18,4 @@
             <span class="material-symbols-rounded" id="menu">menu</span>
         </div>
     </div>
-</footer>
+</div>

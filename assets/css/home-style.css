@@ -1,55 +1,38 @@
-#main-divider{
-    overflow-x: hidden;
-    overflow-y: auto;
-    margin-left: 160px;
-    padding-right: 20px;
-    max-height: calc(100vh - 140px);
+#greetings{
+    font-size: 70px;
+    color: var(--low-blue-slate-gray);
+    margin-top: 20px;
 }
 
-#main-divider .filler{
-    position: sticky;
-    bottom: 0;
-    height: 24px;
-    background: linear-gradient(to top right, var(--high-lilac-slate-gray), 70%, var(--slate-lavender)) fixed no-repeat;
+/* Contenedor deslizable principal */
+.scroll-container{
+    display: flex;
+    margin: 10px 0 30px 0;
 }
 
-#main-divider::-webkit-scrollbar {
-    width: 5px;
+/* Botones de scroll de tarjetas (artistas, albums, canciones) */
+.scroll-left, .scroll-right{
+    border-radius: var(--radius);
+    color: var(--mid-lilac);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, var(--high-lilac-slate-gray) 50%, var(--slate-lavender)) fixed;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 3;
+    border-radius: 0;
 }
 
-/* Fondo de la barra vertical de la navegación */
-#main-divider::-webkit-scrollbar-track {
-    background-color: var(--high-lilac);
+.scroll-left:active, .scroll-right:active{
+    color: var(--low-lilac);
 }
 
-/* Cursor de la barra vertical de la navegación */
-#main-divider::-webkit-scrollbar-thumb {
-    background-color: var(--mid-lilac);
-    border-radius: 2px;
+.scroll-left span, .scroll-right span{
+    font-size: 40px;
 }
 
-#scroll-left, #scroll-right {
-    position: absolute; /* Añadido para posicionar los botones dentro del div */
-    top: 30%; /* Centra verticalmente */
-    transform: translateY(-50%); /* Centra verticalmente */
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
-    opacity: 0; /* Inicialmente invisibles */
-    transition: opacity 0.3s ease;
-    z-index: 1; /* Para que estén sobre las cards */
-    color: pink;
-}
 
-#scroll-left {
-    left: 50;
-}
-
-#scroll-right {
-    right: 0;
-}
-
+/* Separador con borde */
 .hr{
     width: 100%;
     border-bottom: 3px solid var(--mid-lilac);
@@ -57,17 +40,24 @@
     margin-bottom: var(--separation);
 }
 
-/* ,---------- ALBUM PLAYLIST ----------, */
+/* ,---------- RANDOM ----------, */
 
-#main-albums,
-#main-playlists{
+#random-container{
+    height: fit-content;
+    margin-bottom: 30px;
+}
+
+
+/* ,---------- CARDS ----------, */
+
+.scroll-container div:nth-child(2){
     display: flex;
     overflow-x: hidden; /* Cambiado a hidden para ocultar la barra de desplazamiento */
     position: relative; /* Añadido para posicionar correctamente los botones */
+    flex: 1; 
 }
 
-.album-a,
-.playlist-div-a{
+.card-a{
     padding: 10px;
     border-radius: 10px;
     max-width: 220px;
@@ -75,18 +65,15 @@
     transition: 300ms;
 }
 
-.album-a:hover,
-.playlist-div-a:hover{
+.card-a:hover{
     background-color: var(--high-lilac);
 }
 
-.album,
-.playlist-div{
+.card{
     max-width: 200px;
 }
 
-.album h3,
-.playlist-div h3{
+.card h3{
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -94,29 +81,75 @@
     font-size: 20px;
 }
 
-.album h4,
-.playlist-div h4{
+.card h4{
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: pre;
 }
 
-.album img,
-.playlist-div img{
+.card img{
     width: 200px;
     border-radius: 10px;
 }
 
-/* ^---------- ALBUM PLAYLIST ----------^ */
+/* ,---------- BIG CARDS ----------, */
 
+.big-card-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 40px;
+}
+
+.big-card-a{
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.big-card-a:hover{
+    background-color: var(--high-lilac);
+}
+
+.big-card{
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.big-card img{
+    width: 200px;
+    height: inherit;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.big-card section{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 20px;
+}
+
+.big-card h3{
+    font-size: 40px;
+    color: var(--low-blue-slate-gray);
+}
+
+.big-card h4{
+    font-size: 22px;
+    color: var(--low-lilac);
+}
 
 /* ,---------- ARTIST ----------, */
 
-#main-artists{
-    display: flex;
-    overflow-x: hidden; /* Cambiado a hidden para ocultar la barra de desplazamiento */
-}
 
 .artist {
     margin: 10px;
@@ -126,17 +159,17 @@
     height: 200px;
     border-radius: 10px;
     padding: 15px;
-    background-color: black;
     background-size: cover;
     background-repeat: no-repeat;
     transition: 300ms;
 }
 
 .artist h3 {
-    font-size: 43px;
+    font-size: 30px;
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     display: block;
+    width: 170px;
 }
 
 .artist.h3-oculto h3 {
@@ -147,45 +180,6 @@
 }
 
 /* ^---------- ARTIST ----------^ */
-
-
-/* ,---------- TRACKS ----------, */
-
-#top-50-songs{
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
-}
-
-.track-a{
-    margin: 10px;
-    flex: 0 0 auto;
-    margin: 5px; /* Espacio entre los elementos */
-    padding: 10px;
-    /* Establece el tamaño relativo del elemento */
-    width: calc((100% / 7) - 10px); /* Por ejemplo, tres elementos por fila */
-    /* Ajusta este valor según el número de elementos que desees mostrar por fila */
-}
-
-.track img{
-    width: 100%;
-    border-radius: 10px;
-}
-
-.track h3{
-    width: 100%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: pre;
-    font-size: 20px;
-}
-
-.track h4{
-    width: 100%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: pre;
-}
 
 /* ^---------- TRACKS ----------^ */
 

@@ -10,5 +10,6 @@ if(isset($_GET['pages'])) {
             break;
     }
 } else {
+    // require_once 'view/presentation.php';
     require_once 'view/main-page.php';
 }

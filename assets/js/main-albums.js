@@ -37,7 +37,7 @@ $(document).ready(function() {
 
                 albums.forEach(function(album) {
                     var albumName = album.name.length > 50 ? album.name.substring(0, 50) + '...' : album.name;
-                    var html = '<a href="#" class="album-a"><div class="album">';
+                    var html = '<a href="#" class="card-a"><div class="card">';
                     if (album.images.length > 0) {
                         html += '<img src="' + album.images[0].url + '" alt="' + album.name + '">';
                     }
@@ -66,7 +66,7 @@ $(document).ready(function() {
     // Función para imprimir las playlists más populares
     function printPlaylists(accessToken) {
         $.ajax({
-            url: 'https://api.spotify.com/v1/browse/featured-playlists?limit=6',
+            url: 'https://api.spotify.com/v1/browse/featured-playlists?limit=30',
             type: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -76,7 +76,7 @@ $(document).ready(function() {
                 var playlists = data.playlists.items;
 
                 playlists.forEach(function(playlist) {
-                    var html = '<a href="#" class="playlist-div-a"><div class="playlist-div">';
+                    var html = '<a href="#" class="card-a"><div class="card">';
                     if (playlist.images.length > 0) {
                         html += '<img src="' + playlist.images[0].url + '">';
                     }
@@ -91,6 +91,7 @@ $(document).ready(function() {
             }
         });
     }
+
     // Función para imprimir las canciones de la playlist "Top 50"
     function printTop50(accessToken) {
         $.ajax({
@@ -104,7 +105,7 @@ $(document).ready(function() {
                 var tracks = data.items;
 
                 tracks.forEach(function(track, index) {
-                    var html = '<a href="#" class="track-a" data-name="' + track.track.name + '" data-artists="' + track.track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.track.preview_url + '"><div class="track">';
+                    var html = '<a href="#" class="card-a track-a" data-name="' + track.track.name + '" data-artists="' + track.track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.track.preview_url + '"><div class="card">';
                     if (track.track.album.images.length > 0) {
                         html += '<img src="' + track.track.album.images[0].url + '" alt="' + track.track.name + '">';
                     }
@@ -139,7 +140,58 @@ $(document).ready(function() {
             error: function(err) {
                 console.error('Error al obtener las canciones del Top 50:', err);
             }
-        });
+        }); 
+    }
+
+    // Función para imprimir las canciones de la playlist "Top 50"
+    function printViral50(accessToken) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/playlists/37i9dQZEVXbLiRSasKsNU9/tracks',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(data) {
+                // console.log('Canciones del Viral 50:', data);
+                var tracks = data.items;
+
+                tracks.forEach(function(track, index) {
+                    var html = '<a href="#" class="card-a track-a" data-name="' + track.track.name + '" data-artists="' + track.track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.track.preview_url + '"><div class="card">';
+                    if (track.track.album.images.length > 0) {
+                        html += '<img src="' + track.track.album.images[0].url + '" alt="' + track.track.name + '">';
+                    }
+                    html += '<h3>' + track.track.name + '</h3>';
+                    html += '<h4>';
+                    track.track.artists.forEach(function(artist, index) {
+                        html += artist.name;
+                        if (index < track.track.artists.length - 1) {
+                            html += ', ';
+                        }
+                    });
+                    html += '</h4>';
+                    html += '</div></a>';
+                    $('#viral-50-songs').append(html);
+                });
+
+                // Agregar el evento clic a cada elemento de canción
+                $('.track-a').on('click', function(e) {
+                    e.preventDefault();
+                    var songName = $(this).data('name');
+                    var artists = $(this).data('artists');
+                    var previewUrl = $(this).data('preview');
+                    var imageUrl = $(this).find('img').attr('src'); // Get the image URL of the clicked song
+                    // Actualizar la información de la canción en el reproductor
+                    $('#playing-song-info h3').text(songName);
+                    $('#playing-song-info h4').text(artists);
+                    playing_song_audio.src = previewUrl;
+                    $('#img-current-song img').attr('src', imageUrl); // Update the image of the playing song
+                    changeSongStatus(); // Reproducir la canción automáticamente
+                });
+            },
+            error: function(err) {
+                console.error('Error al obtener las canciones del Top 50:', err);
+            }
+        }); 
     }
 
     // Función para buscar información adicional sobre los artistas implicados en los álbumes
@@ -167,11 +219,134 @@ $(document).ready(function() {
         });
     }
 
+    // Devuele una canción aleatoria de la API
+    function printRandomSong(accessToken) {
+        const randomOffset = Math.floor(Math.random() * 1000);
+        $.ajax({
+            url: 'https://api.spotify.com/v1/search?q=year:2023&type=track&limit=1&offset=' + randomOffset,
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(data) {
+                if (data.tracks.items.length > 0) {
+                    var track = data.tracks.items[0];
+                    
+                    var html = '<a href="#" class="big-card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '">';
+                    html += '<div class="big-card">';
+                    html += '<img src="' + (track.album.images[0] ? track.album.images[0].url : '') + '">';
+                    html += '<section>';
+                    html += '<h3>' + track.name + '</h3>';
+                    html += '<h4>';
+                    html += track.artists.map(artist => artist.name).join(', ');
+                    html += '</h4></section></div></a>';
+                    
+                    $('#random-container').append(html);
+    
+                    // Agregar el evento clic a cada elemento de canción
+                    $('.track-a').on('click', function(e) {
+                        e.preventDefault();
+                        var songName = $(this).data('name');
+                        var artists = $(this).data('artists');
+                        var previewUrl = $(this).data('preview');
+                        var imageUrl = $(this).find('img').attr('src'); // Obtener la URL de la imagen de la canción clicada
+                        
+                        // Actualizar la información de la canción en el reproductor
+                        $('#playing-song-info h3').text(songName);
+                        $('#playing-song-info h4').text(artists);
+                        playing_song_audio.src = previewUrl;
+                        $('#img-current-song img').attr('src', imageUrl); // Actualizar la imagen de la canción en reproducción
+                        changeSongStatus(); // Reproducir la canción automáticamente
+                    });
+                } else {
+                    console.error('No se encontró ninguna canción.');
+                }
+            },
+            error: function(err) {
+                console.error('Error al obtener la canción aleatoria:', err);
+            }
+        });
+    }
+
+    // Devuele un género aleatorio
+    function printRandomArtist(accessToken) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/recommendations/available-genre-seeds',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(data) {
+                const randomGenre = data.genres[Math.floor(Math.random() * data.genres.length)];
+
+                $.ajax({
+                    url: 'https://api.spotify.com/v1/search?q=genre:' + randomGenre + '&type=artist&limit=50',
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    },
+                    success: function(data) {
+                        const artists = data.artists.items;
+                        const randomArtist = artists[Math.floor(Math.random() * artists.length)];
+                        var html = '<a href="#" class="big-card-a">';
+                        html += '<div class="big-card">';
+                        html += '<img src="' + randomArtist.images[0].url + '">';
+                        html += '<section><h3>' + randomArtist.name + '</h3>';
+                        html += '<h4>'+ randomArtist.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' seguidores</h4></section></div></a>';
+                    
+                        $('#random-container').append(html);
+                    },
+                    error: function(err) {
+                        console.error('Error al obtener el artista aleatorio 1:', err);
+                    }
+                });
+            },
+            error: function(err) {
+                console.error('Error al obtener el artista aleatorio 2:', err);
+            }
+        });
+    }
+
+    // Devuele un género aleatorio
+    function printRandomPlaylist(accessToken) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/search?q=playlist&type=playlist&limit=50',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(data) {
+                var playlists = data.playlists.items;
+                // Indice aleatorio 
+                var randomIndex = Math.floor(Math.random() * playlists.length);
+                // Playlist aleatoria
+                var randomPlaylist = playlists[randomIndex]; 
+
+                console.log(randomPlaylist.name);
+                var html = '<a href="#" class="big-card-a">';
+                html += '<div class="big-card">';
+                html += '<img src="' + randomPlaylist.images[0].url + '">';
+                html += '<section><h3>' + randomPlaylist.name + '</h3>';
+                html += '<h4>'+ randomPlaylist.owner.display_name + '</h4></section></div></a>';
+
+                $('#random-container').append(html);
+            },
+            error: function(err) {
+                console.error('Error al obtener la playlist aleatoria 2:', err);
+            }
+        });
+    }
+
+
     // Obtener el token de acceso y llamar a las funciones para imprimir los datos
     getAccessToken(function(accessToken) {
         printAlbums(accessToken);
         printPlaylists(accessToken);
         printTop50(accessToken);
+        printViral50(accessToken);
+        printRandomSong(accessToken);
+        printRandomArtist(accessToken);
+        printRandomPlaylist(accessToken);
     });
 });
 
@@ -184,30 +359,31 @@ $(document).ready(function() {
 
 document.addEventListener("DOMContentLoaded", function() {
     const scrollContainers = document.querySelectorAll(".scroll-container");
+    const landingContainer = document.querySelector("#home-real");
 
     scrollContainers.forEach(scrollContainer => {
         const scrollLeft = scrollContainer.querySelector(".scroll-left");
         const scrollRight = scrollContainer.querySelector(".scroll-right");
         const mainContentDiv = scrollContainer.querySelector("div");
 
-        scrollContainer.addEventListener("mouseenter", function() {
-            toggleScrollButtonsVisibility(mainContentDiv, scrollLeft, scrollRight);
-        });
+        // scrollContainer.addEventListener("mouseenter", function() {
+        //     toggleScrollButtonsVisibility(mainContentDiv, scrollLeft, scrollRight);
+        // });
 
-        scrollContainer.addEventListener("mouseleave", function() {
-            toggleScrollButtonsVisibility(mainContentDiv, scrollLeft, scrollRight);
-        });
+        // scrollContainer.addEventListener("mouseleave", function() {
+        //     toggleScrollButtonsVisibility(mainContentDiv, scrollLeft, scrollRight);
+        // });
 
         scrollLeft.addEventListener("click", function() {
             mainContentDiv.scrollBy({
-                left: -1500, // Ajusta la cantidad de desplazamiento según tus necesidades
+                left: -(landingContainer.clientWidth/2), // Ajusta la cantidad de desplazamiento según tus necesidades
                 behavior: "smooth"
             });
         });
 
         scrollRight.addEventListener("click", function() {
             mainContentDiv.scrollBy({
-                left: 1500, // Ajusta la cantidad de desplazamiento según tus necesidades
+                left: (landingContainer.clientWidth/2), // Ajusta la cantidad de desplazamiento según tus necesidades
                 behavior: "smooth"
             });
         });
@@ -251,7 +427,7 @@ function obtenerSaludo() {
 }
 
 // Obtener el elemento donde mostrar el saludo
-var mensajeSaludo = document.getElementById("saludo"); // Ajusta el ID según tu HTML
+var mensajeSaludo = document.getElementById("greetings"); // Ajusta el ID según tu HTML
 
 // Mostrar el saludo
 mensajeSaludo.textContent = obtenerSaludo();

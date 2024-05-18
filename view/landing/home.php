@@ -1,25 +1,38 @@
+<!-- Contenedores de la busqueda -->
 <div id="search-results" style="display: none;">
     <div class='main-content'>
         <div id="artists-container" class="scroll-container">
-            <button id="artists-scroll-left" class="scroll-left">&lt;</button>
+            <button id="albums-scroll-left" class="scroll-left">
+                <span class="material-symbols-rounded">chevron_left</span>
+            </button>
             <div id="searched-artists"></div>
-            <button id="artists-scroll-right" class="scroll-right">&gt;</button>
+            <button id="albums-scroll-right" class="scroll-right">
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
         </div>
         <div id="songs" class="scroll-container">
-            <button id="songs-scroll-left" class="scroll-left">&lt;</button>
+            <button id="albums-scroll-left" class="scroll-left">
+                <span class="material-symbols-rounded">chevron_left</span>
+            </button>
             <div id="searched-songs"></div>
-            <button id="songs-scroll-right" class="scroll-right">&gt;</button>
+            <button id="albums-scroll-right" class="scroll-right">
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
         </div>
         <div id="albums-container" class="scroll-container">
-            <button id="albums-scroll-left" class="scroll-left">&lt;</button>
+            <button id="albums-scroll-left" class="scroll-left">
+                <span class="material-symbols-rounded">chevron_left</span>
+            </button>
             <div id="searched-albums"></div>
-            <button id="albums-scroll-right" class="scroll-right">&gt;</button>
+            <button id="albums-scroll-right" class="scroll-right">
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
         </div>
     </div>
 </div>
 
 <?php if (!isset($_GET['text']) || empty($_GET['text'])): ?>
-<?php include 'home-real.php';?>
+<?php include 'landing.php';?>
 <?php endif; ?>
 
 <footer class="footer">

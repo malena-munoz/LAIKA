@@ -26,7 +26,12 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
     <body>
         <div id="modal" class="modal">
             <div class="modal-content">
-                <?php $activeLink = 'main-page'; include 'register.php'; ?>
+                <div id="register-form" style="display: none;">
+                    <?php include 'register.php'; ?>
+                </div>
+                <div id="login-form" style="display: none;">
+                    <?php include 'login.php'; ?>
+                </div>
             </div>
         </div>
         <!-- Canción en reproducción -->
@@ -53,4 +58,6 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
     <script src="./assets/js/search-script.js"></script>
     <script src="./assets/js/main-albums.js"></script>
     <script src="./assets/js/playlist-album-script.js"></script>
+    <script src="./assets/js/register-script.js"></script>
+    <script src="./assets/js/login-script.js"></script>
 </html> 

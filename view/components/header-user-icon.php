@@ -1,4 +1,3 @@
-
 <div id="user-icon">
     <label class="popup">
         <input type="checkbox">
@@ -50,15 +49,22 @@
             </li>
             <hr>
             <li>
-                <button>
-                <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
-                    <line y2="18" x2="6" y1="6" x1="18"></line>
-                    <line y2="18" x2="18" y1="6" x1="6"></line>
-                </svg>
-                <span>Cerrar Sesión</span>
+                <button id="logout-button">
+                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                        <line y2="18" x2="6" y1="6" x1="18"></line>
+                        <line y2="18" x2="18" y1="6" x1="6"></line>
+                    </svg>
+                    <span>Cerrar Sesión</span>
                 </button>
             </li>
             </ul>
         </nav>
     </label>
 </div>
+
+<script>
+document.getElementById('logout-button').addEventListener('click', function() {
+    // Redirigir a un script PHP que cierre la sesión
+    window.location.href = './view/verifiers/logout.php';
+});
+</script>

@@ -12,27 +12,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //---------------------------------------------------------------------------------------
 
+// Definir openModal globalmente
+window.openModal = function (type) {
+    var modal = document.getElementById('modal');
+    var registerForm = document.getElementById('register-form');
+    var loginForm = document.getElementById('login-form');
+    
+    if (type === 'login') {
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+    } else if (type === 'register') {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+    }
+
+    modal.classList.remove('fadeOut');
+    modal.style.display = 'block';
+};
+
 document.addEventListener('DOMContentLoaded', function () {
     var modal = document.getElementById('modal');
-    var formUI = document.getElementById('form-ui');
-
-    // Abrir el modal
-    function openModal() {
-        modal.classList.remove('fadeOut');
-        modal.style.display = 'block';
-    }
+    var registerForm = document.getElementById('register-form');
+    var loginForm = document.getElementById('login-form');
 
     // Cerrar el modal
     function closeModal() {
         modal.classList.add('fadeOut');
         setTimeout(function () {
             modal.style.display = 'none';
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'none';
         }, 300); // Tiempo de duración de la animación
     }
 
     // Evento clic en la "x" para cerrar el modal
-    var closeButton = document.querySelector('#close-modal .close');
-    closeButton.addEventListener('click', closeModal);
+    var closeButtons = document.querySelectorAll('#close-modal .close');
+    closeButtons.forEach(function (closeButton) {
+        closeButton.addEventListener('click', closeModal);
+    });
 
     // Evento clic fuera del formulario para cerrar el modal
     modal.addEventListener('click', function (event) {
@@ -43,14 +60,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Evento clic en el botón "Forgot password?"
     var forgotPasswordLink = document.getElementById('forgot-pass');
-    forgotPasswordLink.addEventListener('click', function (event) {
-        event.preventDefault();
-        // Aquí podrías agregar la lógica para el enlace "Forgot password?"
-    });
+    if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            // Aquí podrías agregar la lógica para el enlace "Forgot password?"
+        });
+    }
 
-    // Evento clic en el botón para abrir el modal
-    document.querySelector('.sparkle-button').addEventListener('click', openModal);
+    // Eventos clic en los enlaces "No tengo una cuenta" y "Ya tengo una cuenta"
+    var noAccountLink = document.querySelector('#login-form #not-logged');
+    var hasAccountLink = document.querySelector('#register-form #already-logged');
 
+    if (noAccountLink) {
+        noAccountLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            openModal('register');
+        });
+    }
+
+    if (hasAccountLink) {
+        hasAccountLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            openModal('login');
+        });
+    }
 });
 
 //---------------------------------------------------------------------------------------

@@ -2,8 +2,8 @@ async function searchSpotify(event) {
     event.preventDefault();
     
     const searchTerm = document.getElementById('search-input').value;
-    const clientId = 'c1f77d0fade2485f987f6454a201cab5';
-    const clientSecret = '1c3bc66535484d90a934968f469d445a';
+    const clientId = '84f52098b74a42d3bce3277d27253875';
+    const clientSecret = '56cd5c6c0f5e4e7c98db87172e03d54b';
 
     try {
         // Obtener token de acceso

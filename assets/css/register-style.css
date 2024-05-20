@@ -136,7 +136,8 @@
 }
 
 #submit-button,
-#continuar-button {
+#continuar-button,
+#login-submit-button {
     display: block;
     width: 100%;
     color: var(--mid-lilac);
@@ -154,7 +155,8 @@
 }
 
 #submit-button:hover,
-#continuar-button:hover {
+#continuar-button:hover,
+#login-submit-button:hover {
     transition: all ease-in-out .3s;
     background-color: var(--mid-lilac);
     color: #161616;

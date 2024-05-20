@@ -536,4 +536,21 @@ header .centered:nth-child(2):active {
     translate: -25% -5%;
 }
 
+/*LOGIN*/
+
+.acceder-button{
+    margin-right: 20px;
+}
+
+.acceder-button > h3{
+    font-size: 25px;
+    color: var(--mid-lilac);
+    transition: all ease-in 0.2s;
+}
+
+.acceder-button > h3:hover{
+    color: var(--high-lilac);
+    font-size: 27px;
+}
+
 /* ^---------- HEADER BUTTONS ----------^ */

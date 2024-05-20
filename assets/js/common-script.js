@@ -41,14 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Evento clic en el botón "Login" dentro del formulario
-    var loginButton = document.getElementById('submit-button');
-    loginButton.addEventListener('click', function (event) {
-        event.preventDefault();
-        // Aquí podrías agregar la lógica para enviar los datos del formulario
-        closeModal();
-    });
-
     // Evento clic en el botón "Forgot password?"
     var forgotPasswordLink = document.getElementById('forgot-pass');
     forgotPasswordLink.addEventListener('click', function (event) {

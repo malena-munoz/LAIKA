@@ -1,9 +1,11 @@
 <?php
 session_start();
 
-// Lógica para iniciar sesión del usuario...
-
-$_SESSION['loggedin'] = false; // Establecer la variable de sesión
+if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
+    $_SESSION['loggedin'] = true; // Si la sesión está activa, se establece como verdadero
+} else {
+    $_SESSION['loggedin'] = false; // Si la sesión no está activa, se establece como falso
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -43,6 +45,7 @@ $_SESSION['loggedin'] = false; // Establecer la variable de sesión
         <!-- Reproductor -->
         <?php include 'player.php';?>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://widget.deezer.com/widget/dynamic/deezer-widget-loader.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./assets/js/playing-song-script.js"></script>

@@ -2,6 +2,8 @@
 var playing_song_audio = document.getElementById("playing-song-audio");
 // Valor del input del nivel de sonido
 var volume_input = document.getElementById("volume-input");
+// Valor temporal del volumen
+var temp_volume = 0;
 // Elemento del icono de sonido
 var volume_icon = document.getElementById("volume-icon");
 // Elemento del icono del estado de la canción actual
@@ -34,16 +36,24 @@ function changeSongStatus() {
     }
 }
 
+// Reproduce la canción
+function playNewSong(){
+    changeVolume();
+    play_pause_icon.textContent = "pause";
+    playing_song_audio.play();
+}
+
 // Ensordece o establece el volumen de la canción actual al 50%
 function muteOrDesmute(){
     if (volume_icon.textContent==="volume_down"|| volume_icon.textContent==="volume_up"){
         volume_icon.textContent = "volume_off";
+        temp_volume = playing_song_audio.volume;
         playing_song_audio.volume = 0;
         volume_input.value = 0;
     }else{
         volume_icon.textContent = "volume_down";
-        playing_song_audio.volume = 0.5;
-        volume_input.value = 50;
+        playing_song_audio.volume = temp_volume;
+        volume_input.value = temp_volume*100;
     }
 }
 

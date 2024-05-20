@@ -1,2 +1,2 @@
 <?php
-    require 'controller/main_controller.php';
+    require 'controller/main-controller.php';

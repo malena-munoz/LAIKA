@@ -31,8 +31,9 @@
     </div>
 </div>
 
+
 <?php if (!isset($_GET['text']) || empty($_GET['text'])): ?>
-<?php include 'landing.php';?>
+<?php include 'playlist.php'; include 'home-real.php';?>
 <?php endif; ?>
 
 <footer class="footer">

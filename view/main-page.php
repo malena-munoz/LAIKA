@@ -19,11 +19,12 @@ $_SESSION['loggedin'] = false; // Establecer la variable de sesión
         <link rel="stylesheet" href="assets/css/header-style.css"/>
         <link rel="stylesheet" href="assets/css/home-style.css"/>
         <link rel="stylesheet" href="assets/css/register-style.css"/>
+        <link rel="stylesheet" href="assets/css/playlist-album-style.css"/>
     </head>
     <body>
         <div id="modal" class="modal">
             <div class="modal-content">
-                <?php include 'register.php'; ?>
+                <?php $activeLink = 'main-page'; include 'register.php'; ?>
             </div>
         </div>
         <!-- Canción en reproducción -->
@@ -34,10 +35,8 @@ $_SESSION['loggedin'] = false; // Establecer la variable de sesión
         <div id="main-divider">
             <!-- Barra de búsqueda -->
             <?php include 'header.php';?>
-
-            <?php include 'landing/home-real.php';?>
             <!-- Datos empresa -->
-            <!-- <php include 'home.php';?> -->
+            <?php include 'landing/home.php';?>
             <!-- Sección de relleno -->
             <section class="filler"></section>
         </div>
@@ -50,4 +49,5 @@ $_SESSION['loggedin'] = false; // Establecer la variable de sesión
     <script src="./assets/js/common-script.js"></script>
     <script src="./assets/js/search-script.js"></script>
     <script src="./assets/js/main-albums.js"></script>
+    <script src="./assets/js/playlist-album-script.js"></script>
 </html> 

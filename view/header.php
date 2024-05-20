@@ -1,6 +1,6 @@
 <header>
     <section class="centered">
-        <span class="material-symbols-rounded" id="home">home</span>
+        <span class="material-symbols-rounded" id="home" onclick="goHome();">home</span>
     </section>
     <section class="centered" id="centered-container">
         <span class="material-symbols-rounded" id="search">search</span>

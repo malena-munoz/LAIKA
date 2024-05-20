@@ -1,0 +1,171 @@
+#album-display{
+    display: none;
+}
+
+/* Contenedor de la información de la playlist */
+#playlist-info{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 5px solid var(--mid-lilac);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 20px;
+}
+
+/* Sección del contenedor de la info de la playlist: contiene nombre y dueño */
+#playlist-info section{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+    gap: 5px;
+}
+
+/* Nombre de la canción */
+#playlist-name{
+    font-size: 90px;
+    font-weight: bold;
+    color: var(--low-lilac);
+}
+
+/* Datos del dueño de la playlist */
+#playlist-owner{
+    display: flex;
+    gap: 15px;
+}
+
+#owner-img{
+    width: 40px;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 5px;
+}
+
+#owner-name{
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--low-blue-slate-gray);
+}
+
+#playlist-controls{
+    height: 45px;
+    margin-top: var(--separation);
+    padding-right: 5px;
+    border-top: 5px solid var(--mid-lilac);
+    border-left: 5px solid var(--mid-lilac);
+    border-right: 5px solid var(--mid-lilac);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+#playlist-controls span{
+    font-size: 40px;
+    height: inherit;
+    color: var(--mid-lilac);
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: pointer;
+}
+
+#playlist-controls span:first-child{
+    background-color: var(--mid-lilac);
+    color: var(--high-lilac-slate-gray);
+    padding-right: 5px;
+}
+
+#playlist-img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    border-left: 5px solid var(--mid-lilac);
+    border-top: 5px solid var(--mid-lilac);
+    border-right: 5px solid var(--mid-lilac);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+#song-list{
+    margin: 20px 0 0 20px;
+}
+
+/* ----------------------------------------------------
+        TABLAS (PLAYLIST O ALBUM)
+------------------------------------------------------- */
+
+
+/* Tabla de playlist o álbum */
+.playlist-table, .album-table{
+    width: 100%;
+    color: var(--low-lilac);
+}
+
+/* Primera columna de las tablas playlist/album */
+.playlist-table th:first-child, .album-table th:first-child, .playlist-table td:first-child, .album-table td:first-child{
+    width: 40px;
+    text-align: center;
+    padding: 0;
+}
+
+/* Última columna de las tablas playlist/album */
+.playlist-table th:last-child, .album-table th:last-child, .playlist-table td:last-child, .album-table td:last-child{
+    width: 50px;
+    padding: 0 20px 0 0;
+    text-align: center;
+}
+
+/* Segunda columna de la tabla playlist */
+.playlist-table td:nth-child(2){
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.playlist-table td section{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+/* Filas de las filas */
+.playlist-table tr, .album-table tr{
+    height: 50px;
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.playlist-table td, .album-table td{
+    height: 55px;
+}
+
+.playlist-table td:first-child, .album-table td:first-child{
+    height: 55px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.playlist-table td:last-child, .album-table td:last-child{
+    height: 55px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.playlist-table th, .album-table th{
+    color: var(--low-lilac);
+    border-bottom: 2px solid var(--mid-lilac);
+    text-align: left;
+}
+
+/* Imagen del álbum de la canción que hay en la playlist */
+.song-playlist-img{
+    width: 40px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.playlist-table .playlist-song-title{
+    font-weight: bold;
+}
+
+.playlist-song-artist{
+    color: var(--low-blue-slate-gray);
+}

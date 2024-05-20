@@ -59,6 +59,21 @@ body{
     border-radius: 10px;
 }
 
+.big-card-container .card_loader{
+    width: 33%;
+    margin-bottom: 40px;
+}
+
+
+.big-card-container .card_loader section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px 20px;
+}
+
 .card__skeleton {
     background-image: linear-gradient(
             90deg,
@@ -84,11 +99,24 @@ body{
     border-radius: 15px;
 }
 
+.big-card-container .card_loader section .card__title {
+    width: auto;
+    height: 35px;
+}
+
+.big-card-container .card_loader section .card__title:nth-child(2) {
+    flex-grow: 1;
+}
+
 .card__artist {
     height: 21px;
     width: 50%;
     border-radius: 15px;
     margin-top: 5px;
+}
+
+.big-card-container .card_loader section .card__artist{
+    height: 25px;
 }
 
 @keyframes shimmer {
@@ -131,6 +159,20 @@ span{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; 
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0; 
+}
+
+th, td{
+    padding-left: var(--separation);
+}
+
+.main-content{
+    display: flex;
+    flex-direction: column;
 }
 
 .filler{
@@ -201,10 +243,11 @@ input[type="range"]::-moz-range-thumb {
     bottom: 0;
     height: 24px;
     z-index: 10;
+    background: linear-gradient(45deg, var(--high-lilac-slate-gray) 50%, var(--slate-lavender)) fixed no-repeat;
 }
 
 #main-divider::-webkit-scrollbar {
-    width: 5px;
+    width: 0;
 }
 
 /* Fondo de la barra vertical de la navegación */

@@ -1,34 +1,53 @@
 <div class='main-content' id="home-real">
     <h3 id="greetings"></h3>
     <div class="hr"></div>
+    <h3>¿Te apetece descubrir...</h3>
     <div id="random-container" class="big-card-container">
-        <div class="card_loader">
+        <div class="card_loader big-card">
             <div class="card__skeleton card__image"></div>
-            <div class="card__skeleton card__title"></div>
-            <div class="card__skeleton card__artist"></div>
+            <section>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__artist"></div>
+            </section>
         </div>
-        <div class="card_loader">
+        <div class="card_loader big-card">
             <div class="card__skeleton card__image"></div>
-            <div class="card__skeleton card__title"></div>
-            <div class="card__skeleton card__artist"></div>
+            <section>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__artist"></div>
+            </section>
         </div>
-        <div class="card_loader">
+        <div class="card_loader big-card">
             <div class="card__skeleton card__image"></div>
-            <div class="card__skeleton card__title"></div>
-            <div class="card__skeleton card__artist"></div>
+            <section>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__artist"></div>
+            </section>
         </div>
     </div>
 
 
-
     <!-- ,---------- ALBUMES ----------, -->
 
-    <h3>Los álbumes más escuchados</h3>
+    <h3>Los álbumes que lo están petando</h3>
     <div id="albums-container" class="scroll-container">
         <button id="albums-scroll-left" class="scroll-left">
             <span class="material-symbols-rounded">chevron_left</span>
         </button>
         <div id="main-albums">
+            <div class="card_loader">
+                <div class="card__skeleton card__image"></div>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__artist"></div>
+            </div>
+            <div class="card_loader">
+                <div class="card__skeleton card__image"></div>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__artist"></div>
+            </div>
             <div class="card_loader">
                 <div class="card__skeleton card__image"></div>
                 <div class="card__skeleton card__title"></div>
@@ -110,6 +129,12 @@
             <div class="card_loader">
                 <div class="card__skeleton card__image"></div>
             </div>
+            <div class="card_loader">
+                <div class="card__skeleton card__image"></div>
+            </div>
+            <div class="card_loader">
+                <div class="card__skeleton card__image"></div>
+            </div>
         </div>
         <button id="albums-scroll-right" class="scroll-right">
             <span class="material-symbols-rounded">chevron_right</span>
@@ -167,6 +192,16 @@
                 <div class="card__skeleton card__title"></div>
                 <div class="card__skeleton card__artist"></div>
             </div>
+            <div class="card_loader">
+                <div class="card__skeleton card__image"></div>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__artist"></div>
+            </div>
+            <div class="card_loader">
+                <div class="card__skeleton card__image"></div>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__artist"></div>
+            </div>
         </div>
         <button id="albums-scroll-right" class="scroll-right">
             <span class="material-symbols-rounded">chevron_right</span>
@@ -184,6 +219,16 @@
             <span class="material-symbols-rounded">chevron_left</span>
         </button>
         <div id="top-50-songs">
+            <div class="card_loader">
+                <div class="card__skeleton card__image"></div>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__artist"></div>
+            </div>
+            <div class="card_loader">
+                <div class="card__skeleton card__image"></div>
+                <div class="card__skeleton card__title"></div>
+                <div class="card__skeleton card__artist"></div>
+            </div>
             <div class="card_loader">
                 <div class="card__skeleton card__image"></div>
                 <div class="card__skeleton card__title"></div>

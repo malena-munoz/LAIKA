@@ -58,5 +58,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Evento clic en el botón para abrir el modal
     document.querySelector('.sparkle-button').addEventListener('click', openModal);
+
 });
 
+//---------------------------------------------------------------------------------------
+
+// Vuelve a mostrar el contenido inicial
+function goHome(){  
+    const home = document.getElementById('home-real');
+    home.style.display = 'block';
+    const album = document.getElementById('album-display');
+    album.style.display = 'none';
+}

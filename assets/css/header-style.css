@@ -464,7 +464,7 @@ header .centered:nth-child(2):active {
 
 .sparkle-button:is(:hover, :focus-visible) ~ :is(.bodydrop, .particle-pen) {
     --active: 1;
-    --play-state: runnin;
+    --play-state: running;
 }
 
 .sparkle-button:is(:hover, :focus-visible) {
@@ -539,18 +539,20 @@ header .centered:nth-child(2):active {
 /*LOGIN*/
 
 .acceder-button{
-    margin-right: 20px;
+    margin-right: 18px;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .acceder-button > h3{
-    font-size: 25px;
+    font-size: 20px;
+    font-weight: normal;
     color: var(--mid-lilac);
     transition: all ease-in 0.2s;
 }
 
 .acceder-button > h3:hover{
-    color: var(--high-lilac);
-    font-size: 27px;
+    color: var(--low-blue-slate-gray);
+    font-size: 22px;
 }
 
 /* ^---------- HEADER BUTTONS ----------^ */

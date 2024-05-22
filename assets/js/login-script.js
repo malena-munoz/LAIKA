@@ -56,3 +56,15 @@ document.getElementById("login-submit-button").addEventListener("click", functio
     };
     xhr.send("emailUsuario=" + encodeURIComponent(emailUsuario) + "&claveUsuario=" + encodeURIComponent(claveUsuario));
 });
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+// Al tener el cursor encima, el botón de acceder, gana más márgen
+document.querySelector('.sparkle-button').addEventListener("mouseover", function() {
+    document.getElementById('acceder-button').style.marginRight = '25px';
+});
+
+// Al no tener el cursor encima, el botón de acceder, pierde el márgen agregado antes
+document.querySelector('.sparkle-button').addEventListener("mouseout", function() {
+    document.getElementById('acceder-button').style.marginRight = '18px';
+});

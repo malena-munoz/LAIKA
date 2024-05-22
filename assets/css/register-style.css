@@ -69,7 +69,7 @@
     width: 400px;
     padding: 25px;
     padding-bottom: 40px;
-    background-color: #161616;
+    background: linear-gradient(45deg, var(--high-lilac-slate-gray) 50%, var(--slate-lavender)) fixed;
     box-shadow: 0px 15px 60px var(--mid-lilac);
     outline: 1px solid var(--mid-lilac);
     border-radius: 10px;
@@ -109,10 +109,6 @@
     line-height: 1;
 }
 
-.form-inp:focus {
-    border: 1px solid var(--mid-lilac);
-}
-
 .form-inp:first-child {
     margin-bottom: 15px;
 }
@@ -129,6 +125,14 @@
 
 .form-inp input:focus {
     outline: none;
+}
+
+.form-inp input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    box-shadow: 0 0 0px 1000px transparent inset !important;
+    -webkit-text-fill-color: var(--mid-lilac);
+    border: none !important; 
+    text-decoration: none !important; 
 }
 
 #submit-button-cvr {

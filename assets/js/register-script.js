@@ -62,6 +62,8 @@ document.getElementById("continuar-button").addEventListener("click", function()
     xhr.send();
 });
 
+// ---------------------------------------------------------------------------------------------------------------------
+
 document.getElementById("submit-button").addEventListener("click", function() {
     // Obtener los valores ingresados por el usuario
     var nombreUsuario = document.getElementById("nombre").value;
@@ -170,3 +172,11 @@ document.getElementById("submit-button").addEventListener("click", function() {
     };
     xhr.send();
 });
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+// Al hacer clic en la X, el formulario se vacía
+document.querySelector('.close').addEventListener("click", function() {
+    document.getElementById('form').reset();
+});
+

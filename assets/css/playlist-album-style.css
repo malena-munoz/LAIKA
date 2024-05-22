@@ -1,4 +1,4 @@
-#album-display{
+#playlist-display{
     display: none;
 }
 
@@ -6,10 +6,10 @@
 #playlist-info{
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
     border-bottom: 5px solid var(--mid-lilac);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    margin-left: 20px;
 }
 
 /* Sección del contenedor de la info de la playlist: contiene nombre y dueño */
@@ -27,12 +27,15 @@
     font-size: 90px;
     font-weight: bold;
     color: var(--low-lilac);
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 /* Datos del dueño de la playlist */
 #playlist-owner{
     display: flex;
     gap: 15px;
+    margin-left: 10px;
 }
 
 #owner-img{
@@ -87,7 +90,7 @@
 }
 
 #song-list{
-    margin: 20px 0 0 20px;
+    margin-top: 10px;
 }
 
 /* ----------------------------------------------------
@@ -136,6 +139,11 @@
 
 .playlist-table td, .album-table td{
     height: 55px;
+    cursor: default;
+}
+
+.playlist-table td:hover, .album-table td:hover{
+    cursor: pointer;
 }
 
 .playlist-table td:first-child, .album-table td:first-child{

@@ -32,6 +32,7 @@
     list-style: none;
     box-sizing: border-box;
     font-family: 'Satoshi', sans-serif;
+    user-select: none;
 }
 
 input:-webkit-autofill,
@@ -164,6 +165,10 @@ span{
 table{
     border-collapse: collapse;
     border-spacing: 0; 
+}
+
+img{
+    pointer-events: none;
 }
 
 th, td{

@@ -32,7 +32,7 @@
 
     <!-- ,---------- ALBUMES ----------, -->
 
-    <h3>Los álbumes que lo están petando</h3>
+    <h3>Álbumes que lo están petando</h3>
     <div id="albums-container" class="scroll-container">
         <button id="albums-scroll-left" class="scroll-left">
             <span class="material-symbols-rounded">chevron_left</span>
@@ -99,7 +99,7 @@
 
     <!-- ,---------- ARTISTAS ----------, -->
 
-    <h3>Los artistas del momento</h3>
+    <h3>Artistas del momento</h3>
     <div id="artists-container" class="scroll-container">
         <button id="albums-scroll-left" class="scroll-left">
             <span class="material-symbols-rounded">chevron_left</span>

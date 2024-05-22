@@ -88,10 +88,66 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //---------------------------------------------------------------------------------------
 
+// Funcionalidad a las fechas de scroll en la página principal
+document.addEventListener("DOMContentLoaded", function() {
+    const scrollContainers = document.querySelectorAll(".scroll-container");
+    const landingContainer = document.querySelector("#home-real");
+
+    scrollContainers.forEach(scrollContainer => {
+        const scrollLeft = scrollContainer.querySelector(".scroll-left");
+        const scrollRight = scrollContainer.querySelector(".scroll-right");
+        const mainContentDiv = scrollContainer.querySelector("div");
+
+        scrollLeft.addEventListener("click", function() {
+            mainContentDiv.scrollBy({
+                left: -(landingContainer.clientWidth/2), // Ajusta la cantidad de desplazamiento según tus necesidades
+                behavior: "smooth"
+            });
+        });
+
+        scrollRight.addEventListener("click", function() {
+            mainContentDiv.scrollBy({
+                left: (landingContainer.clientWidth/2), // Ajusta la cantidad de desplazamiento según tus necesidades
+                behavior: "smooth"
+            });
+        });
+    });
+});
+
+//---------------------------------------------------------------------------------------
+
 // Vuelve a mostrar el contenido inicial
 function goHome(){  
+    // Contenedor primario
+    var mainDivider = document.getElementById('main-divider');
+    mainDivider.scrollTo({
+        top: 0
+    });
+    // Contenedor del inicio
     const home = document.getElementById('home-real');
     home.style.display = 'block';
-    const album = document.getElementById('album-display');
-    album.style.display = 'none';
+    // Contenedor de playlist/album
+    var playlist = document.getElementById('playlist-display');
+    if (playlist) {
+        playlist.remove();
+    }
 }
+
+// -----------------------------------------------------------------------------------------------------------------------------------------
+
+// Devuelve un tipo de saludo, según la hora (formato 24h)
+function obtenerSaludo() {
+    var hora = new Date().getHours();
+    if (hora >= 7 && hora < 14) {
+        return "¡Buenos días!";
+    } else if (hora >= 14 && hora < 20) {
+        return "¡Buenas tardes!";
+    } else {
+        return "¡Buenas noches!";
+    }
+}
+
+// Obtener el elemento donde mostrar el saludo
+var mensajeSaludo = document.getElementById("greetings"); // Ajusta el ID según tu HTML
+// Mostrar el saludo
+mensajeSaludo.textContent = obtenerSaludo();

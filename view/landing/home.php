@@ -33,7 +33,7 @@
 
 
 <?php if (!isset($_GET['text']) || empty($_GET['text'])): ?>
-<?php include 'playlist.php'; include 'home-real.php';?>
+<?php include 'home-real.php';?>
 <?php endif; ?>
 
 <footer class="footer">

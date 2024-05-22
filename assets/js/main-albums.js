@@ -29,8 +29,123 @@ $(document).ready(function() {
         });
     }
 
-    // Función para imprimir los álbumes más recientes
-    function printAlbums(accessToken) {
+    function getArtistId(accessToken, artistName, callback) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/search',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            data: {
+                q: artistName,
+                type: 'artist',
+                limit: 1
+            },
+            success: function(response) {
+                if (response.artists.items.length > 0) {
+                    callback(response.artists.items[0].id);
+                } else {
+                    console.error('No se encontró el artista:', artistName);
+                    callback(null);
+                }
+            },
+            error: function(err) {
+                console.error('Error al buscar el artista:', err);
+                callback(null);
+            }
+        });
+    }
+
+    function printAlbums(accessToken, topArtists) {
+        if (!topArtists.length) {
+            printGeneralAlbums(accessToken);
+            return;
+        }
+    
+        let allAlbums = [];
+    
+        // Función para mezclar un array
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+    
+        // Función para mostrar los álbumes
+        function displayAlbums(albums) {
+            albums.forEach(function(album) {
+                var albumName = album.name.length > 50 ? album.name.substring(0, 50) + '...' : album.name;
+                var html = '<a href="#" class="card-a" id="' + album.id + '" onclick="setupAlbum(this);"><div class="card">';
+                if (album.images.length > 0) {
+                    html += '<img src="' + album.images[0].url + '" alt="' + album.name + '">';
+                }
+                html += '<h3>' + albumName + '</h3>';
+                html += '<h4>';
+                album.artists.forEach(function(artist, index) {
+                    html += artist.name;
+                    if (index < album.artists.length - 1) {
+                        html += ', ';
+                    }
+                });
+                html += '</h4>';
+                html += '</div></a>';
+                $('#main-albums').append(html);
+            });
+        }
+    
+        // Contador para asegurarnos de que todas las solicitudes AJAX hayan terminado
+        let remainingArtists = topArtists.length;
+    
+        topArtists.forEach(function(artistName) {
+            getArtistId(accessToken, artistName, function(artistId) {
+                if (artistId) {
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/artists/' + artistId + '/albums?limit=5',
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
+                        success: function(data) {
+                            allAlbums = allAlbums.concat(data.items);
+    
+                            // Reducir el contador
+                            remainingArtists--;
+    
+                            // Si es el último artista, mezclar y mostrar los álbumes
+                            if (remainingArtists === 0) {
+                                shuffle(allAlbums);
+                                displayAlbums(allAlbums);
+                            }
+                        },
+                        error: function(err) {
+                            console.error('Error al obtener los álbumes:', err);
+    
+                            // Reducir el contador aunque haya un error
+                            remainingArtists--;
+    
+                            // Si es el último artista, mezclar y mostrar los álbumes
+                            if (remainingArtists === 0) {
+                                shuffle(allAlbums);
+                                displayAlbums(allAlbums);
+                            }
+                        }
+                    });
+                } else {
+                    // Reducir el contador si no se encuentra el ID del artista
+                    remainingArtists--;
+    
+                    // Si es el último artista, mezclar y mostrar los álbumes
+                    if (remainingArtists === 0) {
+                        shuffle(allAlbums);
+                        displayAlbums(allAlbums);
+                    }
+                }
+            });
+        });
+    }    
+
+    function printGeneralAlbums(accessToken) {
         $.ajax({
             url: 'https://api.spotify.com/v1/browse/new-releases?limit=30',
             type: 'GET',
@@ -98,8 +213,60 @@ $(document).ready(function() {
         });
     }
 
-    // Función para imprimir las canciones de la playlist "Top 50"
-    function printTop50(accessToken) {
+    function printTop50(accessToken, topArtists) {
+        if (!topArtists.length) {
+            printGeneralTop50(accessToken);
+            return;
+        }
+    
+        let trackCount = 0;
+        let sectionCount = 0;
+        let $currentSection;
+    
+        topArtists.forEach(function(artistName) {
+            getArtistId(accessToken, artistName, function(artistId) {
+                if (artistId) {
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks?market=ES',
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
+                        success: function(data) {
+                            var tracks = data.tracks;
+                            tracks.forEach(function(track) {
+                                if (trackCount % 50 === 0) {
+                                    sectionCount++;
+                                    $currentSection = $('<section id="section-top-' + sectionCount + '"></section>');
+                                    $('#top-50-songs').append($currentSection);
+                                }
+                                trackCount++;
+                                
+                                var html = '<a href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
+                                if (track.album.images.length > 0) {
+                                    html += '<img src="' + track.album.images[0].url + '" alt="' + track.name + '">';
+                                }
+                                var trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
+                                html += '<h3>' + trackName + '</h3>';
+                                html += '<h4>';
+                                var artistName = (track.artists.map(artist => artist.name).join(', ').length > 30 ? 
+                                    track.artists.map(artist => artist.name).join(', ').substring(0, 30) + '...' : 
+                                    track.artists.map(artist => artist.name).join(', '));
+                                html += artistName + '</h4>';
+                                html += '</div></a>';
+                                $currentSection.append(html);
+                            });
+                        },
+                        error: function(err) {
+                            console.error('Error al obtener las canciones del Top 50:', err);
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    function printGeneralTop50(accessToken) {
         $.ajax({
             url: 'https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks',
             type: 'GET',
@@ -156,8 +323,57 @@ $(document).ready(function() {
         }); 
     }
 
-    // Función para imprimir las canciones de la playlist "Viral 50"
-    function printViral50(accessToken) {
+    function printViral50(accessToken, topGenres) {
+        if (!topGenres) {
+            printGeneralViral50(accessToken);
+            return;
+        }
+    
+        var sectionCount = 0;
+        var trackCount = 0;
+        var $currentSection = $('<section id="viral-50-section-' + sectionCount + '"></section>');
+        $('#viral-50-songs').append($currentSection);
+    
+        topGenres.forEach(function(genre) {
+            $.ajax({
+                url: 'https://api.spotify.com/v1/search?q=genre:' + genre + '&type=track&limit=20',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                success: function(data) {
+                    var tracks = data.tracks.items;
+                    tracks.forEach(function(track) {
+                        if (trackCount % 50 === 0 && trackCount !== 0) {
+                            sectionCount++;
+                            $currentSection = $('<section id="viral-50-section-' + sectionCount + '"></section>');
+                            $('#viral-50-songs').append($currentSection);
+                        }
+    
+                        var html = '<a href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
+                        if (track.album.images.length > 0) {
+                            html += '<img src="' + track.album.images[0].url + '" alt="' + track.name + '">';
+                        }
+                        var trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
+                        html += '<h3>' + trackName + '</h3>';
+                        html += '<h4>';
+                        var artistName = track.artists.map(artist => artist.name).join(', ');
+                        artistName = artistName.length > 30 ? artistName.substring(0, 30) + '...' : artistName;
+                        html += artistName + '</h4>';
+                        html += '</div></a>';
+    
+                        $currentSection.append(html);
+                        trackCount++;
+                    });
+                },
+                error: function(err) {
+                    console.error('Error al obtener las canciones del Viral 50:', err);
+                }
+            });
+        });
+    }    
+
+    function printGeneralViral50(accessToken) {
         $.ajax({
             url: 'https://api.spotify.com/v1/playlists/37i9dQZEVXbLiRSasKsNU9/tracks',
             type: 'GET',
@@ -215,25 +431,62 @@ $(document).ready(function() {
 
     // Función para buscar información adicional sobre los artistas implicados en los álbumes
     function searchArtists(accessToken, albums) {
+        var artistIds = new Set();
+
         albums.forEach(function(album) {
             album.artists.forEach(function(artist) {
-                $.ajax({
-                    url: 'https://api.spotify.com/v1/artists/' + artist.id,
-                    type: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + accessToken
-                    },
-                    success: function(data) {
-                        // console.log('Información del artista:', data);
-                        var html = '<a href="#" artist-id="' + artist.id + '"><div class="artist" style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(' + data.images[0].url + ')">';
-                        html += '<h3>' + data.name + '</h3>';
+                if (!artistIds.has(artist.id)) {
+                    artistIds.add(artist.id);
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/artists/' + artist.id,
+                        type: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
+                        success: function(data) {
+                            var html = '<a href="#" artist-id="' + artist.id + '"><div class="artist" style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(' + data.images[0].url + ')">';
+                            html += '<h3>' + data.name + '</h3>';
+                            html += '</div></a>';
+                            $('#main-artists').append(html);
+                        },
+                        error: function(err) {
+                            console.error('Error al obtener información del artista:', err);
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    // Función para imprimir los artistas
+    function printArtists(accessToken, topArtists) {
+        var artistIds = new Set();
+
+        topArtists.forEach(function(artist) {
+            $.ajax({
+                url: 'https://api.spotify.com/v1/search',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                data: {
+                    q: artist,
+                    type: 'artist',
+                    limit: 1
+                },
+                success: function(data) {
+                    var artistData = data.artists.items[0];
+                    if (!artistIds.has(artistData.id)) {
+                        artistIds.add(artistData.id);
+                        var html = '<a href="#" artist-id="' + artistData.id + '"><div class="artist" style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(' + artistData.images[0].url + ')">';
+                        html += '<h3>' + artistData.name + '</h3>';
                         html += '</div></a>';
                         $('#main-artists').append(html);
-                    },
-                    error: function(err) {
-                        console.error('Error al obtener información del artista:', err);
                     }
-                });
+                },
+                error: function(err) {
+                    console.error('Error al obtener información del artista:', err);
+                }
             });
         });
     }
@@ -345,18 +598,61 @@ $(document).ready(function() {
         });
     }
 
-    // Obtener el token de acceso y llamar a las funciones para imprimir los datos
-    getAccessToken(function(accessToken) {
-        printAlbums(accessToken);
-        printPlaylists(accessToken);
-        printTop50(accessToken);
-        printViral50(accessToken);
-        printRandomSong(accessToken);
-        printRandomArtist(accessToken);
-        printRandomPlaylist(accessToken);
+    // Función para obtener las estadísticas del usuario
+    function getUserStats(callback) {
+        $.ajax({
+            url: './view/get_user_statistics.php', // Reemplaza con la ruta correcta a tu script PHP
+            type: 'GET',
+            success: function(response) {
+                callback(JSON.parse(response));
+            },
+            error: function(err) {
+                console.error('Error al obtener las estadísticas del usuario:', err);
+            }
+        });
+    }
+
+    // Verificar si el usuario está logueado y tiene estadísticas
+    getUserStats(function(userStats) {
+        if (userStats.loggedin) {
+            if (userStats.topArtists || userStats.topGenres) {
+                getAccessToken(function(accessToken) {
+                    // Ejecutar el código modificado para mostrar álbumes de artistas más escuchados
+                    printAlbums(accessToken, userStats.topArtists);
+                    printArtists(accessToken, userStats.topArtists);
+                    printPlaylists(accessToken);
+                    // Ejecutar el código modificado para mostrar canciones del Top 50 de artistas más escuchados
+                    printTop50(accessToken, userStats.topArtists);
+                    // Ejecutar el código modificado para mostrar canciones del género más escuchado
+                    printViral50(accessToken, userStats.topGenres);
+                    printRandomSong(accessToken);
+                    printRandomArtist(accessToken);
+                    printRandomPlaylist(accessToken);
+                });
+            }else{
+                getAccessToken(function(accessToken) {
+                    printGeneralAlbums(accessToken);
+                    printPlaylists(accessToken);
+                    printGeneralTop50(accessToken);
+                    printGeneralViral50(accessToken);
+                    printRandomSong(accessToken);
+                    printRandomArtist(accessToken);
+                    printRandomPlaylist(accessToken);
+                });
+            }
+        } else {
+            getAccessToken(function(accessToken) {
+                printGeneralAlbums(accessToken);
+                printPlaylists(accessToken);
+                printGeneralTop50(accessToken);
+                printGeneralViral50(accessToken);
+                printRandomSong(accessToken);
+                printRandomArtist(accessToken);
+                printRandomPlaylist(accessToken);
+            });
+        }
     });
 });
-
 
 
 

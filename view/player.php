@@ -4,8 +4,8 @@
     </div>
     <div id="controls-playing-song">
         <div id="playing-song-info">
-            <h3>PAID</h3>
-            <h4>¥$, Kanye West, Ty Dolla $ign</h4>
+            <h3 id="song-title"></h3>
+            <h4 id="song-artists"></h4>
         </div>
         <div id="playing-song-buttons">
             <span class="material-symbols-rounded" id="volume-icon" onclick="muteOrDesmute()">volume_down</span>
@@ -19,3 +19,42 @@
         </div>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    let previousTitle = '';
+    let previousArtists = '';
+
+    function updateDatabase(title, artists) {
+        if (title !== previousTitle || artists !== previousArtists) {
+            previousTitle = title;
+            previousArtists = artists;
+            
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', './view/update_song_info.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send('title=' + encodeURIComponent(title) + '&artists=' + encodeURIComponent(artists));
+        }
+    }
+
+    const songTitleElement = document.getElementById('song-title');
+    const songArtistsElement = document.getElementById('song-artists');
+
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (mutation.target === songTitleElement || mutation.target === songArtistsElement) {
+                const title = songTitleElement.textContent.trim();
+                const artists = songArtistsElement.textContent.trim();
+                updateDatabase(title, artists);
+            }
+        });
+    });
+
+    observer.observe(songTitleElement, { childList: true });
+    observer.observe(songArtistsElement, { childList: true });
+});
+</script>

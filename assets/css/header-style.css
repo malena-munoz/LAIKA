@@ -92,6 +92,8 @@ header .centered:nth-child(2):active {
     justify-content: right;
     align-items: center;
 }
+
+
 .popup {
     --burger-line-width: 1.125em;
     --burger-line-height: 0.125em;
@@ -143,7 +145,6 @@ header .centered:nth-child(2):active {
     --underline-margin-y: 0.3125em;
 }
 
-/* popup settings 👆 */
 
 .popup {
     display: inline-block;
@@ -195,29 +196,25 @@ header .centered:nth-child(2):active {
     opacity: 0;
     position: absolute;
     padding: var(--nav-padding-y) var(--nav-padding-x);
-    background: var(--nav-bg);
+    background: linear-gradient(45deg, var(--high-lilac-slate-gray) 50%, var(--slate-lavender)) fixed;
     font-family: var(--nav-font-family);
-    color: var(--nav-text-color);
     border-radius: var(--nav-border-radius);
     box-shadow: var(--nav-shadow-width) var(--nav-shadow-color);
-    border: var(--nav-border-width) solid var(--nav-border-color);
-    top: calc(var(--burger-diameter) + var(--burger-enable-outline-width) + var(--burger-enable-outline-offset));
-    right: calc(0% + 10px);
+    border: 3px solid var(--mid-lilac);
+    top: 42px;
+    right: calc(0%);
     transition: var(--burger-transition);
-}
-
-.popup-window legend {
-    padding: var(--nav-title-padding-y) var(--nav-title-padding-x);
-    margin: 0;
-    color: var(--nav-title-color);
-    font-size: var(--nav-title-size);
-    text-transform: uppercase;
 }
 
 .popup-window ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
+}
+
+.popup-window span{
+    color: var(--low-lilac);
+    font-size: 20px;
 }
 
 .popup-window ul button {
@@ -231,29 +228,20 @@ header .centered:nth-child(2):active {
     font-size: var(--nav-button-font-size);
     padding: var(--nav-button-padding-y) var(--nav-button-padding-x);
     white-space: nowrap;
-    border-radius: var(--nav-button-border-radius);
+    border-radius: 5px;
     cursor: pointer;
-    column-gap: var(--nav-button-distance);
 }
 
-.popup-window ul li:nth-child(1) svg,
-.popup-window ul li:nth-child(2) svg {
-    color: cornflowerblue;
-}
-
-.popup-window ul li:nth-child(4) svg,
-.popup-window ul li:nth-child(5) svg {
-    color: rgb(153, 153, 153);
-}
-
-.popup-window ul li:nth-child(7) svg {
-    color: red;
-}
-
-.popup-window hr {
-    margin: var(--underline-margin-y) 0;
+.popup-window hr{
     border: none;
-    border-bottom: var(--underline-border-width) solid var(--underline-border-color);
+    border-bottom: 3px solid var(--mid-lilac);
+    margin: 10px 0 5px 0;
+}
+
+.popup-window .material-symbols-rounded{
+    font-size: 25px;
+    height: fit-content;
+    color: var(--low-blue-slate-gray);
 }
 
 /* actions */
@@ -262,8 +250,7 @@ header .centered:nth-child(2):active {
 .popup-window ul button:focus-visible,
 .popup-window ul button:hover svg,
 .popup-window ul button:focus-visible svg {
-    color: var(--nav-button-hover-text-color);
-    background: var(--nav-button-hover-bg);
+    background: var(--slate-lilac);
 }
 
 .burger:hover {
@@ -309,15 +296,15 @@ header .centered:nth-child(2):active {
     --active: 0;
     --bg: radial-gradient(
     40% 50% at center 100%,
-    hsl(270 calc(var(--active) * 97%) 72% / var(--active)),
+    hsl(286 calc(var(--active) * 16%) 42% / var(--active)),
     transparent
     ),
     radial-gradient(
     80% 100% at center 120%,
-    hsl(260 calc(var(--active) * 97%) 70% / var(--active)),
+    hsl(296 calc(var(--active) * 20%) 61% / var(--active)),
     transparent
     ),
-    hsl(260 calc(var(--active) * 97%) calc((var(--active) * 44%) + 12%));
+    hsl(283 calc(var(--active) * 10%) calc((var(--active) * 28%) + 12%));
     background: var(--bg);
     font-size: 1.2rem;
     font-weight: 500;
@@ -330,9 +317,9 @@ header .centered:nth-child(2):active {
     white-space: nowrap;
     border-radius: 100px;
     position: relative;
-    box-shadow: 0 0 calc(var(--active) * 0.9em) calc(var(--active) * 0.3em) hsl(260 97% 61% / 0.75),
-    0 0em 0 0 hsl(260 calc(var(--active) * 97%) calc((var(--active) * 50%) + 30%)) inset,
-    0 -0.05em 0 0 hsl(260 calc(var(--active) * 97%) calc(var(--active) * 60%)) inset;
+    box-shadow: 0 0 calc(var(--active) * 0.9em) calc(var(--active) * 0.3em) hsl(296 20% 61% / 0.75),
+    0 0em 0 0 hsl(290 calc(var(--active) * 20%) calc((var(--active) * 61%) + 30%)) inset,
+    0 -0.05em 0 0 hsl(290 calc(var(--active) * 20%) calc(var(--active) * 61%)) inset;
     transition: box-shadow var(--transition), scale var(--transition), background var(--transition);
     scale: calc(1 + (var(--active) * 0.1));
     transition: .3s;
@@ -387,7 +374,6 @@ header .centered:nth-child(2):active {
     position: absolute;
     inset: -0.2em;
     z-index: -1;
-    border: 0.25em solid hsl(260 97% 50% / 0.5);
     border-radius: 100px;
     opacity: var(--active, 0);
     transition: opacity var(--transition);

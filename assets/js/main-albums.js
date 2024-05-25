@@ -740,7 +740,7 @@ function setupPlaylist(playlistCard) {
                     '<span id="playlist-name">' + (playlist.name.length > 25 ? playlist.name.substring(0, 25) + '...' : playlist.name) + '</span>';
                 html += '<div id="playlist-owner"><img id="owner-img" src="' +  playlist.images[0].url + '" alt="' +playlist.owner.display_name + '">';
                 html += '<span id="owner-name">' + playlist.owner.display_name + '</span></div><div id="playlist-controls">';
-                html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\');">play_arrow</span>';
+                html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\'); addPlaylist(); playAtIndex(0);">play_arrow</span>';
                 html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="changePlaylistControlStyle(\'shuffle-playlist\');">shuffle</span>';
                 html += '<span class="material-symbols-rounded" id="add-playlist" onclick="changePlaylistControlStyle(\'add-playlist\');">add</span>';
                 html += '</div></section><img id="playlist-img" src="' + playlist.images[0].url + '" alt="' + playlist.name + '"></div>';
@@ -781,7 +781,6 @@ function setupPlaylist(playlistCard) {
 function setupAlbum(albumCard) {
     // ID de la playlist
     var id = albumCard.getAttribute('id');
-    console.log(id);
     // Contenedor primario de toda la página
     var mainDivider = document.getElementById('main-divider');
     returnAccessToken()
@@ -789,7 +788,6 @@ function setupAlbum(albumCard) {
             return getAlbum(id, accessToken);
         })
         .then(function(album) {
-            console.log(album);
             $(document).ready(function() {
                 // Display del contenedor principal
                 $('#home-real').css({'display': 'none'});
@@ -799,7 +797,7 @@ function setupAlbum(albumCard) {
                     '<span id="playlist-name">' + (album.name.length > 25 ? album.name.substring(0, 25) + '...' : album.name) + '</span>';
                 html += '<div id="playlist-owner"><img id="owner-img" src="' +  album.images[0].url + '" alt="' + album.artists.map(artist => artist.name).join(', ') + '">';
                 html += '<span id="owner-name">' + album.artists.map(artist => artist.name).join(', ') + '</span></div><div id="playlist-controls">';
-                html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\');">play_arrow</span>';
+                html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\'); addAlbum(); playAtIndex(0);">play_arrow</span>';
                 html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="changePlaylistControlStyle(\'shuffle-playlist\');">shuffle</span>';
                 html += '<span class="material-symbols-rounded" id="add-playlist" onclick="changePlaylistControlStyle(\'add-playlist\');">add</span>';
                 html += '</div></section><img id="playlist-img" src="' + album.images[0].url + '" alt="' + album.name + '"></div>';

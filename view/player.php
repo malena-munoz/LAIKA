@@ -10,11 +10,12 @@
         <div id="playing-song-buttons">
             <span class="material-symbols-rounded" id="volume-icon" onclick="muteOrDesmute()">volume_down</span>
             <div class="range-input-container">
-                <input type="range" min="0" max="100" value="50" id="volume-input" oninput="changeVolume()">
+                <input type="range" min="0" max="100" value="10" id="volume-input" oninput="changeVolume()">
             </div>
-            <span class="material-symbols-rounded" id="previous">skip_previous</span>
-            <span class="material-symbols-rounded" id="play-pause" onclick="changeSongStatus()">play_arrow</span>
-            <span class="material-symbols-rounded" id="next">skip_next</span>
+            <span class="material-symbols-rounded" id="previous" onclick="playPrevious();">skip_previous</span>
+            <span class="material-symbols-rounded" id="play-pause" onclick="changeSongStatus();">play_arrow</span>
+            <span class="material-symbols-rounded" id="next" onclick="playNext();">skip_next</span>
+            <span class="material-symbols-rounded" id="shuffle" onclick="shuffleSongs();">shuffle</span>
             <span class="material-symbols-rounded" id="menu">menu</span>
         </div>
     </div>

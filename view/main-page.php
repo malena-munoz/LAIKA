@@ -22,6 +22,7 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
         <link rel="stylesheet" href="assets/css/home-style.css"/>
         <link rel="stylesheet" href="assets/css/register-style.css"/>
         <link rel="stylesheet" href="assets/css/playlist-album-style.css"/>
+        <link rel="stylesheet" href="assets/css/user-style.css"/>
     </head>
     <body>
         <div id="modal" class="modal">
@@ -43,6 +44,7 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
             <!-- Barra de búsqueda -->
             <?php include 'header.php';?>
             <!-- Datos empresa -->
+            <!-- <php include 'landing/user.php';?> -->
             <?php include 'landing/home.php';?>
             <!-- Sección de relleno -->
             <section class="filler"></section>

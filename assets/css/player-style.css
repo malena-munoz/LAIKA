@@ -66,6 +66,12 @@
     transform: scale(0.75);
 }
 
+/* Icono de mezclar canciones */
+#shuffle{
+    margin-left: 5px;
+    font-size: 29px !important;  
+}
+
 /* El span del icono del menú, tiene un margen izquierdo adicional */
 #menu{
     margin-left: 15px;

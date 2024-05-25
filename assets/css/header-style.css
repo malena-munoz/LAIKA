@@ -119,7 +119,6 @@ header .centered:nth-child(2):active {
     --nav-shadow-color: rgba(0, 0, 0, .2);
     --nav-shadow-width: 0 1px 5px;
     --nav-bg: #eee;
-    --nav-font-family: Menlo, Roboto Mono, monospace;
     --nav-default-scale: .8;
     --nav-active-scale: 1;
     --nav-position-left: 0;
@@ -197,7 +196,6 @@ header .centered:nth-child(2):active {
     position: absolute;
     padding: var(--nav-padding-y) var(--nav-padding-x);
     background: linear-gradient(45deg, var(--high-lilac-slate-gray) 50%, var(--slate-lavender)) fixed;
-    font-family: var(--nav-font-family);
     border-radius: var(--nav-border-radius);
     box-shadow: var(--nav-shadow-width) var(--nav-shadow-color);
     border: 3px solid var(--mid-lilac);

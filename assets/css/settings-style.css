@@ -1,0 +1,82 @@
+#settings-display{
+    gap: var(--separation);
+}
+
+#settings-display h2{
+    font-size: 70px;
+    color: var(--low-blue-slate-gray);
+    margin-top: 20px;
+}
+
+#settings-display .form-inp{
+    margin: 0;
+}
+
+#user-settings{
+    display: flex;
+    flex-direction: column;
+    gap: var(--separation);
+}
+
+.settings-inp{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: none;
+    width: 500px;
+}
+
+.settings-inp input{
+    border-bottom: 1px solid var(--mid-lilac);
+    font-size: 20px;
+    padding: 8px;
+}
+
+input[type="file"] {
+  position: relative;
+  outline: none;
+  padding: 4px;
+  margin: 10px -4px -4px -4px;
+  border: none;
+}
+  
+  input[type="file"]::file-selector-button {
+    width: 40px;
+    height: 40px;
+    color: transparent;
+  }
+  
+  /* Faked label styles and icon */
+  input[type="file"]::before {
+    position: absolute;
+    pointer-events: none;
+    height: 45px;
+    width: 40px;
+    content: "";
+    background: url("../img/upload.svg") no-repeat;
+  }
+  
+  /* ------- From Step 1 ------- */
+  
+  /* file upload button */
+  input[type="file"]::file-selector-button {
+    border-radius: 4px;
+    padding: 0 16px;
+    height: 40px;
+    cursor: pointer;
+    background-color: var(--mid-lilac);
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    margin-right: 16px;
+    transition: background-color 200ms;
+  }
+  
+  /* file upload button hover state */
+  input[type="file"]::file-selector-button:hover {
+    background-color: var(--high-lilac)
+  }
+  
+  /* file upload button active state */
+  input[type="file"]::file-selector-button:active {
+    background-color: var(--low-blue-slate-gray);
+  }

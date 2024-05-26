@@ -11,14 +11,12 @@
             <div id="input-area">
                 <div id="instruccion-email-login" class="instruccion">Email</div>
                 <div class="form-inp" id="email-login-inp" style="display: block;">
-                    <input type="email" id="email-login" name="email-login" placeholder="ejemplo@ejemplo.com">
+                    <input type="email" autocomplete="off" id="email-login" name="email-login" placeholder="ejemplo@ejemplo.com">
                 </div>
                 <div id="instruccion-clave-login" class="instruccion" style="display: block;">Contraseña</div>
                 <div class="form-inp" id="clave-login-inp" style="display: block;">
-                    <input type="password" id="clave-login" name="clave-login" placeholder="Contraseña">
-                </div>
-
-                
+                    <input type="password" autocomplete="off" id="clave-login" name="clave-login" placeholder="Contraseña">
+                </div>  
                 <div id="welcome-user-logged" class="instruccion" style="display: none;">¡Bienvenido de nuevo, nombreUsuario!</div>
             </div>
             <div id="submit-button-cvr">

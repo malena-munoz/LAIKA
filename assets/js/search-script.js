@@ -35,7 +35,7 @@ async function searchSpotify(event) {
         console.error('Error al realizar la búsqueda:', error);
     }
 
-    if(searchTerm == '' || searchTerm == null) {
+    if(searchTerm == '') {
         document.getElementById('search-results').style.display = 'none';
         document.getElementById('home-real').style.display = 'block';
     }
@@ -49,21 +49,34 @@ function displaySearchResults(data) {
     searchedSongsContainer.innerHTML = '';
     if (tracks.items.length > 0) {
         tracks.items.forEach(track => {
-            var html = '<a href="#" class="track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + (track.preview_url ? track.preview_url : '') + '"><div class="track">';
+            var html = '<a href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
             if (track.album.images.length > 0) {
                 html += '<img src="' + track.album.images[0].url + '" alt="' + track.name + '">';
             }
-            html += '<h3>' + track.name + '</h3>';
+            var trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
+            html += '<h3>' + trackName + '</h3>';
             html += '<h4>';
-            track.artists.forEach(function(artist, index) {
-                html += artist.name;
-                if (index < track.artists.length - 1) {
-                    html += ', ';
-                }
-            });
-            html += '</h4>';
+            var artistName = (track.artists.map(artist => artist.name).join(', ').length > 30 ? 
+                track.artists.map(artist => artist.name).join(', ').substring(0, 30) + '...' : 
+                track.artists.map(artist => artist.name).join(', '));
+            html += artistName + '</h4>';
             html += '</div></a>';
             searchedSongsContainer.innerHTML += html;
+        });
+
+        // Agregar el evento clic a cada elemento de canción
+        $('.track-a').on('click', function(e) {
+            e.preventDefault();
+            var songName = $(this).data('name');
+            var artists = $(this).data('artists');
+            var previewUrl = $(this).data('preview');
+            var imageUrl = $(this).find('img').attr('src'); // Get the image URL of the clicked song
+            // Actualizar la información de la canción en el reproductor
+            $('#playing-song-info h3').text(songName);
+            $('#playing-song-info h4').text(artists);
+            playing_song_audio.src = previewUrl;
+            $('#img-current-song img').attr('src', imageUrl); // Update the image of the playing song
+            playNewSong(); // Reproducir la canción automáticamente
         });
     }
 
@@ -85,12 +98,42 @@ function displaySearchResults(data) {
     // Mostrar artistas
     const searchedArtistsContainer = document.getElementById('searched-artists');
     searchedArtistsContainer.innerHTML = '';
+
     if (artists.items.length > 0) {
         artists.items.forEach(artist => {
-            var html = '<a href="#"><div class="artist" style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(' + artist.images[0].url + ')">';
-            html += '<h3>' + artist.name + '</h3>';
-            html += '</div></a>';
-            searchedArtistsContainer.innerHTML += html;
+            let imageUrl = artist.images.length > 0 ? artist.images[0].url : '';
+
+            // Crear el contenedor del artista
+            let artistDiv = document.createElement('div');
+            artistDiv.className = 'artist';
+            artistDiv.style.backgroundImage = imageUrl ? `linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(${imageUrl})` : '';
+            artistDiv.style.backgroundColor = imageUrl ? '' : 'black';
+
+            // Crear el nombre del artista
+            let artistName = document.createElement('h3');
+            artistName.textContent = artist.name;
+
+            // Crear el enlace
+            let link = document.createElement('a');
+            link.href = '#';
+
+            // Añadir el nombre al contenedor del artista
+            artistDiv.appendChild(artistName);
+            // Añadir el contenedor del artista al enlace
+            link.appendChild(artistDiv);
+            // Añadir el enlace al contenedor principal
+            searchedArtistsContainer.appendChild(link);
+
+            // Manejar el error de carga de la imagen
+            if (imageUrl) {
+                let img = new Image();
+                img.src = imageUrl;
+                img.onerror = () => {
+                    artistDiv.style.backgroundImage = '';
+                    artistDiv.style.backgroundColor = 'black';
+                };
+            }
         });
     }
+
 }

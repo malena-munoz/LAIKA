@@ -17,13 +17,20 @@ window.openModal = function (type) {
     var modal = document.getElementById('modal');
     var registerForm = document.getElementById('register-form');
     var loginForm = document.getElementById('login-form');
+    var forgotPasswordForm = document.getElementById('forgotPassword-form');
     
     if (type === 'login') {
+        forgotPasswordForm.style.display = 'none';
         registerForm.style.display = 'none';
         loginForm.style.display = 'block';
     } else if (type === 'register') {
+        forgotPasswordForm.style.display = 'none';
         loginForm.style.display = 'none';
         registerForm.style.display = 'block';
+    } else if (type === 'forgotPassword') {
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'none';
+        forgotPasswordForm.style.display = 'block';
     }
 
     modal.classList.remove('fadeOut');
@@ -59,11 +66,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Evento clic en el botón "Forgot password?"
-    var forgotPasswordLink = document.getElementById('forgot-pass');
+    var forgotPasswordLink = document.getElementById('forgot');
     if (forgotPasswordLink) {
         forgotPasswordLink.addEventListener('click', function (event) {
             event.preventDefault();
-            // Aquí podrías agregar la lógica para el enlace "Forgot password?"
+            openModal('forgotPassword');
         });
     }
 

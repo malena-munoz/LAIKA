@@ -33,6 +33,9 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
                 </div>
                 <div id="login-form" style="display: none;">
                     <?php include 'login.php'; ?>
+                </div>                
+                <div id="forgotPassword-form" style="display: none;">
+                    <?php include 'forgot.php'; ?>
                 </div>
             </div>
         </div>
@@ -45,9 +48,9 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
             <!-- Barra de búsqueda -->
             <?php include 'header.php';?>
             <!-- Datos empresa -->
-            <?php include 'landing/settings.php';?>
+            <!-- <?php include 'landing/settings.php';?> -->
             <!-- <php include 'landing/user.php';?> -->
-            <!-- <php include 'landing/home.php';?> -->
+            <?php include 'landing/home.php';?>
             <!-- Sección de relleno -->
             <section class="filler"></section>
         </div>

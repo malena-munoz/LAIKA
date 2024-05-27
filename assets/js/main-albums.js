@@ -235,6 +235,8 @@ $(document).ready(function() {
                         success: function(data) {
                             var tracks = data.tracks;
                             tracks.forEach(function(track) {
+                                if (trackCount >= 100) return;  // Limita las canciones a 100
+
                                 if (trackCount % 50 === 0) {
                                     sectionCount++;
                                     $currentSection = $('<section id="section-top-' + sectionCount + '"></section>');
@@ -264,7 +266,7 @@ $(document).ready(function() {
                 }
             });
         });
-    }
+    }    
 
     function printGeneralTop50(accessToken) {
         $.ajax({
@@ -336,7 +338,7 @@ $(document).ready(function() {
     
         topGenres.forEach(function(genre) {
             $.ajax({
-                url: 'https://api.spotify.com/v1/search?q=genre:' + genre + '&type=track&limit=20',
+                url: 'https://api.spotify.com/v1/search?q=genre:' + genre + '&type=track',
                 type: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
@@ -344,6 +346,8 @@ $(document).ready(function() {
                 success: function(data) {
                     var tracks = data.tracks.items;
                     tracks.forEach(function(track) {
+                        if (trackCount >= 100) return;  // Limita las canciones a 100
+
                         if (trackCount % 50 === 0 && trackCount !== 0) {
                             sectionCount++;
                             $currentSection = $('<section id="viral-50-section-' + sectionCount + '"></section>');
@@ -542,7 +546,7 @@ $(document).ready(function() {
         });
     }
 
-    // Devuele un género aleatorio
+    // Devuelve un género aleatorio
     function printRandomArtist(accessToken) {
         const randomGenre = genres[Math.floor(Math.random() * genres.length)];
         $.ajax({
@@ -555,13 +559,52 @@ $(document).ready(function() {
                 const artists = data.artists.items;
                 const randomArtist = artists[Math.floor(Math.random() * artists.length)];
 
-                var html = '<a href="#" class="big-card-a" artist-id="' + randomArtist.id + '">';
-                html += '<div class="big-card">';
-                html += '<img src="' + randomArtist.images[0].url + '">';
-                html += '<section><h3>...un artista?</h3><h3>' + randomArtist.name + '</h3>';
-                html += '<h4>'+ randomArtist.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' seguidores</h4></section></div></a>';
-            
-                $('#random-container').append(html);
+                // Crear los elementos del artista
+                let link = document.createElement('a');
+                link.href = '#';
+                link.className = 'big-card-a';
+                link.setAttribute('artist-id', randomArtist.id);
+
+                let bigCardDiv = document.createElement('div');
+                bigCardDiv.className = 'big-card';
+
+                // Manejo de la imagen
+                let img = new Image();
+                if (randomArtist.images.length > 0) {
+                    img.src = randomArtist.images[0].url;
+                }
+                img.onerror = function() {
+                    bigCardDiv.style.backgroundColor = 'black';
+                };
+
+                let section = document.createElement('section');
+
+                let h3_1 = document.createElement('h3');
+                h3_1.textContent = '...un artista?';
+
+                let h3_2 = document.createElement('h3');
+                h3_2.textContent = randomArtist.name;
+
+                let h4 = document.createElement('h4');
+                h4.textContent = randomArtist.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' seguidores';
+
+                // Ensamblar los elementos
+                section.appendChild(h3_1);
+                section.appendChild(h3_2);
+                section.appendChild(h4);
+
+                bigCardDiv.appendChild(img);
+                bigCardDiv.appendChild(section);
+
+                link.appendChild(bigCardDiv);
+
+                // Añadir el enlace al contenedor principal
+                document.getElementById('random-container').appendChild(link);
+
+                // Comprobar si la imagen se ha cargado
+                if (randomArtist.images.length === 0) {
+                    bigCardDiv.style.backgroundColor = 'black';
+                }
             },
             error: function(err) {
                 console.error('Error al obtener el artista aleatorio 1:', err);

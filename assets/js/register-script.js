@@ -1,4 +1,3 @@
-
 document.getElementById("continuar-button").addEventListener("click", function() {
     // Obtener el nombre de usuario ingresado
     var nombreUsuario = document.getElementById("nombre").value;

@@ -15,7 +15,7 @@
                 </button>
             </li>
             <li>
-                <button>
+                <button onclick="openSettings();">
                     <span class="material-symbols-rounded">settings</span>
                     <span>Ajustes</span>
                 </button>

@@ -170,7 +170,7 @@ header .centered:nth-child(2):active {
     transition: var(--burger-transition);
     outline: var(--burger-enable-outline-width) solid transparent;
     outline-offset: 0;
-    background-image: url(https://ih1.redbubble.net/image.3987161176.8731/raf,360x360,075,t,fafafa:ca443f4786.jpg);
+    background-image: url(../img/default-user.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center; 

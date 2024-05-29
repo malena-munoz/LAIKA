@@ -1,9 +1,9 @@
 <div class="main-content" id="user-display">
     <div class="user-big-container">
-        <img id="user-portrait" src="./assets/img/background.png" alt="">
+        <img id="user-portrait" src="./assets/img/default-bg.png" alt="">
     </div>
     <div class="user-main-container">
-        <img id="user-portrait" src="./assets/img/uwu.png" alt="">
+        <img id="user-portrait" src="./assets/img/default-user.png" alt="">
         <span id="user-name">usuario</span>
     </div>
     <div class="user-note-container">

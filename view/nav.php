@@ -28,7 +28,7 @@
             <section class="filler"></section>
         </div>
         <div id="img-current-song">
-            <img src="assets\img\image.png" alt="Album of the playing song">
+            <img src="assets\img\default-song.png" alt="Album of the playing song">
         </div>
     </div>
 </nav>

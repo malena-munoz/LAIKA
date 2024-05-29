@@ -180,6 +180,7 @@ th, td{
     flex-direction: column;
 }
 
+/* Contenedor de relleno, que simulará margen adicional */
 .filler{
     width: inherit;
     height: var(--separation);
@@ -203,10 +204,31 @@ input[type="range"] {
     overflow: hidden;
 }
 
+/* Contenedor de input de rango */
 .range-input-container{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Contenedor de input de contraseña */
+.password-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Icono de visibilidad de contraseña */
+.password-container span{
+    color: var(--mid-lilac);
+    margin-left: -24px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Input para agregar una contraseña */
+.password-container input{
+    padding: 8px 30px 8px 8px !important;
 }
 
 /* Cursor del input de rango (Chrome) */

@@ -1,5 +1,6 @@
 #settings-display{
     gap: var(--separation);
+    display: none;
 }
 
 #settings-display h2{
@@ -21,9 +22,39 @@
 .settings-inp{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--separation);
     border: none;
     width: 500px;
+}
+
+#password-inp, #profile-inp{
+    width: 1000px;
+}
+
+#profile-inp {
+    flex-direction: row;
+}
+
+#profile-inp section{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--separation);
+}
+
+#password-inp p{
+    color: var(--mid-lilac);
+    text-align: justify;
+    font-size: 20px;
+}
+
+#password-inp p span{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#password-inp p span:hover{
+    color: var(--low-blue-slate-gray);
 }
 
 .settings-inp input{
@@ -33,50 +64,51 @@
 }
 
 input[type="file"] {
-  position: relative;
-  outline: none;
-  padding: 4px;
-  margin: 10px -4px -4px -4px;
-  border: none;
+    position: relative;
+    outline: none;
+    border: 1px solid var(--mid-lilac);
+    padding: 0;
+    cursor: pointer;
 }
-  
-  input[type="file"]::file-selector-button {
-    width: 40px;
-    height: 40px;
-    color: transparent;
-  }
-  
+
   /* Faked label styles and icon */
-  input[type="file"]::before {
+input[type="file"]::before {
     position: absolute;
     pointer-events: none;
+    cursor: pointer;
     height: 45px;
     width: 40px;
     content: "";
     background: url("../img/upload.svg") no-repeat;
-  }
-  
-  /* ------- From Step 1 ------- */
-  
-  /* file upload button */
-  input[type="file"]::file-selector-button {
-    border-radius: 4px;
+}
+
+input[type="file"]::file-selector-button {
     padding: 0 16px;
+    width: 40px;
     height: 40px;
-    cursor: pointer;
+    color: transparent;
     background-color: var(--mid-lilac);
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    border: 0px solid transparent;
     margin-right: 16px;
     transition: background-color 200ms;
-  }
+}
   
-  /* file upload button hover state */
-  input[type="file"]::file-selector-button:hover {
-    background-color: var(--high-lilac)
-  }
-  
-  /* file upload button active state */
-  input[type="file"]::file-selector-button:active {
-    background-color: var(--low-blue-slate-gray);
-  }
+input[type="file"]::file-selector-button:hover {
+  background-color: var(--high-lilac)
+}
+
+#password-inp section > *{
+  width: 500px;
+}
+
+#password-inp section{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+#password-inp #code-inp{
+  justify-content: left;
+  width: fit-content;
+  margin-bottom: -3px;
+}

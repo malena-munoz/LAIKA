@@ -107,14 +107,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
         scrollLeft.addEventListener("click", function() {
             mainContentDiv.scrollBy({
-                left: -(landingContainer.clientWidth/2), // Ajusta la cantidad de desplazamiento según tus necesidades
+                left: -(landingContainer.clientWidth/2), 
                 behavior: "smooth"
             });
         });
 
         scrollRight.addEventListener("click", function() {
             mainContentDiv.scrollBy({
-                left: (landingContainer.clientWidth/2), // Ajusta la cantidad de desplazamiento según tus necesidades
+                left: (landingContainer.clientWidth/2),
                 behavior: "smooth"
             });
         });
@@ -130,17 +130,31 @@ function goHome(){
     mainDivider.scrollTo({
         top: 0
     });
-    // Contenedor del inicio
-    const home = document.getElementById('home-real');
-    home.style.display = 'block';
+    // Elementos hijos
+    const childrenArray = Array.from(document.getElementById('main-divider').children);
+    childrenArray.forEach(child => {
+        if (child.tagName.toLowerCase() === 'div') {
+            if(child.getAttribute('id') === 'home-real'){
+                child.style.display = 'flex';
+            } else {
+                child.style.display = 'none';
+            }
+        }
+    });
+    // Footer
+    const footer = document.querySelector('.footer');
+    footer.style.display = 'flex';
     // Contenedor de playlist/album
     var playlist = document.getElementById('playlist-display');
     if (playlist) {
         playlist.remove();
     }
+    // Playlist o álbum agregado + índice
+    wasAdded = false;
+    tempIndex = -1;
 }
 
-// -----------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
 
 // Devuelve un tipo de saludo, según la hora (formato 24h)
 function obtenerSaludo() {
@@ -155,6 +169,46 @@ function obtenerSaludo() {
 }
 
 // Obtener el elemento donde mostrar el saludo
-var mensajeSaludo = document.getElementById("greetings"); // Ajusta el ID según tu HTML
+var mensajeSaludo = document.getElementById('greetings'); // Ajusta el ID según tu HTML
 // Mostrar el saludo
 mensajeSaludo.textContent = obtenerSaludo();
+
+
+//---------------------------------------------------------------------------------------
+
+// Visibiliza o no, los inputs de las contraseñas
+function togglePassword(span) {
+    const passwordInput = span.previousElementSibling;
+
+    if (span.textContent === 'visibility') {
+        passwordInput.type = 'text';
+        span.textContent = 'visibility_off'; // Cambiar el icono
+    } else {
+        passwordInput.type = 'password';
+        span.textContent = 'visibility';
+    }
+}
+
+
+//---------------------------------------------------------------------------------------
+
+// Visibiliza o no, el display de los ajustes
+function openSettings(){
+    // Elementos hijos
+    const childrenArray = Array.from(document.getElementById('main-divider').children);
+    childrenArray.forEach(child => {
+        if (child.tagName.toLowerCase() === 'div') {
+            if(child.getAttribute('id') === 'settings-display'){
+                child.style.display = 'flex';
+            } else {
+                child.style.display = 'none';
+            }
+        }
+    });
+    // Footer
+    const footer = document.querySelector('.footer');
+    footer.style.display = 'none';
+    // Playlist o álbum agregado + índex
+    wasAdded = false;
+    tempIndex = -1;
+}

@@ -41,14 +41,15 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
         </div>
         <!-- Canción en reproducción -->
         <audio id="playing-song-audio" ontimeupdate="refreshProgressBar(), changeMaxValueSongProgress()">
-            <source src="./assets/audio/paid.mp3" type="audio/mp3">
+            <source type="audio/mp3">
         </audio>
         <?php include 'nav.php';?>
         <div id="main-divider">
             <!-- Barra de búsqueda -->
             <?php include 'header.php';?>
+            <!-- Ajustes (se mantienen ocultos) -->
+            <?php include 'landing/settings.php';?>
             <!-- Datos empresa -->
-            <!-- <?php include 'landing/settings.php';?> -->
             <!-- <php include 'landing/user.php';?> -->
             <?php include 'landing/home.php';?>
             <!-- Sección de relleno -->

@@ -1,31 +1,44 @@
 <?php
-session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-try {
-    if (!isset($_POST['email'])) {
-        throw new Exception('Email no proporcionado.');
-    }
+require './../../vendor/autoload.php';
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
     $email = $_POST['email'];
+
+    // Generar un código de verificación de 4 dígitos
     $codigo = rand(1000, 9999);
 
-    // Guardar el código en la sesión para comparar más tarde
-    $_SESSION['codigo_recuperacion'] = $codigo;
+    // Iniciar la sesión y guardar el email y el código de verificación
+    session_start();
+    $_SESSION['codigo_verificacion'] = $codigo;
+    $_SESSION['email'] = $email;
 
-    // Detalles del correo
-    $subject = "Recuperación de contraseña";
-    $message = "Tu código de recuperación es: " . $codigo;
-    $headers = "From: no-reply@tu-dominio.com";
+    // Crear una instancia de PHPMailer
+    $mail = new PHPMailer(true);
 
-    // Enviar el correo
-    if (mail($email, $subject, $message, $headers)) {
-        echo "Correo enviado";
-    } else {
-        throw new Exception('Error al enviar el correo.');
+    try {
+        // Configuración del servidor SMTP
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Cambia esto por el servidor SMTP de tu proveedor de correo
+        $mail->SMTPAuth = true;
+        $mail->Username = 'srbylukasmicz@gmail.com'; // Cambia esto por tu dirección de correo electrónico
+        $mail->Password = 'xcfabockaozhpvyu'; // Cambia esto por la contraseña de tu correo electrónico
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 465;
+
+        // Configuración del correo
+        $mail->setFrom('srbylukasmicz@gmail.com', 'Laika'); // Cambia esto por tu dirección de correo electrónico y nombre
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Código de verificación';
+        $mail->Body = 'Tu código de verificación es: <b>' . $codigo . '</b>';
+
+        $mail->send();
+        echo 'enviado';
+    } catch (Exception $e) {
+        echo 'Error: ' . $mail->ErrorInfo;
     }
-} catch (Exception $e) {
-    // Registrar el error en el log del servidor y devolver una respuesta 500
-    error_log($e->getMessage());
-    http_response_code(500);
-    echo "Error: " . $e->getMessage();
 }

@@ -784,7 +784,7 @@ function setupPlaylist(playlistCard) {
                 html += '<div id="playlist-owner"><img id="owner-img" src="' +  playlist.images[0].url + '" alt="' +playlist.owner.display_name + '">';
                 html += '<span id="owner-name">' + playlist.owner.display_name + '</span></div><div id="playlist-controls">';
                 html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\'); addPlaylist(); playAtIndex(0);">play_arrow</span>';
-                html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="changePlaylistControlStyle(\'shuffle-playlist\');">shuffle</span>';
+                html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="shuffleBegin(\'playlist\');">shuffle</span>';
                 html += '<span class="material-symbols-rounded" id="add-playlist" onclick="changePlaylistControlStyle(\'add-playlist\');">add</span>';
                 html += '</div></section><img id="playlist-img" src="' + playlist.images[0].url + '" alt="' + playlist.name + '"></div>';
                 html += '<div id="song-list"><div id="song-list"><table class="playlist-table"><thead><tr>';
@@ -813,6 +813,17 @@ function setupPlaylist(playlistCard) {
                 mainDivider.scrollTo({
                     top: 0
                 });
+
+                var current_id = document.getElementById('playlist-info').getAttribute('playlist-id');
+                var last_id = document.getElementById('last-id').value;
+                var shuffle = document.getElementById('shuffle');
+
+                if(current_id == last_id){
+                    document.getElementById('play-playlist').style.display = 'none';
+                    if(window.getComputedStyle(shuffle).color!=='rgb(173, 136, 176)'){
+                        document.getElementById('shuffle-playlist').style.color = '#E8DAED';
+                    }
+                }
             });
         })
         .catch(function(err) {
@@ -841,7 +852,7 @@ function setupAlbum(albumCard) {
                 html += '<div id="playlist-owner"><img id="owner-img" src="' +  album.images[0].url + '" alt="' + album.artists.map(artist => artist.name).join(', ') + '">';
                 html += '<span id="owner-name">' + album.artists.map(artist => artist.name).join(', ') + '</span></div><div id="playlist-controls">';
                 html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\'); addAlbum(); playAtIndex(0);">play_arrow</span>';
-                html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="changePlaylistControlStyle(\'shuffle-playlist\');">shuffle</span>';
+                html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="shuffleBegin(\'album\');">shuffle</span>';
                 html += '<span class="material-symbols-rounded" id="add-playlist" onclick="changePlaylistControlStyle(\'add-playlist\');">add</span>';
                 html += '</div></section><img id="playlist-img" src="' + album.images[0].url + '" alt="' + album.name + '"></div>';
                 html += '<div id="song-list"><div id="song-list"><table class="album-table"><thead><tr>';
@@ -868,6 +879,17 @@ function setupAlbum(albumCard) {
                 mainDivider.scrollTo({
                     top: 0
                 });
+
+                var current_id = document.getElementById('playlist-info').getAttribute('playlist-id');
+                var last_id = document.getElementById('last-id').value;
+                var shuffle = document.getElementById('shuffle');
+
+                if(current_id == last_id){
+                    document.getElementById('play-playlist').style.display = 'none';
+                    if(window.getComputedStyle(shuffle).color!=='rgb(173, 136, 176)'){
+                        document.getElementById('shuffle-playlist').style.color = '#E8DAED';
+                    }
+                }
             });
         })
         .catch(function(err) {

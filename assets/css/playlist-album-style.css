@@ -71,12 +71,6 @@
     cursor: pointer;
 }
 
-#playlist-controls span:first-child{
-    background-color: var(--mid-lilac);
-    color: var(--high-lilac-slate-gray);
-    padding-right: 5px;
-}
-
 #playlist-img{
     width: 300px;
     height: 300px;

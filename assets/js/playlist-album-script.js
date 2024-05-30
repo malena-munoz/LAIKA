@@ -3,15 +3,6 @@ function changePlaylistControlStyle(controlID) {
     var control = document.getElementById(controlID);
 
     switch(controlID){
-        case 'play-playlist':
-            if(window.getComputedStyle(control).color === 'rgb(42, 49, 62)'){
-                control.style.color = '#E8DAED';
-                control.style.backgroundColor = 'transparent';
-            }else{
-                control.style.color = '#2A313E';
-                control.style.backgroundColor = '#AD88B0';
-            }
-            break;
         case 'shuffle-playlist':
             if(window.getComputedStyle(control).color==='rgb(173, 136, 176)'){
                 control.style.color = '#E8DAED';

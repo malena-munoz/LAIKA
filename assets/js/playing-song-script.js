@@ -5,6 +5,9 @@ var currentIndex = -1;
 // Array e índice temporales para el mezclado aleatorio
 var tempSongs = []; 
 var tempIndex = -1;
+// Booleano e IDs para saber si se ha agregado la playlist o álbum
+var wasAdded = false;
+var lastID = document.getElementById('last-id');
 
 // --------------------------------------------------------------------------------------------------------
 
@@ -20,6 +23,9 @@ var volume_icon = document.getElementById("volume-icon");
 var play_pause_icon = document.getElementById("play-pause");
 // Input de barra de progreso que muestra en qué tiempo exacto está reproduciéndose la canción actual
 var song_process_input = document.getElementById("song-process-input");
+
+
+// ------------------------------------------------------------------------------------------------
 
 
 // Cambia el volumen de la canción actual en base al valor del input
@@ -72,12 +78,11 @@ function changeMaxValueSongProgress(){
     song_process_input.max = Math.trunc(playing_song_audio.duration);
 }
 
-
 // Refresca el valor actual de la barra de progreso mientras la canción actual se está reproduciendo
 function refreshProgressBar(){
     song_process_input.value = Math.trunc(playing_song_audio.currentTime);
     if(song_process_input.value==song_process_input.max){
-        play_pause_icon.textContent = "play_arrow";
+        playNext();
     }
 }
 
@@ -93,6 +98,7 @@ function playSongPlaylist(row){
         addPlaylist();
         playAtIndex(index);
     });
+    lastID.value = document.getElementById('playlist-info').getAttribute('playlist-id');
 }
 
 // Obtiene la info de la fila en el álbum
@@ -102,6 +108,7 @@ function playSongAlbum(row){
         addAlbum();
         playAtIndex(index);
     });
+    lastID.value = document.getElementById('playlist-info').getAttribute('playlist-id');
 }
 
 // Agrega las canciones del álbum al array
@@ -122,6 +129,8 @@ function addAlbum(){
         };
         songs.push(song);
     }
+    wasAdded = true;
+    document.getElementById("play-playlist").style.display = 'none';
 }
 
 // Agrega las canciones de la playlist al array
@@ -142,6 +151,9 @@ function addPlaylist(){
         };
         songs.push(song);
     }
+    // Fue agregada
+    wasAdded = true;
+    document.getElementById("play-playlist").style.display = 'none';
 }
 
 // Reproduce la canción en donde se encuentre ese índice
@@ -156,8 +168,8 @@ function playAtIndex(index){
     });
     currentIndex = index;
     tempIndex = song.index;
+    lastID.value = document.getElementById('playlist-info').getAttribute('playlist-id');
 }
-
 
 
 // Reproduce la siguiente canción
@@ -176,8 +188,8 @@ function playNext(){
     });
     currentIndex = index;
     tempIndex = song.index;
+    lastID.value = document.getElementById('playlist-info').getAttribute('playlist-id');
 }
-
 
 
 // Reproduce la anterior canción
@@ -196,18 +208,15 @@ function playPrevious(){
     });
     currentIndex = index;
     tempIndex = song.index;
+    lastID.value = document.getElementById('playlist-info').getAttribute('playlist-id');
 }
-
 
 
 // Mezcla aleatoriamente las canciones de la array
 function shuffleSongs(){
+    changePlaylistControlStyle('shuffle-playlist'); 
     // Span de shuffle
     var shuffleSpan = document.getElementById('shuffle');
-    // Título y artistas de la canción
-    var song = document.querySelector('#playing-song-info h3').textContent;
-    var artists = document.querySelector('#playing-song-info h4').textContent;
-    console.log(song + " " + artists);
     if(window.getComputedStyle(shuffleSpan).color==='rgb(173, 136, 176)'){
         // Span más claro
         shuffleSpan.style.color = '#E8DAED';
@@ -226,12 +235,74 @@ function shuffleSongs(){
         // La array principal pasa a ser la misma mezclada
         songs = songsShuffle;
     }else{
-         // Span vuelve al color por defecto
+        // Span vuelve al color por defecto
         shuffleSpan.style.color = 'rgb(173, 136, 176)';
         // La array e índice vuelven con los valores temporales
         songs = tempSongs;
         currentIndex = tempIndex;
     }
+    lastID.value = document.getElementById('playlist-info').getAttribute('playlist-id');
 
 }
 
+// Mezcla aleatoriamente el álbum o playlist nuevo
+function shuffleBegin(type){
+    // Span de shuffle
+    var shuffleSpan = document.getElementById('shuffle-playlist');
+    // IDs de las playlist/álbum
+    var current_id = document.getElementById('playlist-info').getAttribute('playlist-id');
+    var last_id = document.getElementById('last-id').value;
+    // Canción en ese momento
+    var song = songs[currentIndex];
+    if(window.getComputedStyle(shuffleSpan).color==='rgb(173, 136, 176)'){
+        console.log("mezclar");
+        // Span más claro
+        shuffleSpan.style.color = '#E8DAED';
+        document.getElementById('shuffle').style.color = '#E8DAED';
+        // Si la playlist o álbum no fue agregada a la cola...
+        if(current_id != last_id){
+            console.log("nueva");
+            switch(type){
+                case 'album':
+                    addAlbum();
+                    break;
+                case 'playlist':
+                    addPlaylist();
+                    break;
+            }  
+        }
+        // Array e indice guardado en variables temporales
+        tempSongs = songs.slice();
+        tempIndex = currentIndex;
+        // Copia de la array
+        const songsShuffle = songs.slice();
+        // Bucle de mezclado
+        for (let i = songsShuffle.length - 1; i > 0; i--) {
+            let indexRandom = Math.floor(Math.random() * (i + 1));
+            let temp = songsShuffle[i];
+            songsShuffle[i] = songsShuffle[indexRandom];
+            songsShuffle[indexRandom] = temp;
+        }
+        // La array principal pasa a ser la misma mezclada
+        songs = songsShuffle;
+        // Si no hay una canción en reproducción...
+        if(tempIndex == -1){
+            playAtIndex(0);
+        }else{
+            var index = songs.indexOf(song);
+            if(index == -1){
+                playAtIndex(0);
+            }
+        }
+    }else{
+        console.log("no");
+        // Span vuelve al color por defecto
+        shuffleSpan.style.color = 'rgb(173, 136, 176)';
+        document.getElementById('shuffle').style.color = 'rgb(173, 136, 176)';
+        // La array e índice vuelven con los valores temporales
+        songs = tempSongs;
+        currentIndex = tempIndex;
+    }
+    console.log(songs);
+    lastID.value = document.getElementById('playlist-info').getAttribute('playlist-id');
+}

@@ -1,4 +1,5 @@
 <div class='player'>
+    <input type="hidden" id="last-id">
     <div class="range-input-container" id="main-range-input">
         <input type="range" min="0" max="100" value="0" id="song-process-input" oninput="refreshProgressSong()">
     </div>

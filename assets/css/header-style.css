@@ -170,7 +170,6 @@ header .centered:nth-child(2):active {
     transition: var(--burger-transition);
     outline: var(--burger-enable-outline-width) solid transparent;
     outline-offset: 0;
-    background-image: url(../img/default-user.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center; 

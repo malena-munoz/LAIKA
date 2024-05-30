@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 }
 
 // Verificar si el email está registrado
-$sql = "SELECT id_usuario, nombre_usuario FROM usuarios WHERE email_usuario='$emailUsuario'";
+$sql = "SELECT id_usuario, nombre_usuario, email_usuario, foto_usuario, fondo_usuario FROM usuarios WHERE email_usuario='$emailUsuario'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -28,6 +28,9 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $idUsuario = $row['id_usuario'];
     $nombreUsuario = $row['nombre_usuario'];
+    $emailUsuario = $row['email_usuario'];
+    $fotoUsuario = $row['foto_usuario'];
+    $fondoUsuario = $row['fondo_usuario'];
 
     // Obtener la contraseña hasheada de la tabla notas
     $sqlClave = "SELECT nota FROM notas WHERE id_usuario='$idUsuario'";
@@ -42,8 +45,11 @@ if ($result->num_rows > 0) {
             // Contraseña correcta, iniciar sesión
             $_SESSION['idUsuario'] = $idUsuario;
             $_SESSION['nombreUsuario'] = $nombreUsuario;
+            $_SESSION['emailUsuario'] = $emailUsuario;
+            $_SESSION['fotoUsuario'] = $fotoUsuario;
+            $_SESSION['fondoUsuario'] = $fondoUsuario;
             $_SESSION['loggedin'] = true;
-            echo json_encode(["status" => "success", "nombreUsuario" => $nombreUsuario]);
+            echo json_encode(["status" => "success", "nombreUsuario" => $nombreUsuario, "emailUsuario" => $emailUsuario, "fotoUsuario" => $fotoUsuario, "fondoUsuario" => $fondoUsuario]);
         } else {
             // Contraseña incorrecta
             echo json_encode(["status" => "incorrect_password"]);

@@ -142,7 +142,9 @@
 #submit-button,
 #continuar-button,
 #continuar-recover-button,
-#login-submit-button {
+#login-submit-button,
+#validar-recover-button,
+#cambiar-password-button {
     display: block;
     width: 100%;
     color: var(--mid-lilac);
@@ -161,7 +163,9 @@
 
 #submit-button:hover,
 #continuar-button:hover,
-#login-submit-button:hover {
+#login-submit-button:hover,
+#validar-recover-button:hover,
+#cambiar-password-button:hover {
     transition: all ease-in-out .3s;
     background-color: var(--mid-lilac);
     color: #161616;

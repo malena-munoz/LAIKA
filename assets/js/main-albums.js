@@ -5,18 +5,20 @@ const genres = [
 
 var clientId = 'c1f77d0fade2485f987f6454a201cab5';
 var clientSecret = '1c3bc66535484d90a934968f469d445a';
+var clientId2 = '84f52098b74a42d3bce3277d27253875';
+var clientSecret2 = '56cd5c6c0f5e4e7c98db87172e03d54b';
 
 
 $(document).ready(function() {
 
-    // Función para obtener el token de acceso
+    // Función para obtener el token de acceso, con posibilidad de cambio de credenciales
     function getAccessToken(callback) {
         $.ajax({
             url: 'https://accounts.spotify.com/api/token',
             type: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
+                'Authorization': 'Basic ' + btoa(clientId2 + ':' + clientSecret2)
             },
             data: 'grant_type=client_credentials',
             success: function(response) {
@@ -24,7 +26,28 @@ $(document).ready(function() {
                 callback(accessToken);
             },
             error: function(err) {
-                console.error('Error al obtener el token de acceso:', err);
+                if (err.status === 429) { // Error 429: Too Many Requests
+                    console.error('Error 429: Too Many Requests. Cambiando a las segundas credenciales.');
+                    // Intentar obtener el token con las segundas credenciales
+                    $.ajax({
+                        url: 'https://accounts.spotify.com/api/token',
+                        type: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
+                        },
+                        data: 'grant_type=client_credentials',
+                        success: function(response) {
+                            var accessToken = response.access_token;
+                            callback(accessToken);
+                        },
+                        error: function(err) {
+                            console.error('Error al obtener el token de acceso con las segundas credenciales:', err);
+                        }
+                    });
+                } else {
+                    console.error('Error al obtener el token de acceso:', err);
+                }
             }
         });
     }

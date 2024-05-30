@@ -170,7 +170,6 @@ header .centered:nth-child(2):active {
     transition: var(--burger-transition);
     outline: var(--burger-enable-outline-width) solid transparent;
     outline-offset: 0;
-    background-image: url(../img/default-user.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center; 
@@ -198,7 +197,6 @@ header .centered:nth-child(2):active {
     background: linear-gradient(45deg, var(--high-lilac-slate-gray) 50%, var(--slate-lavender)) fixed;
     border-radius: var(--nav-border-radius);
     box-shadow: var(--nav-shadow-width) var(--nav-shadow-color);
-    border: 3px solid var(--mid-lilac);
     top: 42px;
     right: calc(0%);
     transition: var(--burger-transition);
@@ -232,7 +230,7 @@ header .centered:nth-child(2):active {
 
 .popup-window hr{
     border: none;
-    border-bottom: 3px solid var(--mid-lilac);
+    border-bottom: 2px solid var(--mid-lilac);
     margin: 10px 0 5px 0;
 }
 

@@ -33,7 +33,7 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
                 </div>
                 <div id="login-form" style="display: none;">
                     <?php include 'login.php'; ?>
-                </div>                
+                </div>
                 <div id="forgotPassword-form" style="display: none;">
                     <?php include 'forgot.php'; ?>
                 </div>
@@ -68,4 +68,5 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
     <script src="./assets/js/playlist-album-script.js"></script>
     <script src="./assets/js/register-script.js"></script>
     <script src="./assets/js/login-script.js"></script>
+    <script src="./assets/js/forgot-script.js"></script>
 </html> 

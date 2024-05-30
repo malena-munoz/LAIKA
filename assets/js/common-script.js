@@ -121,6 +121,70 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+//---------------------------------------------------------------------------------------
+
+
+// Funcionalidad del menú del reproductor
+document.addEventListener('DOMContentLoaded', function () {
+    // Menú desplegable + listas
+    var menu = document.querySelector('#playing-song-buttons .dropdown-menu');
+    var lists = document.querySelector('.dropdown-lists.drop-player');
+    // Icono del menú
+    var menu_icon = document.getElementById('menu');
+
+    menu_icon.addEventListener("click", function() {
+        var options = menu.querySelectorAll('a');
+        if(menu_icon.getAttribute('open') === 'no'){
+            menu_icon.setAttribute('open', 'yes');
+            menu.style.visibility = 'visible';
+        }else{
+            menu_icon.setAttribute('open', 'no');
+            menu.style.visibility = 'hidden';
+            lists.style.display = 'none';
+            options.forEach(option => {
+                option.style.backgroundColor = "";
+            });
+        }
+
+        options.forEach(option => {
+            option.addEventListener("click", function (){
+                if(option.textContent === 'Agregar en...'){
+                    if(window.getComputedStyle(option).backgroundColor === 'rgb(74, 64, 78)'){
+                        option.style.backgroundColor = "#755B7D";
+                        lists.style.display = 'flex';
+                    }else{
+                        option.style.backgroundColor = "";
+                        lists.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+});
+
+
+//---------------------------------------------------------------------------------------
+
+
+// Camnia la flecha de despliegue
+document.addEventListener('DOMContentLoaded', function() {
+    const select = document.getElementById('lists');
+    var arrow = document.getElementById('list-arrow');
+
+    select.addEventListener('click', function() {
+        if(arrow.getAttribute('src') === './assets/img/arrow.svg'){
+            arrow.setAttribute('src', './assets/img/arrow_down.svg');
+        }else{
+            arrow.setAttribute('src', './assets/img/arrow.svg');
+        }
+    });
+
+    select.addEventListener('blur', function() {
+        arrow.setAttribute('src', './assets/img/arrow.svg');
+    });
+});
+
 //---------------------------------------------------------------------------------------
 
 // Vuelve a mostrar el contenido inicial

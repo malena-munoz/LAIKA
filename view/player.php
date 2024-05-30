@@ -17,7 +17,21 @@
             <span class="material-symbols-rounded" id="play-pause" onclick="changeSongStatus();">play_arrow</span>
             <span class="material-symbols-rounded" id="next" onclick="playNext();">skip_next</span>
             <span class="material-symbols-rounded" id="shuffle" onclick="shuffleSongs();">shuffle</span>
-            <span class="material-symbols-rounded" id="menu">menu</span>
+            <span class="material-symbols-rounded" id="menu" open="no">menu</span>
+            <div class="dropdown-menu">
+                <a href="#">Agregar en...</a>
+                <a href="#">Ir a álbum...</a>
+                <a href="#">Añadir a la cola</a>
+            </div>
+            <div class="dropdown-lists drop-player">
+                <img src="./assets/img/arrow.svg" alt="Arrow" id="list-arrow">
+                <select name="lists" id="lists">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <span class="material-symbols-rounded" id="player-add-song">add</span>
+            </div>
         </div>
     </div>
 </div>

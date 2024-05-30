@@ -214,7 +214,6 @@ function playPrevious(){
 
 // Mezcla aleatoriamente las canciones de la array
 function shuffleSongs(){
-    changePlaylistControlStyle('shuffle-playlist'); 
     // Span de shuffle
     var shuffleSpan = document.getElementById('shuffle');
     if(window.getComputedStyle(shuffleSpan).color==='rgb(173, 136, 176)'){

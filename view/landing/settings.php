@@ -46,6 +46,28 @@
     </form>
 </div>
 <script>
+    document.getElementById('save-changes').addEventListener('click', function() {
+        var formData = new FormData(document.getElementById('user-settings'));
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', './controller/update_user_settings.php', true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cambios guardados',
+                    text: 'Los cambios que has hecho se han guardado con exito.'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error al guardar los cambios.'
+                });
+            }
+        };
+        xhr.send(formData);
+    });
     document.getElementById("request-code").addEventListener("click", function() {
         var email = "<?php echo $emailUsuario; ?>";
 

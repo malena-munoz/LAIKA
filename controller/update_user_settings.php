@@ -23,8 +23,9 @@ if ($nombreUsuario) {
 }
 
 if ($nuevaPassword) {
+    $sql = "UPDATE notas SET ";
     $hashedPassword = password_hash($nuevaPassword, PASSWORD_DEFAULT);
-    $sql .= "password_usuario = '". $conn->real_escape_string($hashedPassword) . "', ";
+    $sql .= "nota = '". $conn->real_escape_string($hashedPassword) . "', ";
 }
 
 if (!empty($_FILES['profile']['tmp_name'])) {
@@ -49,4 +50,3 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $conn->close();
-?>

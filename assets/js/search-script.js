@@ -85,15 +85,26 @@ function displaySearchResults(data) {
     searchedAlbumsContainer.innerHTML = '';
     if (albums.items.length > 0) {
         albums.items.forEach(album => {
-            var html = '<a href="#" class="album-a" data-name="' + album.name + '"><div class="album">';
+            var albumName = album.name.length > 50 ? album.name.substring(0, 50) + '...' : album.name;
+            var html = '<a href="#" class="card-a" id="' + album.id + '" data-name="' + 
+                albumName + '" onclick="setupAlbum(this);"><div class="card">';
             if (album.images.length > 0) {
                 html += '<img src="' + album.images[0].url + '" alt="' + album.name + '">';
             }
-            html += '<h3>' + album.name + '</h3>';
-            html += '</div></a>';
+            html += '<h3>' + albumName + '</h3>';
+                html += '<h4>';
+                album.artists.forEach(function(artist, index) {
+                    html += artist.name;
+                    if (index < album.artists.length - 1) {
+                        html += ', ';
+                    }
+                });
+                html += '</h4>';
+                html += '</div></a>';
             searchedAlbumsContainer.innerHTML += html;
         });
     }
+    
 
     // Mostrar artistas
     const searchedArtistsContainer = document.getElementById('searched-artists');

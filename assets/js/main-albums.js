@@ -847,6 +847,7 @@ function setupPlaylist(playlistCard) {
                         document.getElementById('shuffle-playlist').style.color = '#E8DAED';
                     }
                 }
+                openPlaylistAlbum();
             });
         })
         .catch(function(err) {
@@ -913,6 +914,7 @@ function setupAlbum(albumCard) {
                         document.getElementById('shuffle-playlist').style.color = '#E8DAED';
                     }
                 }
+                openPlaylistAlbum();
             });
         })
         .catch(function(err) {

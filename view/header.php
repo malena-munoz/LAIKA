@@ -5,7 +5,7 @@
     <section class="centered" id="centered-container">
         <span class="material-symbols-rounded" id="search">search</span>
         <form onsubmit="searchSpotify(event)" role="search">
-            <input placeholder="Buscar canción / artista / playlist..." type="text" name="text" id="search-input">
+            <input placeholder="Buscar canción / artista / playlist..." autocomplete="off" type="text" name="text" id="search-input">
         </form>
     </section>
 

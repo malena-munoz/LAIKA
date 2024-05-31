@@ -160,7 +160,7 @@ input[type="range"]::-moz-range-thumb {
     background-color: var(--high-lilac-slate-gray);
     box-shadow: var(--nav-shadow-width) var(--nav-shadow-color);
     border-radius: var(--radius);
-    width: 155px;
+    width: 255px;
     height: 45px;
     z-index: 9;
     display: none;
@@ -183,10 +183,9 @@ input[type="range"]::-moz-range-thumb {
     background-color: var(--slate-lilac);
 }
 
-
 .dropdown-lists select{
     height: 30px;
-    width: 100px;
+    width: 200px;
     border: 2px solid var(--mid-lilac);
     background-color: transparent;
     border-radius: var(--radius);
@@ -204,9 +203,8 @@ input[type="range"]::-moz-range-thumb {
 
 .dropdown-lists img{
     position: fixed;
-    margin-left: 75px;
+    margin-left: 175px;
 }
-
 
 #player-add-song{
     padding: 2px;

@@ -1,6 +1,7 @@
 <!-- Contenedores de la busqueda -->
 <div id="search-results" style="display: none;">
     <div class='main-content'>
+        <h3>Artistas</h3>
         <div id="artists-container" class="scroll-container">
             <button id="albums-scroll-left" class="scroll-left">
                 <span class="material-symbols-rounded">chevron_left</span>
@@ -10,6 +11,7 @@
                 <span class="material-symbols-rounded">chevron_right</span>
             </button>
         </div>
+        <h3>Canciones</h3>
         <div id="songs" class="scroll-container">
             <button id="albums-scroll-left" class="scroll-left">
                 <span class="material-symbols-rounded">chevron_left</span>
@@ -19,6 +21,7 @@
                 <span class="material-symbols-rounded">chevron_right</span>
             </button>
         </div>
+        <h3>Álbumes</h3>
         <div id="albums-container" class="scroll-container">
             <button id="albums-scroll-left" class="scroll-left">
                 <span class="material-symbols-rounded">chevron_left</span>

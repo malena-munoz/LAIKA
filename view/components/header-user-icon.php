@@ -5,7 +5,7 @@
         <nav class="popup-window">
             <ul>
                 <li>
-                    <button>
+                    <button onclick="openUser();">
                         <span class="material-symbols-rounded">person</span>
                         <span>Perfil</span>
                     </button>

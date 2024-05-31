@@ -24,6 +24,7 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
         <link rel="stylesheet" href="assets/css/playlist-album-style.css"/>
         <link rel="stylesheet" href="assets/css/user-style.css"/>
         <link rel="stylesheet" href="assets/css/settings-style.css"/>
+        <link rel="stylesheet" href="assets/css/shop-style.css"/>
     </head>
     <body>
         <div id="modal" class="modal">
@@ -49,8 +50,9 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
             <?php include 'header.php';?>
             <!-- Ajustes (se mantienen ocultos) -->
             <?php include 'landing/settings.php';?>
+            <!-- <php include 'landing/shop.php';?> -->
             <!-- Datos empresa -->
-            <!-- <php include 'landing/user.php';?> -->
+            <?php include 'landing/user.php';?>
             <?php include 'landing/home.php';?>
             <!-- Sección de relleno -->
             <section class="filler"></section>

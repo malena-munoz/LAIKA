@@ -1,5 +1,6 @@
 #user-display{
     gap: 25px;
+    display: none;
 }
 
 #user-display h3{

@@ -121,6 +121,33 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// Funcionalidad a las fechas de scroll en la página de búsqueda
+document.addEventListener("DOMContentLoaded", function() {
+    const landingContainer = document.querySelector("#search-results");
+    const searchContainer = landingContainer.querySelector('.main-content');
+    const scrollContainers = searchContainer.querySelectorAll('.scroll-container');
+
+    scrollContainers.forEach(scrollContainer => {
+        const scrollLeft = scrollContainer.querySelector(".scroll-left");
+        const scrollRight = scrollContainer.querySelector(".scroll-right");
+        const mainContentDiv = scrollContainer.querySelector("div");
+
+        scrollLeft.addEventListener("click", function() {
+            mainContentDiv.scrollBy({
+                left: -(landingContainer.clientWidth/2), 
+                behavior: "smooth"
+            });
+        });
+
+        scrollRight.addEventListener("click", function() {
+            mainContentDiv.scrollBy({
+                left: (landingContainer.clientWidth/2),
+                behavior: "smooth"
+            });
+        });
+    });
+});
+
 
 //---------------------------------------------------------------------------------------
 
@@ -275,4 +302,35 @@ function openSettings(){
     // Playlist o álbum agregado + índex
     wasAdded = false;
     tempIndex = -1;
+}
+
+function openUser(){
+    // Elementos hijos
+    const childrenArray = Array.from(document.getElementById('main-divider').children);
+    childrenArray.forEach(child => {
+        if (child.tagName.toLowerCase() === 'div') {
+            if(child.getAttribute('id') === 'user-display'){
+                child.style.display = 'flex';
+            } else {
+                child.style.display = 'none';
+            }
+        }
+    });
+    // Playlist o álbum agregado + índex
+    wasAdded = false;
+    tempIndex = -1;
+}
+
+function openPlaylistAlbum(){
+    // Elementos hijos
+    const childrenArray = Array.from(document.getElementById('main-divider').children);
+    childrenArray.forEach(child => {
+        if (child.tagName.toLowerCase() === 'div') {
+            if(child.getAttribute('id') === 'playlist-display'){
+                child.style.display = 'flex';
+            } else {
+                child.style.display = 'none';
+            }
+        }
+    });
 }

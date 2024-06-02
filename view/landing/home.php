@@ -3,21 +3,21 @@
     <div class='main-content'>
         <h3>Artistas</h3>
         <div id="artists-container" class="scroll-container">
-            <button id="albums-scroll-left" class="scroll-left">
+            <button id="artists-scroll-left" class="scroll-left">
                 <span class="material-symbols-rounded">chevron_left</span>
             </button>
             <div id="searched-artists"></div>
-            <button id="albums-scroll-right" class="scroll-right">
+            <button id="artists-scroll-right" class="scroll-right">
                 <span class="material-symbols-rounded">chevron_right</span>
             </button>
         </div>
         <h3>Canciones</h3>
         <div id="songs" class="scroll-container">
-            <button id="albums-scroll-left" class="scroll-left">
+            <button id="songs-scroll-left" class="scroll-left">
                 <span class="material-symbols-rounded">chevron_left</span>
             </button>
             <div id="searched-songs"></div>
-            <button id="albums-scroll-right" class="scroll-right">
+            <button id="songs-scroll-right" class="scroll-right">
                 <span class="material-symbols-rounded">chevron_right</span>
             </button>
         </div>
@@ -28,6 +28,16 @@
             </button>
             <div id="searched-albums"></div>
             <button id="albums-scroll-right" class="scroll-right">
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
+        </div>
+        <h3>Playlists</h3>
+        <div id="playlists-container" class="scroll-container">
+            <button id="playlists-scroll-left" class="scroll-left">
+                <span class="material-symbols-rounded">chevron_left</span>
+            </button>
+            <div id="searched-playlists"></div>
+            <button id="playlists-scroll-right" class="scroll-right">
                 <span class="material-symbols-rounded">chevron_right</span>
             </button>
         </div>

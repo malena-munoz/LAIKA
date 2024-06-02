@@ -800,6 +800,7 @@ function setupPlaylist(playlistCard) {
             $(document).ready(function() {
                 // Display del contenedor principal
                 $('#home-real').css({'display': 'none'});
+                $('#search-results').css({'display': 'none'});
 
                 var html = '<div class="main-content" id="playlist-display" style="display: flex">' +
                     '<div id="playlist-info" playlist-id="' + playlist.id +'"><section>' +
@@ -869,6 +870,7 @@ function setupAlbum(albumCard) {
             $(document).ready(function() {
                 // Display del contenedor principal
                 $('#home-real').css({'display': 'none'});
+                $('#search-results').css({'display': 'none'});
 
                 var html = '<div class="main-content" id="playlist-display" style="display: flex">' +
                     '<div id="playlist-info" playlist-id="' + album.id +'"><section>' +

@@ -19,7 +19,7 @@ async function searchSpotify(event) {
         const accessToken = tokenData.access_token;
 
         // Realizar búsqueda en la API de Spotify
-        const searchResponse = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchTerm)}&type=track,artist,album`, {
+        const searchResponse = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchTerm)}&type=track,artist,album,playlist`, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + accessToken,
@@ -35,32 +35,28 @@ async function searchSpotify(event) {
         console.error('Error al realizar la búsqueda:', error);
     }
 
-    if(searchTerm == '') {
+    if (searchTerm == '') {
         document.getElementById('search-results').style.display = 'none';
         document.getElementById('home-real').style.display = 'block';
     }
 }
 
 function displaySearchResults(data) {
-    const { tracks, artists, albums } = data;
+    const { tracks, artists, albums, playlists } = data;
 
     // Mostrar canciones
     const searchedSongsContainer = document.getElementById('searched-songs');
     searchedSongsContainer.innerHTML = '';
     if (tracks.items.length > 0) {
         tracks.items.forEach(track => {
-            console.log(track);
-            var html = '<a href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
+            let html = '<a href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
             if (track.album.images.length > 0) {
                 html += '<img src="' + track.album.images[0].url + '" alt="' + track.name + '">';
             }
-            var trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
+            let trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
             html += '<h3>' + trackName + '</h3>';
-            html += '<h4>';
-            var artistName = (track.artists.map(artist => artist.name).join(', ').length > 30 ? 
-                track.artists.map(artist => artist.name).join(', ').substring(0, 30) + '...' : 
-                track.artists.map(artist => artist.name).join(', '));
-            html += artistName + '</h4>';
+            let artistName = track.artists.map(artist => artist.name).join(', ').length > 30 ? track.artists.map(artist => artist.name).join(', ').substring(0, 30) + '...' : track.artists.map(artist => artist.name).join(', ');
+            html += '<h4>' + artistName + '</h4>';
             html += '</div></a>';
             searchedSongsContainer.innerHTML += html;
         });
@@ -86,31 +82,28 @@ function displaySearchResults(data) {
     searchedAlbumsContainer.innerHTML = '';
     if (albums.items.length > 0) {
         albums.items.forEach(album => {
-            var albumName = album.name.length > 50 ? album.name.substring(0, 50) + '...' : album.name;
-            var html = '<a href="#" class="card-a" id="' + album.id + '" data-name="' + 
-                albumName + '" onclick="setupAlbum(this);"><div class="card">';
+            let albumName = album.name.length > 50 ? album.name.substring(0, 50) + '...' : album.name;
+            let html = '<a href="#" class="card-a" id="' + album.id + '" data-name="' + albumName + '" onclick="setupAlbum(this);"><div class="card">';
             if (album.images.length > 0) {
                 html += '<img src="' + album.images[0].url + '" alt="' + album.name + '">';
             }
             html += '<h3>' + albumName + '</h3>';
-                html += '<h4>';
-                album.artists.forEach(function(artist, index) {
-                    html += artist.name;
-                    if (index < album.artists.length - 1) {
-                        html += ', ';
-                    }
-                });
-                html += '</h4>';
-                html += '</div></a>';
+            html += '<h4>';
+            album.artists.forEach(function(artist, index) {
+                html += artist.name;
+                if (index < album.artists.length - 1) {
+                    html += ', ';
+                }
+            });
+            html += '</h4>';
+            html += '</div></a>';
             searchedAlbumsContainer.innerHTML += html;
         });
     }
-    
 
     // Mostrar artistas
     const searchedArtistsContainer = document.getElementById('searched-artists');
     searchedArtistsContainer.innerHTML = '';
-
     if (artists.items.length > 0) {
         artists.items.forEach(artist => {
             let imageUrl = artist.images.length > 0 ? artist.images[0].url : '';
@@ -148,4 +141,24 @@ function displaySearchResults(data) {
         });
     }
 
+    // Mostrar playlists
+    const searchedPlaylistsContainer = document.getElementById('searched-playlists');
+    searchedPlaylistsContainer.innerHTML = '';
+    if (playlists.items.length > 0) {
+        playlists.items.forEach(playlist => {
+            if (!playlist.owner.display_name.toLowerCase().includes('spotify')) { // Filtrar playlists creadas por Spotify
+                let playlistName = playlist.name.length > 50 ? playlist.name.substring(0, 50) + '...' : playlist.name;
+                let html = '<a href="#" class="card-a" id="' + playlist.id + '" data-name="' + playlistName + '" onclick="setupPlaylist(this);"><div class="card">';
+                if (playlist.images.length > 0) {
+                    html += '<img src="' + playlist.images[0].url + '" alt="' + playlist.name + '">';
+                }
+                html += '<h3>' + playlistName + '</h3>';
+                html += '<h4>';
+                playlist.owner.display_name ? html += playlist.owner.display_name : html += 'Desconocido';
+                html += '</h4>';
+                html += '</div></a>';
+                searchedPlaylistsContainer.innerHTML += html;
+            }
+        });
+    }
 }

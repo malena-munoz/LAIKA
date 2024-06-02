@@ -24,6 +24,7 @@
     width: 100%;
     height: auto;
     object-fit: cover;
+    background-color: var(--mid-lilac);
 }
 
 .user-main-container{
@@ -42,6 +43,7 @@
     width: 250px;
     height: auto;
     border: 5px solid var(--mid-lilac);
+    background-color: var(--mid-lilac);
     border-radius: var(--radius);
 }
 
@@ -68,12 +70,19 @@
     margin-right: 200px;
     background-color: var(--high-lilac);
     position: relative;
-    font-size: 20px;
-    color: var(--low-lilac);
     transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-
+#user-quote {
+    background-color: transparent;
+    border: none;
+    resize: none;
+    outline: none;
+    width: 100%;
+    color: var(--low-lilac);
+    font-size: 20px;
+    overflow: hidden;
+}
 
 .user-note:before {
     content: "";

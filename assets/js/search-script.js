@@ -49,6 +49,7 @@ function displaySearchResults(data) {
     searchedSongsContainer.innerHTML = '';
     if (tracks.items.length > 0) {
         tracks.items.forEach(track => {
+            console.log(track);
             var html = '<a href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
             if (track.album.images.length > 0) {
                 html += '<img src="' + track.album.images[0].url + '" alt="' + track.name + '">';

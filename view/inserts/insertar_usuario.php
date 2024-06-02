@@ -24,8 +24,12 @@ $sql = "INSERT INTO usuarios (nombre_usuario, email_usuario) VALUES ('$nombreUsu
 if ($conn->query($sql) === TRUE) {
     // Obtener el ID de usuario generado
     $idUsuario = $conn->insert_id;
-    $_SESSION['idUsuario'] = $idUsuario; // Guardar ID de usuario en la sesión
-    $_SESSION['nombreUsuario'] = $nombreUsuario; // Guardar nombre de usuario en la sesión
+    $_SESSION['idUsuario'] = $idUsuario;
+    $_SESSION['nombreUsuario'] = $nombreUsuario;
+    $_SESSION['emailUsuario'] = $emailUsuario;
+    $_SESSION['fotoUsuario'] = $fotoUsuario;
+    $_SESSION['fondoUsuario'] = $fondoUsuario;
+    $_SESSION['quoteUsuario'] = $quoteUsuario;
     echo $idUsuario;
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;

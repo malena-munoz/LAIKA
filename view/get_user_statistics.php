@@ -50,15 +50,40 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
         $topGenres = null;
     }
 
+    // Obtener las 20 canciones más escuchados
+    $sql = "SELECT cancion_estadistica FROM estadisticas_canciones WHERE id_usuario = ? ORDER BY cescuchada_estadistica DESC LIMIT 20";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $idUsuario);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $topSongs = [];
+    while ($row = $result->fetch_assoc()) {
+        $topSongs[] = $row['cancion_estadistica'];
+    }
+    $stmt->close();
+
+    // Verificar si hay canciones en las estadísticas
+    if (empty($topSongs)) {
+        $topSongs = null;
+    }
+
     $conn->close();
+
+    // Después de obtener los datos de las estadísticas del usuario
+    $favoriteArtist = !empty($topArtists) ? $topArtists[0] : "Desconocido";
+    $favoriteGenre = !empty($topGenres) ? $topGenres[0] : "Desconocido";
+    $favoriteSong = !empty($topSongs) ? $topSongs[0] : "Desconocido";
 
     // Enviar datos al script JS
     echo json_encode([
         'loggedin' => true,
         'topArtists' => $topArtists,
-        'topGenres' => $topGenres
+        'topGenres' => $topGenres,
+        'topSongs' => $topSongs,
+        'favoriteArtist' => $favoriteArtist,
+        'favoriteGenre' => $favoriteGenre,
+        'favoriteSong' => $favoriteSong
     ]);
 } else {
     echo json_encode(['loggedin' => false]);
 }
-?>

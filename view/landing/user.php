@@ -1,20 +1,26 @@
 <div class="main-content" id="user-display">
+    <?php
+    $idUsuario = $_SESSION['idUsuario'];
+    $nombreUsuario = $_SESSION['nombreUsuario'];
+    $emailUsuario = $_SESSION['emailUsuario'];
+    $fotoUsuario = $_SESSION['fotoUsuario'];
+    $fondoUsuario = $_SESSION['fondoUsuario'];
+    $quoteUsuario = $_SESSION['quoteUsuario'];
+
+    $srcFotoUsuario = isset($fotoUsuario) && !is_null($fotoUsuario) ? 'data:image/png;base64,' . $fotoUsuario : './assets/img/default-user.png';
+    $srcFondoUsuario = isset($fondoUsuario) && !is_null($fondoUsuario) ? 'data:image/png;base64,' . $fondoUsuario : './assets/img/default-bg.png';
+    ?>
     <div class="user-big-container">
-        <img id="user-portrait" src="./assets/img/default-bg.png" alt="">
+        <img id="user-background" src="<?php echo htmlspecialchars($srcFondoUsuario); ?>" alt="">
     </div>
     <div class="user-main-container">
-        <img id="user-portrait" src="./assets/img/default-user.png" alt="">
-        <span id="user-name">usuario</span>
+        <img id="user-portrait" src="<?php echo htmlspecialchars($srcFotoUsuario); ?>" alt="">
+        <span id="user-name"><?php echo htmlspecialchars($nombreUsuario); ?></span>
     </div>
     <div class="user-note-container">
         <section class="user-note">
-            <p>Lorem ipsum dolor sit amet 
-            consectetur adipisicing elit. Fugit repudiandae repellat, velit, 
-            quas sapiente voluptatum sint neque nobis amet error alias, rerum voluptas enim! Veniam quas 
-            sapiente itaque inventore ex.
-            Tenetur blanditiis neque doloribus animi. Dolorum perspiciatis, consequatur vero aperiam at 
-            vel tempora similique non nisi laborum fugiat, corporis saepe? Optio iste facere quasi iure, 
-            quisquam commodi reprehenderit necessitatibus earum.</p>
+            <!-- <p>puta</p> -->
+            <textarea id="user-quote"><?php echo htmlspecialchars($quoteUsuario); ?></textarea>
         </section>
     </div>
     <div class="user-note-container">

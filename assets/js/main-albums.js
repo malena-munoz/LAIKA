@@ -18,7 +18,7 @@ $(document).ready(function() {
             type: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(clientId2 + ':' + clientSecret2)
+                'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
             },
             data: 'grant_type=client_credentials',
             success: function(response) {
@@ -922,7 +922,6 @@ function setupAlbum(albumCard) {
         });
 }
 
-
 // Devuelve los milisegundos, en minutos
 function minutes(ms){
     let seconds = Math.floor(ms / 1000);
@@ -934,4 +933,3 @@ function minutes(ms){
     let formattedSeconds = lastSeconds < 10 ? '0' + lastSeconds : lastSeconds;
     return formattedMinutes + ':' + formattedSeconds;
 }
-

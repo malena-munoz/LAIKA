@@ -7,6 +7,8 @@ var clientId = 'c1f77d0fade2485f987f6454a201cab5';
 var clientSecret = '1c3bc66535484d90a934968f469d445a';
 var clientId2 = '84f52098b74a42d3bce3277d27253875';
 var clientSecret2 = '56cd5c6c0f5e4e7c98db87172e03d54b';
+var clientId3 = 'd820cba9a2b6493fb45ca620d3b97614';
+var clientSecret3 = '2ce635013a234a1d9e79e92f621c8d67';
 
 
 $(document).ready(function() {
@@ -18,7 +20,7 @@ $(document).ready(function() {
             type: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
+                'Authorization': 'Basic ' + btoa(clientId2 + ':' + clientSecret2)
             },
             data: 'grant_type=client_credentials',
             success: function(response) {
@@ -207,7 +209,6 @@ $(document).ready(function() {
         });
     }
 
-    // Función para imprimir las playlists más populares de Spotify
     function printPlaylists(accessToken) {
         $.ajax({
             url: 'https://api.spotify.com/v1/browse/featured-playlists?limit=30',
@@ -267,18 +268,32 @@ $(document).ready(function() {
                                 }
                                 trackCount++;
                                 
-                                var html = '<a href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
+                                var html = '<a onclick="playCard(this);" href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
                                 if (track.album.images.length > 0) {
                                     html += '<img src="' + track.album.images[0].url + '" alt="' + track.name + '">';
                                 }
                                 var trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
                                 html += '<h3>' + trackName + '</h3>';
                                 html += '<h4>';
-                                var artistName = (track.artists.map(artist => artist.name).join(', ').length > 30 ? 
-                                    track.artists.map(artist => artist.name).join(', ').substring(0, 30) + '...' : 
-                                    track.artists.map(artist => artist.name).join(', '));
-                                html += artistName + '</h4>';
-                                html += '</div></a>';
+                                var exceededLimit = track.track.artists.map(artist => artist.name).join(', ').length > 30;
+                                for(var i=0; i<track.track.artists.length; i++){
+                                    var characters = 0;
+                                    if(i != track.track.artists.length-1){
+                                        html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                        html += track.track.artists[i].name + '</span>, ';
+                                        characters += track.track.artists[i].name.length;
+                                    }else{
+                                        if(exceededLimit){
+                                            html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                            html += track.track.artists[i].name.substring(0, 30-characters) + '</span>';
+                                        }else{
+                                            html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                            html += track.track.artists[i].name + '</span>';
+                                        }
+                                    }
+                                }
+                                html += '</h4></div></a>';
+
                                 $currentSection.append(html);
                             });
                         },
@@ -312,35 +327,35 @@ $(document).ready(function() {
                         $currentSection = $('<section id="section-' + sectionCount + '"></section>');
                         $top50Songs.append($currentSection);
                     }
-                    var html = '<a href="#" class="card-a track-a" data-name="' + track.track.name + '" data-artists="' + track.track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.track.preview_url + '"><div class="card">';
+                    var html = '<a onclick="playCard(this);" href="#" class="card-a track-a" data-name="' + track.track.name + '" data-artists="' + track.track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.track.preview_url + '"><div class="card">';
                     if (track.track.album.images.length > 0) {
                         html += '<img src="' + track.track.album.images[0].url + '" alt="' + track.track.name + '">';
                     }
                     var trackName = track.track.name.length > 30 ? track.track.name.substring(0, 30) + '...' : track.track.name;
                     html += '<h3>' + trackName + '</h3>';
                     html += '<h4>';
-                    var artistName = (track.track.artists.map(artist => artist.name).join(', ').length > 30 ? 
-                        track.track.artists.map(artist => artist.name).join(', ').substring(0, 30) + '...' : 
-                        track.track.artists.map(artist => artist.name).join(', '));
-                    html += artistName + '</h4>';
-                    html += '</div></a>';
+                    var exceededLimit = track.track.artists.map(artist => artist.name).join(', ').length > 30;
+                    for(var i=0; i<track.track.artists.length; i++){
+                        var characters = 0;
+                        if(i != track.track.artists.length-1){
+                            html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                            html += track.track.artists[i].name + '</span>, ';
+                            characters += track.track.artists[i].name.length;
+                        }else{
+                            if(exceededLimit){
+                                html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                html += track.track.artists[i].name.substring(0, 30-characters) + '</span>';
+                            }else{
+                                html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                html += track.track.artists[i].name + '</span>';
+                            }
+                        }
+                    }
+                    html += '</h4></div></a>';
+
                     $currentSection.append(html);
                 });
 
-                // Agregar el evento clic a cada elemento de canción
-                $('.track-a').on('click', function(e) {
-                    e.preventDefault();
-                    var songName = $(this).data('name');
-                    var artists = $(this).data('artists');
-                    var previewUrl = $(this).data('preview');
-                    var imageUrl = $(this).find('img').attr('src'); // Get the image URL of the clicked song
-                    // Actualizar la información de la canción en el reproductor
-                    $('#playing-song-info h3').text(songName);
-                    $('#playing-song-info h4').text(artists);
-                    playing_song_audio.src = previewUrl;
-                    $('#img-current-song img').attr('src', imageUrl); // Update the image of the playing song
-                    playNewSong(); // Reproducir la canción automáticamente
-                });
             },
             error: function(err) {
                 console.error('Error al obtener las canciones del Top 50:', err);
@@ -377,17 +392,31 @@ $(document).ready(function() {
                             $('#viral-50-songs').append($currentSection);
                         }
     
-                        var html = '<a href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
+                        var html = '<a onclick="playCard(this);" href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
                         if (track.album.images.length > 0) {
                             html += '<img src="' + track.album.images[0].url + '" alt="' + track.name + '">';
                         }
                         var trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
                         html += '<h3>' + trackName + '</h3>';
                         html += '<h4>';
-                        var artistName = track.artists.map(artist => artist.name).join(', ');
-                        artistName = artistName.length > 30 ? artistName.substring(0, 30) + '...' : artistName;
-                        html += artistName + '</h4>';
-                        html += '</div></a>';
+                        var exceededLimit = track.track.artists.map(artist => artist.name).join(', ').length > 30;
+                        for(var i=0; i<track.track.artists.length; i++){
+                            var characters = 0;
+                            if(i != track.track.artists.length-1){
+                                html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                html += track.track.artists[i].name + '</span>, ';
+                                characters += track.track.artists[i].name.length;
+                            }else{
+                                if(exceededLimit){
+                                    html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                    html += track.track.artists[i].name.substring(0, 30-characters) + '</span>';
+                                }else{
+                                    html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                    html += track.track.artists[i].name + '</span>';
+                                }
+                            }
+                        }
+                        html += '</h4></div></a>';
     
                         $currentSection.append(html);
                         trackCount++;
@@ -421,34 +450,34 @@ $(document).ready(function() {
                         $currentSection = $('<section id="section-' + sectionCount + '"></section>');
                         $viral50Songs.append($currentSection);
                     }
-                    var html = '<a href="#" class="card-a track-a" data-name="' + track.track.name + '" data-artists="' + track.track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.track.preview_url + '"><div class="card">';
+                    var html = '<a onclick="playCard(this);" href="#" class="card-a track-a" data-name="' + track.track.name + '" data-artists="' + track.track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.track.preview_url + '"><div class="card">';
                     if (track.track.album.images.length > 0) {
                         html += '<img src="' + track.track.album.images[0].url + '" alt="' + track.track.name + '">';
                     }
                     var trackName = track.track.name.length > 30 ? track.track.name.substring(0, 30) + '...' : track.track.name;
                     html += '<h3>' + trackName + '</h3>';
                     html += '<h4>';
-                    var artistName = track.track.artists.map(artist => artist.name).join(', ');
-                    artistName = artistName.length > 30 ? artistName.substring(0, 30) + '...' : artistName;
-                    html += artistName + '</h4>';
-                    html += '</div></a>';
+                    var exceededLimit = track.track.artists.map(artist => artist.name).join(', ').length > 30;
+                    for(var i=0; i<track.track.artists.length; i++){
+                        var characters = 0;
+                        if(i != track.track.artists.length-1){
+                            html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                            html += track.track.artists[i].name + '</span>, ';
+                            characters += track.track.artists[i].name.length;
+                        }else{
+                            if(exceededLimit){
+                                html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                html += track.track.artists[i].name.substring(0, 30-characters) + '</span>';
+                            }else{
+                                html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                html += track.track.artists[i].name + '</span>';
+                            }
+                        }
+                    }
+                    html += '</h4></div></a>';
                     $currentSection.append(html);
                 });
 
-                // Agregar el evento clic a cada elemento de canción
-                $('.track-a').on('click', function(e) {
-                    e.preventDefault();
-                    var songName = $(this).data('name');
-                    var artists = $(this).data('artists');
-                    var previewUrl = $(this).data('preview');
-                    var imageUrl = $(this).find('img').attr('src'); // Get the image URL of the clicked song
-                    // Actualizar la información de la canción en el reproductor
-                    $('#playing-song-info h3').text(songName);
-                    $('#playing-song-info h4').text(artists);
-                    playing_song_audio.src = previewUrl;
-                    $('#img-current-song img').attr('src', imageUrl); // Update the image of the playing song
-                    playNewSong(); // Reproducir la canción automáticamente
-                });
             },
             error: function(err) {
                 console.error('Error al obtener las canciones del Viral 50:', err);
@@ -471,7 +500,9 @@ $(document).ready(function() {
                             'Authorization': 'Bearer ' + accessToken
                         },
                         success: function(data) {
-                            var html = '<a href="#" artist-id="' + artist.id + '"><div class="artist" style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(' + data.images[0].url + ')">';
+                            var html = '<a href="#"><div class="artist" ' +
+                            'style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), ' +
+                            'url(' + data.images[0].url + ')" artist-id="' + artist.id + '" onclick="setupArtist(this);">';
                             html += '<h3>' + data.name + '</h3>';
                             html += '</div></a>';
                             $('#main-artists').append(html);
@@ -531,34 +562,32 @@ $(document).ready(function() {
                 if (data.tracks.items.length > 0) {
                     var track = data.tracks.items[0];
                     
-                    var html = '<a href="#" class="big-card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '" song-id="' + track.id + '">';
+                    var html = '<a onclick="playCard(this);" href="#" class="big-card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '" song-id="' + track.id + '">';
                     html += '<div class="big-card">';
                     html += '<img src="' + (track.album.images[0] ? track.album.images[0].url : '') + '">';
                     html += '<section><h3>...una canción?</h3>';
                     html += '<h3>' + (track.name.length > 40 ? track.name.substring(0, 40) + '...' : track.name)+ '</h3>';
                     html += '<h4>';
-                    html += (track.artists.map(artist => artist.name).join(', ').length > 30 ? 
-                        track.artists.map(artist => artist.name).join(', ').substring(0, 30) + '...' : 
-                        track.artists.map(artist => artist.name).join(', '));
+                    var exceededLimit = track.artists.map(artist => artist.name).join(', ').length > 30;
+                    for(var i=0; i<track.artists.length; i++){
+                        var characters = 0;
+                        if(i != track.artists.length-1){
+                            html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                            html += track.artists[i].name + '</span>, ';
+                            characters += track.artists[i].name.length;
+                        }else{
+                            if(exceededLimit){
+                                html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                html += track.artists[i].name.substring(0, 30-characters) + '</span>';
+                            }else{
+                                html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                html += track.artists[i].name + '</span>';
+                            }
+                        }
+                    }
                     html += '</h4></section></div></a>';
                     
                     $('#random-container').append(html);
-    
-                    // Agregar el evento clic a cada elemento de canción
-                    $('.track-a').on('click', function(e) {
-                        e.preventDefault();
-                        var songName = $(this).data('name');
-                        var artists = $(this).data('artists');
-                        var previewUrl = $(this).data('preview');
-                        var imageUrl = $(this).find('img').attr('src'); // Obtener la URL de la imagen de la canción clicada
-                        
-                        // Actualizar la información de la canción en el reproductor
-                        $('#playing-song-info h3').text(songName);
-                        $('#playing-song-info h4').text(artists);
-                        playing_song_audio.src = previewUrl;
-                        $('#img-current-song img').attr('src', imageUrl); // Actualizar la imagen de la canción en reproducción
-                        playNewSong(); // Reproducir la canción automáticamente
-                    });
                 } else {
                     console.error('No se encontró ninguna canción.');
                 }
@@ -586,6 +615,7 @@ $(document).ready(function() {
                 let link = document.createElement('a');
                 link.href = '#';
                 link.className = 'big-card-a';
+                link.setAttribute('onclick', 'setupArtist(this);');
                 link.setAttribute('artist-id', randomArtist.id);
 
                 let bigCardDiv = document.createElement('div');
@@ -721,8 +751,6 @@ $(document).ready(function() {
 });
 
 
-
-
  // Devuelve el token de acceso (sin callback)
 function returnAccessToken() {
     return new Promise(function(resolve, reject) {
@@ -731,7 +759,7 @@ function returnAccessToken() {
             type: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
+                'Authorization': 'Basic ' + btoa(clientId3 + ':' + clientSecret3)
             },
             data: 'grant_type=client_credentials',
             success: function(response) {
@@ -786,6 +814,86 @@ function getAlbum(albumId, accessToken) {
     });
 }
 
+// Función para obtener el artista
+function getArtist(artistId, accessToken) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/artists/' + artistId,
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(err) {
+                console.error('Error al obtener el artista:', err);
+                reject(err);
+            }
+        });
+    });
+}
+
+// Función para obtener los álbums de un artista
+function getArtistAlbums(artistId, accessToken) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/artists/' + artistId + '/albums',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(err) {
+                console.error('Error al obtener el artista:', err);
+                reject(err);
+            }
+        });
+    });
+}
+
+// Función para obtener el top canciones de un artista
+function getArtistTopTracks(artistId, accessToken) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(err) {
+                console.error('Error al obtener el artista:', err);
+                reject(err);
+            }
+        });
+    });
+}
+
+// Función para obtener los artistas relacionados de un artista
+function getArtistRelated(artistId, accessToken) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/artists/' + artistId + '/related-artists',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(err) {
+                console.error('Error al obtener el artista:', err);
+                reject(err);
+            }
+        });
+    });
+}
+
 // Función que, al hacer clic en una playlist, aparece una página con las canciones que la compone
 function setupPlaylist(playlistCard) {
     // ID de la playlist
@@ -804,8 +912,7 @@ function setupPlaylist(playlistCard) {
 
                 var html = '<div class="main-content" id="playlist-display" style="display: flex">' +
                     '<div id="playlist-info" playlist-id="' + playlist.id +'"><section>' +
-                    '<span id="playlist-name">' + (playlist.name.length > 25 ? playlist.name.substring(0, 25) + '...' : playlist.name) + '</span>';
-                html += '<div id="playlist-owner"><img id="owner-img" src="' +  playlist.images[0].url + '" alt="' +playlist.owner.display_name + '">';
+                    '<span id="playlist-name">' + (playlist.name.length > 25 ? playlist.name.substring(0, 25) + '...' : playlist.name) + '</span><div id="playlist-owner">';
                 html += '<span id="owner-name">' + playlist.owner.display_name + '</span></div><div id="playlist-controls">';
                 html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\'); addPlaylist(); playAtIndex(0);">play_arrow</span>';
                 html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="shuffleBegin(\'playlist\');">shuffle</span>';
@@ -874,8 +981,7 @@ function setupAlbum(albumCard) {
 
                 var html = '<div class="main-content" id="playlist-display" style="display: flex">' +
                     '<div id="playlist-info" playlist-id="' + album.id +'"><section>' +
-                    '<span id="playlist-name">' + (album.name.length > 25 ? album.name.substring(0, 25) + '...' : album.name) + '</span>';
-                html += '<div id="playlist-owner"><img id="owner-img" src="' +  album.images[0].url + '" alt="' + album.artists.map(artist => artist.name).join(', ') + '">';
+                    '<span id="playlist-name">' + (album.name.length > 25 ? album.name.substring(0, 25) + '...' : album.name) + '</span><div id="playlist-owner">';
                 html += '<span id="owner-name">' + album.artists.map(artist => artist.name).join(', ') + '</span></div><div id="playlist-controls">';
                 html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\'); addAlbum(); playAtIndex(0);">play_arrow</span>';
                 html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="shuffleBegin(\'album\');">shuffle</span>';
@@ -901,6 +1007,7 @@ function setupAlbum(albumCard) {
                     // Carga la fila en el tbody
                     $('#album-tbody').append(tr);
                 });
+
                 // Una vez termine todo, el scroll vuelve arriba del todo
                 mainDivider.scrollTo({
                     top: 0
@@ -918,6 +1025,124 @@ function setupAlbum(albumCard) {
                 }
                 openPlaylistAlbum();
             });
+        })
+        .catch(function(err) {
+            console.error('Error:', err);
+        });
+}
+
+// Función que, al hacer clic en un artista, aparece la página con la información del artista
+function setupArtist(artistCard) {
+    // ID del artista
+    var id = artistCard.getAttribute('artist-id');
+    // Contenedor de la búsqueda
+    var mainDivider = document.getElementById('main-divider');
+    returnAccessToken()
+        .then(function(accessToken) {
+            return getArtist(id, accessToken);
+        })
+        .then(function(artist) {
+            returnAccessToken()
+                .then(function(accessToken) {
+                    return getArtistAlbums(id, accessToken);
+                })
+                .then(function(albums) {
+                    returnAccessToken()
+                        .then(function(accessToken) {
+                            return getArtistTopTracks(id, accessToken);
+                        })
+                        .then(function(topTracks) {
+                            returnAccessToken()
+                                .then(function(accessToken) {
+                                    return getArtistRelated(id, accessToken);
+                                })
+                                .then(function(related) {   
+                                    $(document).ready(function() {
+                                        // Display del contenedor principal
+                                        $('#home-real').css({'display': 'none'});
+                                        $('#search-results').css({'display': 'none'});
+                                         // Contenedor de artista
+                                        var artistDisplay = document.getElementById('artist-display');
+                                        if (artistDisplay) {
+                                            // Si existe, lo borra
+                                            artistDisplay.remove();
+                                        }
+                                        var html = '<div class="main-content" id="artist-display"><div id="artist-info">';
+                                        if (artist.images.length > 0) {
+                                            html += '<img id="artist-img" src="'+ artist.images[0].url +'" alt="' + artist.name + '">';
+                                        }
+                                        artist.images[0].url.onerror = function() {
+                                            html += '<img id="artist-img" src="./assets/img/default-user.png" alt="' + artist.name + '">';
+                                        };
+                                        html += '<section><span id="artist-name">' + artist.name+ '</span>';
+                                        html += '<span id="artist-followers">' + artist.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') 
+                                        + ' seguidores</span></section></div>';
+                                        html += '<div class="tracks-and-related"><div class="user-note-container"><h3>Top Canciones</h3><section class="user-note stats-note">';
+                                        for(var i=0; i<(topTracks.tracks.length >= 5 ? 6 : topTracks.tracks.length); i++){
+                                            html += '<div class="user-stats"><h4>' + topTracks.tracks[i].name + '</h4></div>';
+                                        }
+                                        if(related.artists.length != 0){
+                                            html += '</section></div><div class="user-note-container"><h3>Artistas relacionados</h3><section class="user-note stats-note">';
+                                            for(var i=0; i<(related.artists.length >= 5 ? 6 : related.artists.length); i++){
+                                                html += '<div class="user-stats"><h4>' + related.artists[i].name + '</h4></div>';
+                                            }
+                                        }
+                                        html += '</section></div></div>';
+                                        html += '</div></div>';
+                                        $('#search-results').after(html);
+
+                                        albums.items.forEach(album => {
+                                            let html = '<div class="album-container"><div class="album-info">';
+                                            html += '<img class="album-img" src="' + album.images[0].url + '"><span class="album-name">' + album.name + '</span></div>';
+                                            html += '<div class="album-songs"><div class="album-artist-display"><table class="album-table"><thead><tr><th>#</th>';
+                                            html += '<th>Canción</th><th><span class="material-symbols-rounded">timer</span></th></tr></thead><tbody id="album-tbody-' + album.id + '">';
+                                            html += '</tbody></table><section class="table-border"></section></div></div></div>';
+                                        
+                                            document.getElementById('artist-display').innerHTML += html; // Añadir el HTML inicial al DOM
+                                        
+                                            returnAccessToken()
+                                                .then(function(accessToken) {
+                                                    return getAlbum(album.id, accessToken);
+                                                })
+                                                .then(function(tracks) { 
+                                                    let albumHtml = '';
+                                                    var index = 1;
+                                                    tracks.tracks.items.forEach(track => {
+                                                        let trackHtml = '<tr><td>' + (index++) + '</td>';
+                                                        trackHtml += '<td><span class="playlist-song-title">' + track.name + '</span></td>';
+                                                        trackHtml += '<td>' + minutes(track.duration_ms) + '</td></tr>';
+                                                        albumHtml += trackHtml;
+                                                    });
+                                                    document.getElementById('album-tbody-' + album.id).innerHTML = albumHtml; // Actualizar el cuerpo de la tabla en el DOM
+                                                })
+                                                .catch(function(err) {
+                                                    console.error('Error:', err);
+                                                });
+                                        });
+                                        
+
+                                        html += '</div></div>';    
+        
+                                        // Una vez termine todo, el scroll vuelve arriba del todo
+                                        mainDivider.scrollTo({
+                                            top: 0
+                                        });
+                
+                                        openArtist();
+
+                                    });
+                                })
+                                .catch(function(err) {
+                                    console.error('Error:', err);
+                                });
+                        })
+                        .catch(function(err) {
+                            console.error('Error:', err);
+                        });
+                })
+                .catch(function(err) {
+                    console.error('Error:', err);
+                });
         })
         .catch(function(err) {
             console.error('Error:', err);

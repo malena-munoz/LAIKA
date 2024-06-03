@@ -1,0 +1,151 @@
+#artist-display{
+    gap: 30px;
+}
+
+/* Contenedor de la información del artista */
+#artist-info{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: var(--separation);
+}
+
+/* Sección del contenedor de la info del artista */
+#artist-info section{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+    gap: 5px;
+    margin-bottom: 40px;
+}
+
+/* Nombre del artista */
+#artist-name{
+    font-size: 90px;
+    font-weight: bold;
+    color: var(--low-lilac);
+}
+
+/* Imagen del artista */
+#artist-img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    border: 5px solid var(--mid-lilac);
+    border-radius: var(--radius);
+}
+
+/* Seguidores del artista */
+#artist-followers, .album-name{
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--low-blue-slate-gray);
+}
+
+/* Contenedor del álbum */
+.album-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+/* Información del álbum */
+.album-info{
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--separation);
+}
+
+.album-img{
+    width: 100px;
+    height: 100px;
+    border: 3px solid var(--mid-lilac);
+    border-bottom: 0;
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+    background: url(../img/default-song.png);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+.album-artist-display{
+    max-height: 300px;
+    width: 100%;
+    overflow-y: scroll;
+    border: 3px solid var(--mid-lilac);
+    border-radius: var(--radius);
+    border-top-left-radius: 0;
+    border-bottom: 0;
+}
+
+.album-artist-display::-webkit-scrollbar {
+    width: 0;
+}
+
+.album-artist-display .album-table thead th {
+    position: sticky;
+    top: 0;
+    border-bottom: 0;
+    background-color: var(--high-lilac);
+}
+
+.tracks-and-related{
+    display: flex;
+    flex-direction: row;
+    gap: var(--separation);
+}
+
+.tracks-and-related .user-note-container{
+    margin: 0;
+    flex: 1;
+}
+
+.tracks-and-related .user-note-container h3{
+    margin-bottom: 10px;
+}
+
+.tracks-and-related .user-note-container .user-note{
+    margin-right: 0;
+    width: 100%;
+}
+
+.products-and-concerts{
+    display: flex;
+    flex-direction: row;
+    gap: var(--separation);
+    margin-bottom: var(--separation);
+    max-height: 352px;
+}
+
+.products-and-concerts .album-container{
+    flex: 1;
+}
+
+.miscellaneous{
+    width: 100%;
+    border: 3px solid var(--low-blue-slate-gray);
+    border-bottom: 0;
+    border-top-left-radius: var(--radius);
+}
+
+.miscellaneous .album-table thead th {
+    background-color: var(--slate-lavender);
+}
+
+.miscellaneous .album-table th, .miscellaneous .album-table td{
+    color: var(--low-blue-slate-gray);
+}
+
+.miscellaneous section{
+    background-color: var(--low-blue-slate-gray);
+}
+
+.album-container h3{
+    margin-bottom: 10px;
+}

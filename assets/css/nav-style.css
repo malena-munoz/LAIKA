@@ -22,7 +22,8 @@
 /* Contenedor que habilita el deslizamiento vertical, en base a la altura del contenedor vertical principal */
 #scrollable-content{
     flex-grow: 1;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
     min-height: 0;
     padding-left: var(--separation);
 }

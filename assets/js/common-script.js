@@ -240,6 +240,11 @@ function goHome(){
     if (playlist) {
         playlist.remove();
     }
+     // Contenedor de artista
+    var artist = document.getElementById('artist-display');
+    if (artist) {
+        artist.remove();
+    }
     // Playlist o álbum agregado + índice
     wasAdded = false;
     tempIndex = -1;
@@ -333,4 +338,55 @@ function openPlaylistAlbum(){
             }
         }
     });
+}
+
+function openArtist(){
+    // Elementos hijos
+    const childrenArray = Array.from(document.getElementById('main-divider').children);
+    childrenArray.forEach(child => {
+        if (child.tagName.toLowerCase() === 'div') {
+            if(child.getAttribute('id') === 'artist-display'){
+                child.style.display = 'flex';
+            } else {
+                child.style.display = 'none';
+            }
+        }
+    });
+}
+
+function displaySearch(visible){
+    // Elementos hijos
+    const childrenArray = Array.from(document.getElementById('main-divider').children);
+    childrenArray.forEach(child => {
+        if (child.tagName.toLowerCase() === 'div') {
+            if(visible){
+                if(child.getAttribute('id') === 'search-results'){
+                    child.style.display = 'block';
+                } else {
+                    child.style.display = 'none';
+                }
+            }else{
+                if(child.getAttribute('id') === 'search-results'){
+                    child.style.display = 'none';
+                }
+                if(child.getAttribute('id') === 'home-real'){
+                    child.style.display = 'block';
+                }
+            }
+        }
+    });
+    // Una vez termine todo, el scroll vuelve arriba del todo
+    document.getElementById('main-divider').scrollTo({
+        top: 0
+    })
+    // Contenedor de playlist/album
+    var playlist = document.getElementById('playlist-display');
+    if (playlist) {
+        playlist.remove();
+    }
+     // Contenedor de artista
+    var artist = document.getElementById('artist-display');
+    if (artist) {
+        artist.remove();
+    }
 }

@@ -163,7 +163,7 @@
 
 /* ,---------- ARTIST ----------, */
 
-#main-artists a:hover h3{
+#main-artists a:hover h3, #searched-artists a:hover h3{
     color: var(--low-blue-slate-gray);
 }
 

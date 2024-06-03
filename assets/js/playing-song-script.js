@@ -111,6 +111,32 @@ function playSongAlbum(row){
     lastID.value = document.getElementById('playlist-info').getAttribute('playlist-id');
 }
 
+// Reproduce una canción de la página principal
+function playCard(card){
+    $(document).ready(function(){
+        var title = card.getAttribute('data-name');
+        var preview = card.getAttribute('data-preview');
+        var img = card.querySelector('img').src;
+        var artists = card.querySelectorAll('.artist-redirect');
+
+        $('#playing-song-info h3').text(title);
+        $('#playing-song-info h4').empty();
+        for(var i=0; i<artists.length; i++){
+            if(i != artists.length-1){
+                $('#playing-song-info h4').append('<span class="artist-redirect" artist-id="' 
+                + artists[i].getAttribute('artist-id') + '" onclick="setupArtist(this);">' + artists[i].textContent + '</span>, ');
+            }else{
+                $('#playing-song-info h4').append('<span class="artist-redirect" artist-id="' 
+                + artists[i].getAttribute('artist-id') + '" onclick="setupArtist(this);">' + artists[i].textContent + '</span>');
+            }
+        }
+        playing_song_audio.src = preview;
+        $('#img-current-song img').attr('src', img);
+
+        playNewSong(); 
+    }); 
+}
+
 // Agrega las canciones del álbum al array
 function addAlbum(){
     const albumSongs = document.getElementById('album-tbody');

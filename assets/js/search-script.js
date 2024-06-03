@@ -29,15 +29,13 @@ async function searchSpotify(event) {
 
         // Mostrar resultados y ocultar el contenido de home-real.php
         displaySearchResults(searchData);
-        document.getElementById('search-results').style.display = 'block';
-        document.getElementById('home-real').style.display = 'none';
+        displaySearch(true);
     } catch (error) {
         console.error('Error al realizar la búsqueda:', error);
     }
 
     if (searchTerm == '') {
-        document.getElementById('search-results').style.display = 'none';
-        document.getElementById('home-real').style.display = 'block';
+        displaySearch(false);
     }
 }
 
@@ -49,31 +47,31 @@ function displaySearchResults(data) {
     searchedSongsContainer.innerHTML = '';
     if (tracks.items.length > 0) {
         tracks.items.forEach(track => {
-            let html = '<a href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
+            let html = '<a onclick="playCard(this);" href="#" class="card-a track-a" data-name="' + track.name + '" data-artists="' + track.artists.map(artist => artist.name).join(', ') + '" data-preview="' + track.preview_url + '"><div class="card">';
             if (track.album.images.length > 0) {
                 html += '<img src="' + track.album.images[0].url + '" alt="' + track.name + '">';
             }
             let trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
-            html += '<h3>' + trackName + '</h3>';
-            let artistName = track.artists.map(artist => artist.name).join(', ').length > 30 ? track.artists.map(artist => artist.name).join(', ').substring(0, 30) + '...' : track.artists.map(artist => artist.name).join(', ');
-            html += '<h4>' + artistName + '</h4>';
-            html += '</div></a>';
+            html += '<h3>' + trackName + '</h3><h4>';
+            var exceededLimit = track.artists.map(artist => artist.name).join(', ').length > 30;
+            for(var i=0; i<track.artists.length; i++){
+                var characters = 0;
+                if(i != track.artists.length-1){
+                    html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                    html += track.artists[i].name + '</span>, ';
+                    characters += track.artists[i].name.length;
+                }else{
+                    if(exceededLimit){
+                        html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                        html += track.artists[i].name.substring(0, 30-characters) + '</span>';
+                    }else{
+                        html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                        html += track.artists[i].name + '</span>';
+                    }
+                }
+            }
+            html += '</h4></div></a>';
             searchedSongsContainer.innerHTML += html;
-        });
-
-        // Agregar el evento clic a cada elemento de canción
-        $('.track-a').on('click', function(e) {
-            e.preventDefault();
-            var songName = $(this).data('name');
-            var artists = $(this).data('artists');
-            var previewUrl = $(this).data('preview');
-            var imageUrl = $(this).find('img').attr('src'); // Get the image URL of the clicked song
-            // Actualizar la información de la canción en el reproductor
-            $('#playing-song-info h3').text(songName);
-            $('#playing-song-info h4').text(artists);
-            playing_song_audio.src = previewUrl;
-            $('#img-current-song img').attr('src', imageUrl); // Update the image of the playing song
-            playNewSong(); // Reproducir la canción automáticamente
         });
     }
 
@@ -87,16 +85,27 @@ function displaySearchResults(data) {
             if (album.images.length > 0) {
                 html += '<img src="' + album.images[0].url + '" alt="' + album.name + '">';
             }
-            html += '<h3>' + albumName + '</h3>';
-            html += '<h4>';
-            album.artists.forEach(function(artist, index) {
-                html += artist.name;
-                if (index < album.artists.length - 1) {
-                    html += ', ';
+            html += '<h3>' + albumName + '</h3><h4>';
+
+            var exceededLimit = album.artists.map(artist => artist.name).join(', ').length > 30;
+            for(var i=0; i<album.artists.length; i++){
+                var characters = 0;
+                if(i != album.artists.length-1){
+                    html += '<span class="artist-redirect" artist-id="' + album.artists[i].id + '">';
+                    html += album.artists[i].name + '</span>, ';
+                    characters += album.artists[i].name.length;
+                }else{
+                    if(exceededLimit){
+                        html += '<span class="artist-redirect" artist-id="' + album.artistss[i].id + '">';
+                        html += album.artists[i].name.substring(0, 30-characters) + '</span>';
+                    }else{
+                        html += '<span class="artist-redirect" artist-id="' + album.artists[i].id + '">';
+                        html += album.artists[i].name + '</span>';
+                    }
                 }
-            });
-            html += '</h4>';
-            html += '</div></a>';
+            }
+            html += '</h4></div></a>';
+            html += '</h4></div></a>';
             searchedAlbumsContainer.innerHTML += html;
         });
     }
@@ -121,6 +130,8 @@ function displaySearchResults(data) {
             // Crear el enlace
             let link = document.createElement('a');
             link.href = '#';
+            link.setAttribute('artist-id', artist.id);
+            link.setAttribute('onclick', 'setupArtist(this);');
 
             // Añadir el nombre al contenedor del artista
             artistDiv.appendChild(artistName);

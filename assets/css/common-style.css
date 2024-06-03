@@ -188,6 +188,14 @@ th, td{
     position: sticky;
 }
 
+.table-border{
+    height: 3px;
+    width: 100%;
+    background-color: var(--mid-lilac);
+    position: sticky;
+    bottom: 0;
+}
+
 .centered{
     display: flex;
     align-items: center;
@@ -287,3 +295,17 @@ input[type="range"]::-moz-range-thumb {
     background-color: var(--mid-lilac);
     border-radius: 2px;
 }
+
+.artist-redirect{
+    text-decoration: none;
+}
+
+.artist-redirect:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#home-real .artist-redirect:hover{
+    text-decoration: none;
+}
+

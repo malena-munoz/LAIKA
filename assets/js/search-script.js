@@ -96,7 +96,7 @@ function displaySearchResults(data) {
                     characters += album.artists[i].name.length;
                 }else{
                     if(exceededLimit){
-                        html += '<span class="artist-redirect" artist-id="' + album.artistss[i].id + '">';
+                        html += '<span class="artist-redirect" artist-id="' + album.artists[i].id + '">';
                         html += album.artists[i].name.substring(0, 30-characters) + '</span>';
                     }else{
                         html += '<span class="artist-redirect" artist-id="' + album.artists[i].id + '">';

@@ -267,7 +267,7 @@ input[type="range"]::-moz-range-thumb {
 #main-divider{
     overflow-x: hidden;
     overflow-y: auto;
-    margin-left: 160px;
+    margin-left: 20px;
     padding-right: 20px;
     max-height: calc(100vh - 140px);
     width: 100%;

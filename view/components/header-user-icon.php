@@ -31,10 +31,14 @@
 <script>
 document.getElementById('logout-button').addEventListener('click', function() {
     window.location.href = './view/verifiers/logout.php';
+    document.getElementById('scrollable-content').style.visibility = "hidden";
+    document.getElementById('main-divider').style.marginLeft = "20px";
 });
 
 window.onload = function() {
     var userBurger = document.getElementById('user-burger');
+    document.getElementById('scrollable-content').style.visibility = "visible";
+    document.getElementById('main-divider').style.marginLeft = "160px";
     var userPhoto = '<?php echo isset($_SESSION["fotoUsuario"]) && $_SESSION["fotoUsuario"] ? "data:image/png;base64," . $_SESSION["fotoUsuario"] : "./assets/img/default-user.png"; ?>';
     userBurger.style.backgroundImage = 'url(' + userPhoto + ')';
 };

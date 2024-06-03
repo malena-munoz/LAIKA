@@ -20,7 +20,7 @@ $(document).ready(function() {
             type: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(clientId2 + ':' + clientSecret2)
+                'Authorization': 'Basic ' + btoa(clientId3 + ':' + clientSecret3)
             },
             data: 'grant_type=client_credentials',
             success: function(response) {

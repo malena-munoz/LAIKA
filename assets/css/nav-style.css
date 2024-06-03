@@ -26,6 +26,7 @@
     overflow-y: scroll;
     min-height: 0;
     padding-left: var(--separation);
+    visibility: hidden;
 }
 
 

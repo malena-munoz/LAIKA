@@ -97,3 +97,14 @@
     border-top-right-radius: 0px;
 }
 
+#create-playlist{
+    background-image: url(../img/default-add.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: all ease-in 0.2s;
+}
+
+#create-playlist:hover{
+    cursor: pointer;
+    background-image: url(../img/default-add-darker.png);
+}

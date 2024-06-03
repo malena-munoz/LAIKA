@@ -21,8 +21,8 @@
                 <li>
                     <div class="playlist">6</div>
                 </li>
-                <li>
-                    <div class="playlist">7</div>
+                <li id="li-create-playlist">
+                    <div id="create-playlist" class="playlist"></div>
                 </li>
             </ul>
             <section class="filler"></section>

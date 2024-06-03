@@ -536,7 +536,7 @@ $(document).ready(function() {
                     var artistData = data.artists.items[0];
                     if (!artistIds.has(artistData.id)) {
                         artistIds.add(artistData.id);
-                        var html = '<a href="#" artist-id="' + artistData.id + '"><div class="artist" style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(' + artistData.images[0].url + ')">';
+                        var html = '<a onclick="setupArtist(this);" href="#" artist-id="' + artistData.id + '"><div class="artist" style="background-image:linear-gradient(0deg, #00000088 30%, #ffffff44 100%), url(' + artistData.images[0].url + ')">';
                         html += '<h3>' + artistData.name + '</h3>';
                         html += '</div></a>';
                         $('#main-artists').append(html);

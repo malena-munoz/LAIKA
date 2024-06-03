@@ -275,20 +275,20 @@ $(document).ready(function() {
                                 var trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
                                 html += '<h3>' + trackName + '</h3>';
                                 html += '<h4>';
-                                var exceededLimit = track.track.artists.map(artist => artist.name).join(', ').length > 30;
-                                for(var i=0; i<track.track.artists.length; i++){
+                                var exceededLimit = track.artists.map(artist => artist.name).join(', ').length > 30;
+                                for(var i=0; i<track.artists.length; i++){
                                     var characters = 0;
-                                    if(i != track.track.artists.length-1){
-                                        html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
-                                        html += track.track.artists[i].name + '</span>, ';
-                                        characters += track.track.artists[i].name.length;
+                                    if(i != track.artists.length-1){
+                                        html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                        html += track.artists[i].name + '</span>, ';
+                                        characters += track.artists[i].name.length;
                                     }else{
                                         if(exceededLimit){
-                                            html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
-                                            html += track.track.artists[i].name.substring(0, 30-characters) + '</span>';
+                                            html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                            html += track.artists[i].name.substring(0, 30-characters) + '</span>';
                                         }else{
-                                            html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
-                                            html += track.track.artists[i].name + '</span>';
+                                            html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                            html += track.artists[i].name + '</span>';
                                         }
                                     }
                                 }
@@ -399,20 +399,20 @@ $(document).ready(function() {
                         var trackName = track.name.length > 30 ? track.name.substring(0, 30) + '...' : track.name;
                         html += '<h3>' + trackName + '</h3>';
                         html += '<h4>';
-                        var exceededLimit = track.track.artists.map(artist => artist.name).join(', ').length > 30;
-                        for(var i=0; i<track.track.artists.length; i++){
+                        var exceededLimit = track.artists.map(artist => artist.name).join(', ').length > 30;
+                        for(var i=0; i<track.artists.length; i++){
                             var characters = 0;
-                            if(i != track.track.artists.length-1){
-                                html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
-                                html += track.track.artists[i].name + '</span>, ';
-                                characters += track.track.artists[i].name.length;
+                            if(i != track.artists.length-1){
+                                html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                html += track.artists[i].name + '</span>, ';
+                                characters += track.artists[i].name.length;
                             }else{
                                 if(exceededLimit){
-                                    html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
-                                    html += track.track.artists[i].name.substring(0, 30-characters) + '</span>';
+                                    html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                    html += track.artists[i].name.substring(0, 30-characters) + '</span>';
                                 }else{
-                                    html += '<span class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
-                                    html += track.track.artists[i].name + '</span>';
+                                    html += '<span class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                    html += track.artists[i].name + '</span>';
                                 }
                             }
                         }

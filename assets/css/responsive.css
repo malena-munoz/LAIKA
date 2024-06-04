@@ -1,0 +1,114 @@
+@media screen and (max-width: 1500px) {
+    
+    #random-container{
+        height: fit-content;
+    }
+
+    .big-card{
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: center;
+        height: fit-content;
+        gap: 10px;
+    }
+    
+    .big-card section{
+        justify-content: center;
+    }
+
+    .big-card img {
+        width: 170px;
+        height: 170px;
+    }
+
+    .big-card h3:first-child {
+        font-size: 30px;
+    }
+
+    .big-card h3:not(:first-child) {
+        font-size: 20px;
+    }
+
+    .footer{
+        flex-direction: column;
+        height: fit-content;
+        gap: 40px;
+    }
+
+    .contact:not(:last-child){
+        flex-direction: row;
+        gap: 20px;
+    }
+}
+
+
+@media screen and (max-width: 1180px) {
+
+    #profile-inp{
+        width: fit-content;
+        flex-direction: column;
+        gap: 31px;
+    }
+
+    #password-inp{
+        width: 90%;
+    }
+
+}
+
+
+@media screen and (max-width: 1100px) {
+    
+    .tracks-and-related{
+        flex-direction: column;
+    }
+
+    #playlist-name{
+        font-size: 70px;
+    }
+
+    .personal-note{
+        width: 90%;
+    }
+
+    .stats-note{
+        gap: 20px;
+    }
+
+    .user-stats{
+        gap: 10px;
+        flex-direction: column;
+        justify-content: left;
+    }
+
+    .user-stats span{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 900px){
+
+    #playlist-img{
+        display: none;
+    }
+
+    #playlist-info{
+        border-bottom: 0;
+    }
+
+    #playlist-controls{
+        height: 50px;
+        border-bottom: 5px solid var(--mid-lilac);
+        border-radius: var(--radius);
+    }
+
+    .company-info{
+        width: 100%;
+    }
+
+    .company-info img{
+        display: none;
+    }
+
+}

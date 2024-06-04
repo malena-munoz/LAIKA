@@ -9,6 +9,8 @@ var clientId2 = '84f52098b74a42d3bce3277d27253875';
 var clientSecret2 = '56cd5c6c0f5e4e7c98db87172e03d54b';
 var clientId3 = 'd820cba9a2b6493fb45ca620d3b97614';
 var clientSecret3 = '2ce635013a234a1d9e79e92f621c8d67';
+var clientId4 = 'f1fefd90a53a41789c105f1c142e60ea';
+var clientSecret4 = 'fbb1acaa02794067b3a92c6a17859630';
 
 
 $(document).ready(function() {
@@ -20,7 +22,7 @@ $(document).ready(function() {
             type: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(clientId3 + ':' + clientSecret3)
+                'Authorization': 'Basic ' + btoa(clientId2 + ':' + clientSecret2)
             },
             data: 'grant_type=client_credentials',
             success: function(response) {
@@ -626,8 +628,9 @@ $(document).ready(function() {
                 if (randomArtist.images.length > 0) {
                     img.src = randomArtist.images[0].url;
                 }
+                
                 img.onerror = function() {
-                    bigCardDiv.style.backgroundColor = 'black';
+                    img.src = '../assets/img/default-user.png';
                 };
 
                 let section = document.createElement('section');
@@ -774,6 +777,26 @@ function returnAccessToken() {
     });
 }
 
+// Función para obtener una canción
+function getTrack(trackId, accessToken) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/tracks/' + trackId,
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(err) {
+                console.error('Error al obtener la canción:', err);
+                reject(err);
+            }
+        });
+    });
+}
+
 // Función para obtener una playlist
 function getPlaylist(playlistId, accessToken) {
     return new Promise(function(resolve, reject) {
@@ -900,6 +923,11 @@ function setupPlaylist(playlistCard) {
     var id = playlistCard.getAttribute('id');
     /// Contenedor primario de toda la página
     var mainDivider = document.getElementById('main-divider');
+    // Contenedor de playlist/album
+    var playlist = document.getElementById('playlist-display');
+    if (playlist) {
+        playlist.remove();
+    }
     returnAccessToken()
         .then(function(accessToken) {
             return getPlaylist(id, accessToken);
@@ -932,9 +960,26 @@ function setupPlaylist(playlistCard) {
                     tr += '<td song-id="' + track.track.id + '" preview-url="' + track.track.preview_url + '">' + (index++) + '</td>';
                     tr += '<td>' + '<img class="song-playlist-img" src="' + track.track.album.images[0].url + '" alt="Playlist-Img"/>' +
                         '<section>' + '<span class="playlist-song-title">' + track.track.name + '</span>' +
-                        '<span class="playlist-song-artist">' + track.track.artists.map(artist => artist.name).join(', ') + '</span>' +
-                        '</section>' + '</td>';
-                    tr += '<td>' + track.track.album.name + '</td>';
+                        '<span class="playlist-song-artist">';
+                        var exceededLimit = track.track.artists.map(artist => artist.name).join(', ').length > 60;
+                        for(var i=0; i<track.track.artists.length; i++){
+                            var characters = 0;
+                            if(i != track.track.artists.length-1){
+                                tr += '<span onclick="setupArtist(this);" class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                tr += track.track.artists[i].name + '</span>, ';
+                                characters += track.track.artists[i].name.length;
+                            }else{
+                                if(exceededLimit){
+                                    tr += '<span onclick="setupArtist(this);" class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                    tr += track.track.artists[i].name.substring(0, 30-characters) + '</span>';
+                                }else{
+                                    tr += '<span onclick="setupArtist(this);" class="artist-redirect" artist-id="' + track.track.artists[i].id + '">';
+                                    tr += track.track.artists[i].name + '</span>';
+                                }
+                            }
+                        }
+                        + '</span></section></td>';
+                    tr += '<td><span onclick="setupAlbum(this);" class="artist-redirect" id="' + track.track.album.id + '">' + track.track.album.name + '</span></td>';
                     tr += '<td>' + minutes(track.track.duration_ms) + '</td>';
                     tr += '</tr>';
                     // Carga la fila en el tbody
@@ -969,6 +1014,11 @@ function setupAlbum(albumCard) {
     var id = albumCard.getAttribute('id');
     // Contenedor primario de toda la página
     var mainDivider = document.getElementById('main-divider');
+    // Contenedor de playlist/album
+    var playlist = document.getElementById('playlist-display');
+    if (playlist) {
+        playlist.remove();
+    }
     returnAccessToken()
         .then(function(accessToken) {
             return getAlbum(id, accessToken);
@@ -982,8 +1032,28 @@ function setupAlbum(albumCard) {
                 var html = '<div class="main-content" id="playlist-display" style="display: flex">' +
                     '<div id="playlist-info" playlist-id="' + album.id +'"><section>' +
                     '<span id="playlist-name">' + (album.name.length > 25 ? album.name.substring(0, 25) + '...' : album.name) + '</span><div id="playlist-owner">';
-                html += '<span id="owner-name">' + album.artists.map(artist => artist.name).join(', ') + '</span></div><div id="playlist-controls">';
-                html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\'); addAlbum(); playAtIndex(0);">play_arrow</span>';
+                html += '<span id="owner-name">';
+
+                var exceededLimit = album.artists.map(artist => artist.name).join(', ').length > 30;
+                for(var i=0; i<album.artists.length; i++){
+                    var characters = 0;
+                    if(i != album.artists.length-1){
+                        html += '<span onclick="setupArtist(this);" class="artist-redirect" artist-id="' + album.artists[i].id + '">';
+                        html += album.artists[i].name + '</span>, ';
+                        characters += album.artists[i].name.length;
+                    }else{
+                        if(exceededLimit){
+                            html += '<span onclick="setupArtist(this);" class="artist-redirect" artist-id="' + album.artists[i].id + '">';
+                            html += album.artists[i].name.substring(0, 30-characters) + '</span>';
+                        }else{
+                            html += '<span onclick="setupArtist(this);" class="artist-redirect" artist-id="' + album.artists[i].id + '">';
+                            html += album.artists[i].name + '</span>';
+                        }
+                    }
+                }
+
+                html += '</span></div><div id="playlist-controls">';
+                html += '<span class="material-symbols-rounded" id="play-playlist" onclick="addAlbum(); playAtIndex(0);">play_arrow</span>';
                 html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="shuffleBegin(\'album\');">shuffle</span>';
                 html += '<span class="material-symbols-rounded" id="add-playlist" onclick="changePlaylistControlStyle(\'add-playlist\');">add</span>';
                 html += '</div></section><img id="playlist-img" src="' + album.images[0].url + '" alt="' + album.name + '"></div>';
@@ -999,10 +1069,25 @@ function setupAlbum(albumCard) {
                 tracks.forEach(track => {
                     var tr = '<tr ondblclick="playSongAlbum(this);" onmouseover="hoverRowIn(this);" onmouseout="hoverRowOut(this);">';
                     tr += '<td song-id="' + track.id + '" preview-url="' + track.preview_url + '">' + (index++) + '</td>';
-                    tr += '<td><span class="playlist-song-title">' + track.name + '</span><span class="additional-artists" style="color: #929CB0"> · ' +
-                        track.artists.map(add => add.name).join(', ') + '</span>';
-                    tr += '</td>';
-                    tr += '<td>' + minutes(track.duration_ms) + '</td>';
+                    tr += '<td><span class="playlist-song-title">' + track.name + '</span><span class="additional-artists" style="color: #929CB0"> · ';
+                    exceededLimit = track.artists.map(artist => artist.name).join(', ').length > 60;
+                        for(var i=0; i<track.artists.length; i++){
+                            var characters = 0;
+                            if(i != track.artists.length-1){
+                                tr += '<span onclick="setupArtist(this);" class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                tr += track.artists[i].name + '</span>, ';
+                                characters += track.artists[i].name.length;
+                            }else{
+                                if(exceededLimit){
+                                    tr += '<span onclick="setupArtist(this);" class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                    tr += track.artists[i].name.substring(0, 30-characters) + '</span>';
+                                }else{
+                                    tr += '<span onclick="setupArtist(this);" class="artist-redirect" artist-id="' + track.artists[i].id + '">';
+                                    tr += track.artists[i].name + '</span>';
+                                }
+                            }
+                        }
+                    tr += '</span></td><td>' + minutes(track.duration_ms) + '</td>';
                     tr += '</tr>';
                     // Carga la fila en el tbody
                     $('#album-tbody').append(tr);
@@ -1079,12 +1164,14 @@ function setupArtist(artistCard) {
                                         + ' seguidores</span></section></div>';
                                         html += '<div class="tracks-and-related"><div class="user-note-container"><h3>Top Canciones</h3><section class="user-note stats-note">';
                                         for(var i=0; i<(topTracks.tracks.length >= 5 ? 6 : topTracks.tracks.length); i++){
-                                            html += '<div class="user-stats"><h4>' + topTracks.tracks[i].name + '</h4></div>';
+                                            html += '<div class="user-stats top-song" onclick="playTop(this);" song-id="' + topTracks.tracks[i].id + '" index="' + i;
+                                            html += '"><h4 class="artist-redirect">' + topTracks.tracks[i].name + '</h4></div>';
                                         }
                                         if(related.artists.length != 0){
                                             html += '</section></div><div class="user-note-container"><h3>Artistas relacionados</h3><section class="user-note stats-note">';
                                             for(var i=0; i<(related.artists.length >= 5 ? 6 : related.artists.length); i++){
-                                                html += '<div class="user-stats"><h4>' + related.artists[i].name + '</h4></div>';
+                                                html += '<div class="user-stats" onclick="setupArtist(this);" artist-id="' + related.artists[i].id + 
+                                                '"><h4 class="artist-redirect">' + related.artists[i].name + '</h4></div>';
                                             }
                                         }
                                         html += '</section></div></div>';
@@ -1093,7 +1180,8 @@ function setupArtist(artistCard) {
 
                                         albums.items.forEach(album => {
                                             let html = '<div class="album-container"><div class="album-info">';
-                                            html += '<img class="album-img" src="' + album.images[0].url + '"><span class="album-name">' + album.name + '</span></div>';
+                                            html += '<img class="album-img" src="' + album.images[0].url + '"><span class="album-name artist-redirect" id="' + album.id +
+                                            '" onclick="setupAlbum(this);">' + album.name + '</span></div>';
                                             html += '<div class="album-songs"><div class="album-artist-display"><table class="album-table"><thead><tr><th>#</th>';
                                             html += '<th>Canción</th><th><span class="material-symbols-rounded">timer</span></th></tr></thead><tbody id="album-tbody-' + album.id + '">';
                                             html += '</tbody></table><section class="table-border"></section></div></div></div>';
@@ -1108,9 +1196,29 @@ function setupArtist(artistCard) {
                                                     let albumHtml = '';
                                                     var index = 1;
                                                     tracks.tracks.items.forEach(track => {
-                                                        let trackHtml = '<tr><td>' + (index++) + '</td>';
-                                                        trackHtml += '<td><span class="playlist-song-title">' + track.name + '</span></td>';
-                                                        trackHtml += '<td>' + minutes(track.duration_ms) + '</td></tr>';
+                                                        let trackHtml = '<tr onclick="playAlbumSong(this);" onmouseover="hoverRowIn(this);" onmouseout="hoverRowOut(this);" preview="' + track.preview_url
+                                                        trackHtml += '" image="' + album.images[0].url + '"><td>' + (index++) + '</td>';
+                                                        trackHtml += '<td><span class="playlist-song-title">' + track.name + '</span><span class="additional-artists" style="color: #929CB0"> · ';
+
+                                                        var exceededLimit = track.artists.map(artist => artist.name).join(', ').length > 30;
+                                                        for(var i=0; i<track.artists.length; i++){
+                                                            var characters = 0;
+                                                            if(i != track.artists.length-1){
+                                                                trackHtml += '<span artist-id="' + track.artists[i].id + '">';
+                                                                trackHtml += track.artists[i].name + '</span>, ';
+                                                                characters += track.artists[i].name.length;
+                                                            }else{
+                                                                if(exceededLimit){
+                                                                    trackHtml += '<span artist-id="' + track.artists[i].id + '">';
+                                                                    trackHtml += track.artists[i].name.substring(0, 30-characters) + '</span>';
+                                                                }else{
+                                                                    trackHtml += '<span artist-id="' + track.artists[i].id + '">';
+                                                                    trackHtml += track.artists[i].name + '</span>';
+                                                                }
+                                                            }
+                                                        }
+
+                                                        trackHtml += '</span></td><td>' + minutes(track.duration_ms) + '</td></tr>';
                                                         albumHtml += trackHtml;
                                                     });
                                                     document.getElementById('album-tbody-' + album.id).innerHTML = albumHtml; // Actualizar el cuerpo de la tabla en el DOM

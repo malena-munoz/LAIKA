@@ -26,6 +26,7 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
         <link rel="stylesheet" href="assets/css/settings-style.css"/>
         <link rel="stylesheet" href="assets/css/shop-style.css"/>
         <link rel="stylesheet" href="assets/css/artist-style.css"/>
+        <link rel="stylesheet" href="assets/css/responsive.css"/>
     </head>
     <body>
         <div id="modal" class="modal">

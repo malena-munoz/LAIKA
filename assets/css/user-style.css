@@ -41,10 +41,11 @@
 
 .user-main-container img{
     width: 250px;
-    height: auto;
+    height: 250px;
     border: 5px solid var(--mid-lilac);
     background-color: var(--mid-lilac);
     border-radius: var(--radius);
+    object-fit: cover;
 }
 
 #user-name{
@@ -81,8 +82,24 @@
     width: 100%;
     color: var(--low-lilac);
     font-size: 20px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
 }
+
+#user-quote::-webkit-scrollbar {
+    width: 5px;
+}
+
+#user-quote::-webkit-scrollbar-track {
+    background-color: var(--slate-lilac);
+}
+
+#user-quote::-webkit-scrollbar-thumb {
+    background-color: var(--mid-lilac);
+    border-radius: 3px;
+}
+
 
 .user-note:before {
     content: "";
@@ -161,4 +178,5 @@
 
 .user-stats span{
     font-size: 20px;
+    color: var(--low-lilac);
 }

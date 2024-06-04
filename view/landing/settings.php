@@ -25,7 +25,7 @@
         <div class="form-inp settings-inp" id="password-inp">
             <h3>Contraseña</h3>
             <p>
-                Para cambiar la contraseña, solicita un código de recuperación haciendo click <span id="request-code" style="color: blue; cursor: pointer;">aquí</span>.
+                Para cambiar la contraseña, solicita un código de recuperación haciendo click <span id="request-code">aquí</span>.
                 Deberá entrar a su correo y revisar si el código de 4 dígitos le llegó. Deberá introducir dicho 
                 código con la contraseña nueva para hacer el cambio.
             </p>
@@ -56,7 +56,7 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'Cambios guardados',
-                    text: 'Los cambios que has hecho se han guardado con exito.'
+                    text: 'Los cambios que has hecho se han guardado con exito. CIerre e inicie sesión de nuevo para verlos.'
                 });
             } else {
                 Swal.fire({

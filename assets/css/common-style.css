@@ -271,6 +271,7 @@ input[type="range"]::-moz-range-thumb {
     padding-right: 20px;
     max-height: calc(100vh - 140px);
     width: 100%;
+    z-index: 6;
 }
 
 #main-divider .filler{

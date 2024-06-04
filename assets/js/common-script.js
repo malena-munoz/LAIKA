@@ -321,6 +321,10 @@ function openUser(){
             }
         }
     });
+    // Una vez termine todo, el scroll vuelve arriba del todo
+    document.getElementById('main-divider').scrollTo({
+        top: 0
+    })
     // Playlist o álbum agregado + índex
     wasAdded = false;
     tempIndex = -1;
@@ -338,6 +342,10 @@ function openPlaylistAlbum(){
             }
         }
     });
+    // Una vez termine todo, el scroll vuelve arriba del todo
+    document.getElementById('main-divider').scrollTo({
+        top: 0
+    })
 }
 
 function openArtist(){
@@ -352,8 +360,13 @@ function openArtist(){
             }
         }
     });
+    // Una vez termine todo, el scroll vuelve arriba del todo
+    document.getElementById('main-divider').scrollTo({
+        top: 0
+    })
 }
 
+// Muestra u oculta la vista
 function displaySearch(visible){
     // Elementos hijos
     const childrenArray = Array.from(document.getElementById('main-divider').children);
@@ -390,3 +403,25 @@ function displaySearch(visible){
         artist.remove();
     }
 }
+
+// Los controles se ocultan o no
+document.addEventListener('DOMContentLoaded', function() {
+    var img = document.querySelector('#img-current-song img');
+
+    if(img.getAttribute('src') === 'assets\\img\\default-song.png'){
+        document.getElementById('playing-song-buttons').style.display = 'none';
+    }else{
+        document.getElementById('playing-song-buttons').style.display = 'flex';
+    }
+});
+
+// Los controles se ocultan o no
+document.addEventListener('mouseover', function() {
+    var img = document.querySelector('#img-current-song img');
+
+    if(img.getAttribute('src') === 'assets\\img\\default-song.png'){
+        document.getElementById('playing-song-buttons').style.display = 'none';
+    }else{
+        document.getElementById('playing-song-buttons').style.display = 'flex';
+    }
+});

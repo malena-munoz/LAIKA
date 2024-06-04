@@ -112,3 +112,24 @@ input[type="file"]::file-selector-button:hover {
   width: fit-content;
   margin-bottom: -3px;
 }
+
+#save-changes{
+    background-color: var(--high-lilac);
+    width: 300px;
+    height: 40px;
+    margin-left: 25px;
+    font-size: 20px;
+    color: var(--low-lilac);
+    border-radius: var(--radius);
+    transition: all ease-in 0.2s;
+}
+
+#save-changes:hover{
+    background-color: var(--slate-lilac);
+    cursor: pointer;
+}
+
+#request-code{
+    color: var(--low-blue-slate-gray);
+    cursor: pointer;
+}

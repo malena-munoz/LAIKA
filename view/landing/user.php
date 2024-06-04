@@ -18,8 +18,7 @@
         <span id="user-name"><?php echo htmlspecialchars($nombreUsuario); ?></span>
     </div>
     <div class="user-note-container">
-        <section class="user-note">
-            <!-- <p>puta</p> -->
+        <section class="user-note personal-note">
             <textarea id="user-quote"><?php echo htmlspecialchars($quoteUsuario); ?></textarea>
         </section>
     </div>

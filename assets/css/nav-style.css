@@ -9,7 +9,7 @@
     flex-direction: column;
     z-index: 5;
 }
- 
+
 /* Contenedor flexible adaptable al alto de la pantalla */
 #vertical-container{
     flex-grow: 1;   

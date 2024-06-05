@@ -5,7 +5,8 @@ $username = 'myuser';
 $password = 'myuser';
 $database = 'ReproductorTFC';
 
-$idUsuario = $_SESSION['idUsuario'];
+// Verificar si la idUsuario está establecida en la sesión
+$idUsuario = isset($_SESSION['idUsuario']) ? $_SESSION['idUsuario'] : -1;
 
 // Conectar a la base de datos
 $conn = new mysqli($hostname, $username, $password, $database, $port);
@@ -29,7 +30,7 @@ $conn->close();
         <div id="scrollable-content">
             <section class="filler"></section>
             <ul id="playlist-list">
-                <?php if (isset($_SESSION['idUsuario'])): ?>
+                <?php if ($idUsuario != -1): ?>
                     <?php foreach ($playlists as $playlist): ?>
                         <li class="playlist-item" data-id="<?php echo $playlist['id_playlist']; ?>">
                             <?php

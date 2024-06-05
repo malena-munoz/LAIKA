@@ -210,7 +210,7 @@ function minutes(milliseconds) {
 
 function updatePlaylistName(id, name) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'update_playlist.php', true);
+    xhr.open('POST', './controller/update_playlist.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
         if (xhr.status !== 200) {
@@ -222,7 +222,7 @@ function updatePlaylistName(id, name) {
 
 function updatePlaylistImage(id, imageData) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'update_playlist.php', true);
+    xhr.open('POST', './controller/update_playlist.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
         if (xhr.status !== 200) {

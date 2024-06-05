@@ -68,12 +68,13 @@
 .playlist{
     width: 95px;
     height: 95px;
-    background-color: deeppink;
     border-radius: var(--radius);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: var(--separation)
+    margin-bottom: var(--separation);
+    background-size: cover;
+    background-position: center;
 }
 
 /* Último contenedor de la clase 'playlist', se le suprime el margen */

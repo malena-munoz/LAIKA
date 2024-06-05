@@ -28,6 +28,7 @@
     font-weight: bold;
     color: var(--low-lilac);
     margin-left: 10px;
+    background-color: transparent;
 }
 
 /* Datos del dueño de la playlist */

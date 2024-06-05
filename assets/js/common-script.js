@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if(window.getComputedStyle(option).backgroundColor === 'rgb(74, 64, 78)'){
                         option.style.backgroundColor = "#755B7D";
                         lists.style.display = 'flex';
+                        loadUserPlaylists(); // Load playlists when 'Agregar en...' is clicked
                     }else{
                         option.style.backgroundColor = "";
                         lists.style.display = 'none';
@@ -188,6 +189,43 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+});
+
+function loadUserPlaylists() {
+    fetch('./controller/get_user_playlists.php')
+        .then(response => response.json())
+        .then(playlists => {
+            var select = document.getElementById('lists');
+            select.innerHTML = ''; // Clear previous options
+
+            playlists.forEach(playlist => {
+                var option = document.createElement('option');
+                option.value = playlist.id_playlist;
+                option.textContent = playlist.nombre_playlist;
+                select.appendChild(option);
+            });
+        })
+        .catch(err => console.error('Error loading playlists:', err));
+}
+
+// Guardar canción en la playlist seleccionada
+document.getElementById('player-add-song').addEventListener('click', function() {
+    var select = document.getElementById('lists');
+    var idPlaylist = select.value;
+    var songTitle = document.getElementById('song-title').textContent;
+    var songArtists = document.getElementById('song-artists').textContent;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', './controller/add_song_to_playlist.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log('Canción agregada exitosamente.');
+        } else {
+            console.error('Error al agregar la canción a la playlist.');
+        }
+    };
+    xhr.send('id_playlist=' + encodeURIComponent(idPlaylist) + '&nombre_cancion=' + encodeURIComponent(songTitle) + '&artista_cancion=' + encodeURIComponent(songArtists));
 });
 
 

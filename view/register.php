@@ -17,18 +17,21 @@
 
                 <div id="instruccion-email" class="instruccion" style="display: none;">Email</div>
                 <div class="form-inp" id="email-inp" style="display: none;">
-                    <input type="email" autocomplete="off" id="email" name="email" placeholder="ejemplo@ejemplo.com">
+                    <input type="email" autocomplete="off" id="email" name="email" placeholder="ejemplo@ejemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                 </div>
+                <div id="email-error" class="error" style="display:none;"></div>
 
                 <div id="instruccion-clave" class="instruccion" style="display: none;">Contraseña</div>
                 <div class="form-inp" id="clave-inp" style="display: none;">
-                    <input type="password" autocomplete="off" id="clave" name="clave" placeholder="Contraseña">
+                    <input type="password" autocomplete="off" id="clave" name="clave" placeholder="Contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}">
                 </div>
+                <div id="clave-error" class="error" style="display:none;"></div>
                 
                 <div id="instruccion-claveRepetida" class="instruccion" style="display: none;">Repite la contraseña</div>
                 <div class="form-inp" id="claveRepetida-inp" style="display: none;">
                     <input type="password" autocomplete="off" id="claveRepetida" name="claveRepetida" placeholder="Repite la contraseña">
                 </div>
+                <div id="claveRepetida-error" class="error" style="display:none;"></div>
 
                 
                 <div id="welcome-user" class="instruccion" style="display: none;">Bienvenido (nombre de usuario)</div>

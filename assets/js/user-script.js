@@ -63,7 +63,7 @@ function getAccessToken(callback) {
 
 function getUserStats(callback) {
     $.ajax({
-        url: './view/get_user_statistics.php', // Reemplaza con la ruta correcta a tu script PHP
+        url: './view/get_user_statistics.php',
         type: 'GET',
         success: function(response) {
             callback(JSON.parse(response));
@@ -81,6 +81,9 @@ getUserStats(function(userStats) {
             document.getElementById("artist-stats-user").textContent = userStats.favoriteArtist;
             document.getElementById("song-stats-user").textContent = userStats.favoriteSong;
             document.getElementById("genre-stats-user").textContent = userStats.favoriteGenre;
+
+            // Mostrar el bloque HTML si se cumplen las condiciones
+            document.querySelector('.user-note.stats-note').style.display = "block";
         });
     }
 });

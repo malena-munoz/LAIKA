@@ -15,11 +15,11 @@
         <div class="form-inp settings-inp" id="profile-inp">
             <section>
                 <h3>Profile icon</h3>
-                <input type="file" id="profile" name="profile" accept=".png, .gif" placeholder="Foto de perfil...">
+                <input type="file" id="profile" name="profile" accept=".png, .gif, .jpg" placeholder="Foto de perfil...">
             </section>
             <section>
                 <h3>Fondo</h3>
-                <input type="file" id="banner" name="banner" accept=".png, .gif" placeholder="Foto de portada...">
+                <input type="file" id="banner" name="banner" accept=".png, .gif, .jpg" placeholder="Foto de portada...">
             </section>
         </div>
         <div class="form-inp settings-inp" id="password-inp">

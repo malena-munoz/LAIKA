@@ -31,41 +31,41 @@
     </div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    let previousTitle = '';
-    let previousArtists = '';
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let previousTitle = '';
+        let previousArtists = '';
 
-    function updateDatabase(title, artists) {
-        if (title !== previousTitle || artists !== previousArtists) {
-            previousTitle = title;
-            previousArtists = artists;
-            
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', './view/update_song_info.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    console.log(xhr.responseText);
-                }
-            };
-            xhr.send('title=' + encodeURIComponent(title) + '&artists=' + encodeURIComponent(artists));
-        }
-    }
-
-    const songTitleElement = document.getElementById('song-title');
-    const songArtistsElement = document.getElementById('song-artists');
-
-    const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-            if (mutation.target === songTitleElement || mutation.target === songArtistsElement) {
-                const title = songTitleElement.textContent.trim();
-                const artists = songArtistsElement.textContent.trim();
-                updateDatabase(title, artists);
+        function updateDatabase(title, artists) {
+            if (title !== previousTitle || artists !== previousArtists) {
+                previousTitle = title;
+                previousArtists = artists;
+                
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', './view/update_song_info.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        console.log(xhr.responseText);
+                    }
+                };
+                xhr.send('title=' + encodeURIComponent(title) + '&artists=' + encodeURIComponent(artists));
             }
-        });
-    });
+        }
 
-    observer.observe(songTitleElement, { childList: true });
-    observer.observe(songArtistsElement, { childList: true });
-});
+        const songTitleElement = document.getElementById('song-title');
+        const songArtistsElement = document.getElementById('song-artists');
+
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.target === songTitleElement || mutation.target === songArtistsElement) {
+                    const title = songTitleElement.textContent.trim();
+                    const artists = songArtistsElement.textContent.trim();
+                    updateDatabase(title, artists);
+                }
+            });
+        });
+
+        observer.observe(songTitleElement, { childList: true });
+        observer.observe(songArtistsElement, { childList: true });
+    });
 </script>

@@ -27,12 +27,14 @@ $playlist = [
 ];
 
 // Obtener los detalles de la playlist
-$sql = "SELECT nombre_playlist, foto_playlist FROM usuario_playlists WHERE id_usuario = '$idUsuario' AND id_playlist = '$idPlaylist'";
+$sql = "SELECT nombre_playlist, foto_playlist, editable, link_playlist FROM usuario_playlists WHERE id_usuario = '$idUsuario' AND id_playlist = '$idPlaylist'";
 $result = $conn->query($sql);
 if ($result && $result->num_rows > 0) {
     $playlistData = $result->fetch_assoc();
     $playlist['name'] = $playlistData['nombre_playlist'] ? $playlistData['nombre_playlist'] : $playlist['name'];
     $playlist['image'] = $playlistData['foto_playlist'] ? 'data:image/png;base64,' . base64_encode($playlistData['foto_playlist']) : $playlist['image'];
+    $playlist['editable'] = $playlistData['editable'];
+    $playlist['link_playlist'] = $playlistData['link_playlist'];
 }
 
 // Obtener el nombre del propietario de la playlist

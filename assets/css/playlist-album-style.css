@@ -71,7 +71,7 @@
     cursor: pointer;
 }
 
-#playlist-img{
+#playlist-img, #playlist-img-container{
     width: 300px;
     height: 300px;
     object-fit: cover;
@@ -82,6 +82,16 @@
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 }
+
+#playlist-img-container{
+    transition: all ease-in 0.2s;
+}
+
+#playlist-img-container:hover{
+    cursor: pointer;
+    box-shadow: inset 0 0 30px rgba(36, 42, 41, 0.6);
+}
+
 
 #song-list{
     margin-top: 10px;

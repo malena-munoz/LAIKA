@@ -22,7 +22,7 @@ $(document).ready(function() {
             type: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(clientId2 + ':' + clientSecret2)
+                'Authorization': 'Basic ' + btoa(clientId3 + ':' + clientSecret3)
             },
             data: 'grant_type=client_credentials',
             success: function(response) {
@@ -90,7 +90,7 @@ $(document).ready(function() {
         }
     
         let allAlbums = [];
-    
+        
         // Función para mezclar un array
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -99,6 +99,7 @@ $(document).ready(function() {
             }
         }
     
+        document.querySelectorAll('h3')[12].textContent = "Álbumes de tus artistas favoritos";
         // Función para mostrar los álbumes
         function displayAlbums(albums) {
             albums.forEach(function(album) {
@@ -248,7 +249,7 @@ $(document).ready(function() {
         let trackCount = 0;
         let sectionCount = 0;
         let $currentSection;
-    
+        document.querySelectorAll('h3')[15].textContent = "Según tus artistas favoritos...";
         topArtists.forEach(function(artistName) {
             getArtistId(accessToken, artistName, function(artistId) {
                 if (artistId) {
@@ -258,7 +259,7 @@ $(document).ready(function() {
                         headers: {
                             'Authorization': 'Bearer ' + accessToken
                         },
-                        success: function(data) {
+                        success: function(data) {    
                             var tracks = data.tracks;
                             tracks.forEach(function(track) {
                                 if (trackCount >= 100) return;  // Limita las canciones a 100
@@ -370,12 +371,11 @@ $(document).ready(function() {
             printGeneralViral50(accessToken);
             return;
         }
-    
         var sectionCount = 0;
         var trackCount = 0;
         var $currentSection = $('<section id="viral-50-section-' + sectionCount + '"></section>');
+        document.querySelectorAll('h3')[16].textContent = "Según tus gustos musicales...";
         $('#viral-50-songs').append($currentSection);
-    
         topGenres.forEach(function(genre) {
             $.ajax({
                 url: 'https://api.spotify.com/v1/search?q=genre:' + genre + '&type=track',
@@ -446,6 +446,7 @@ $(document).ready(function() {
                 var $currentSection;
 
                 tracks.forEach(function(track, index) {
+
                     // Crear una nueva sección cada 25 tracks
                     if (index % 25 === 0) {
                         sectionCount++;
@@ -521,7 +522,7 @@ $(document).ready(function() {
     // Función para imprimir los artistas
     function printArtists(accessToken, topArtists) {
         var artistIds = new Set();
-
+        document.querySelectorAll('h3')[13].textContent = "¿Y tus artistas más escuchados?";
         topArtists.forEach(function(artist) {
             $.ajax({
                 url: 'https://api.spotify.com/v1/search',
@@ -659,7 +660,7 @@ $(document).ready(function() {
 
                 // Comprobar si la imagen se ha cargado
                 if (randomArtist.images.length === 0) {
-                    bigCardDiv.style.backgroundColor = 'black';
+                    img.src = '../assets/img/default-user.png';
                 }
             },
             error: function(err) {

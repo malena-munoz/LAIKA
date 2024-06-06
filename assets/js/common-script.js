@@ -463,3 +463,24 @@ document.addEventListener('mouseover', function() {
         document.getElementById('playing-song-buttons').style.display = 'flex';
     }
 });
+
+function closeFooterModal(){
+    document.getElementById('footer-modal').style.display = 'none';
+}
+
+function openFooterModal(footer){
+    var footerTxt = footer.textContent;
+    document.querySelector('#content h3').textContent = footerTxt;
+    console.log(document.getElementById('scrollable-modal').scrollTop)
+    if(footerTxt === 'Sobre nosotros'){
+        document.getElementById('policy').style.display = 'none';
+        document.getElementById('about').style.display = 'flex';
+        document.querySelector('.accept').textContent = 'Entiendo';
+    }else{
+        document.getElementById('policy').style.display = 'flex';
+        document.getElementById('about').style.display = 'none';
+        document.querySelector('.accept').textContent = 'Acepto las condiciones';
+    }
+    document.getElementById('footer-modal').style.display = 'block';
+    document.getElementById('scrollable-modal').scrollTop = 0;
+}

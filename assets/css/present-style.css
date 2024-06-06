@@ -2,6 +2,11 @@ body::-webkit-scrollbar{
     width: 0;
 }
 
+#presentation{
+    z-index: 50;
+    background: linear-gradient(45deg, var(--high-lilac-slate-gray) 50%, var(--slate-lavender)) fixed;
+}
+
 #main-options{
     position: absolute;
     top: var(--separation);

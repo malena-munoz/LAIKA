@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-    <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>LAIKA Song Player</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0"/>
-        <link rel="stylesheet" href="assets/css/common-style.css"/>
-        <link rel="stylesheet" href="assets/css/present-style.css"/>
-    </head>
-    <body>
-        <?php $activeLink = 'presentation';?>
-        <section id="main-options">
+<div id="presentation">
+    <section id="main-options">
             <a href="">Register</a>
             <button id="log-in-btn">Log In</button>
         </section>
@@ -89,4 +77,4 @@
         <div class="full-screen" style="background-color: orange;"></div>
         <div class="full-screen" style="background-color: green;"></div>
     </body>
-</html>
+</div>

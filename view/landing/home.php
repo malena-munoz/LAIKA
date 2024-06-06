@@ -72,9 +72,9 @@
         </section>
     </section>
     <section class="contact">
-        <a href="#">Inicio</a>
+        <a href="#" onclick="goHome();">Inicio</a>
         <a href="#">Página principal</a>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Política de privacidad</a>
+        <a href="#" onclick="openFooterModal(this);">Sobre nosotros</a>
+        <a href="#" onclick="openFooterModal(this);">Política de privacidad</a>
     </section>
 </footer>

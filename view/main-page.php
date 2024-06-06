@@ -13,7 +13,8 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Welcome</title>
+        <link rel="shortcut icon" type="image/x-icon" href="assets/img/laika-logo.ico">
+        <title>LAIKA Song Player</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0"/>
         <link rel="stylesheet" href="assets/css/common-style.css"/>
         <link rel="stylesheet" href="assets/css/nav-style.css"/>
@@ -27,6 +28,8 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
         <link rel="stylesheet" href="assets/css/shop-style.css"/>
         <link rel="stylesheet" href="assets/css/artist-style.css"/>
         <link rel="stylesheet" href="assets/css/responsive.css"/>
+        <link rel="stylesheet" href="assets/css/present-style.css"/>
+        <link rel="stylesheet" href="assets/css/footer-style.css"/>
     </head>
     <body>
         <div id="modal" class="modal">
@@ -42,6 +45,8 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
                 </div>
             </div>
         </div>
+        <?php include 'policy-about.php';?>
+        <!-- <php include 'presentation.php';?> -->
         <!-- Canción en reproducción -->
         <audio id="playing-song-audio" ontimeupdate="refreshProgressBar(), changeMaxValueSongProgress()">
             <source type="audio/mp3">

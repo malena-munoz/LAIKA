@@ -42,6 +42,14 @@
     }
 }
 
+@media screen and (max-width: 1530px) {
+
+    #playlist-info section{
+        width: calc(100% - 300px);
+    }
+
+}
+
 
 @media screen and (max-width: 1180px) {
 
@@ -89,7 +97,7 @@
 
 @media screen and (max-width: 900px){
 
-    #playlist-img{
+    #playlist-img, #playlist-img-container{
         display: none;
     }
 

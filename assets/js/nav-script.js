@@ -52,8 +52,8 @@ async function setupPlaylistUser(playlistCard) {
             html += '<span id="owner-name">' + playlist.owner + '</span></div><div id="playlist-controls">';
             html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\'); addPlaylist(); playAtIndex(0);">play_arrow</span>';
             html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="shuffleBegin(\'playlist\');">shuffle</span>';
-            html += '<span class="material-symbols-rounded" id="add-playlist" onclick="changePlaylistControlStyle(\'add-playlist\');">add</span>';
-            html += '</div></section><div id="playlist-img-container" style="background-image: url(\'' + playlistImage + '\');width: 300px;height: 300px;object-fit: cover;object-position: top;border-left: 5px solid var(--mid-lilac);border-top: 5px solid var(--mid-lilac);border-right: 5px solid var(--mid-lilac);border-top-right-radius: 5px;border-top-left-radius: 5px;background-size: cover;background-repeat: no-repeat;background-position: center center;"><input type="file" id="playlist-img-upload" accept=".png, .gif" style="display: none;"></div></div>';
+            html += '<span class="material-symbols-rounded" id="add-playlist" onclick="changePlaylistControlStyle(\'add-playlist\');">delete_forever</span>';
+            html += '</div></section><div id="playlist-img-container" style="background-image: url(\'' + playlistImage + '\');width: 300px;height: 300px;object-fit: cover;object-position: top;border-left: 5px solid var(--mid-lilac);border-top: 5px solid var(--mid-lilac);border-right: 5px solid var(--mid-lilac);border-top-right-radius: 5px;border-top-left-radius: 5px;background-size: cover;background-repeat: no-repeat;background-position: center center;"><input type="file" id="playlist-img-upload" accept=".png" style="display: none;"></div></div>';
             html += '<div id="song-list"><table class="playlist-table"><thead><tr>';
             html += '<th>#</th><th>Canción</th><th>Álbum</th><th><span class="material-symbols-rounded">timer</span></th></tr></thead>';
             html += '<tbody id="playlist-tbody"></tbody></table></div></div>';
@@ -117,6 +117,10 @@ async function setupPlaylistUser(playlistCard) {
                 if (e.key === 'Enter') {
                     updatePlaylistName(id, this.value);
                 }
+            });
+
+            document.getElementById('add-playlist').addEventListener('click', function(e) {
+                deletePlaylist(id);
             });
 
             var imgContainer = document.getElementById('playlist-img-container');
@@ -218,6 +222,7 @@ function updatePlaylistName(id, name) {
         }
     };
     xhr.send('id=' + id + '&name=' + encodeURIComponent(name));
+    alert("Nombre de la playlist cambiado exitosamente.");
 }
 
 function updatePlaylistImage(id, imageData) {
@@ -230,4 +235,20 @@ function updatePlaylistImage(id, imageData) {
         }
     };
     xhr.send('id=' + id + '&image=' + encodeURIComponent(imageData));
+    alert("Imagen de la playlist cargada exitosamente.");
+    location.reload(true);
+}
+
+function deletePlaylist(id) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', './controller/delete_playlist.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+        if (xhr.status !== 200) {
+            console.error('Error al borrar la playlist.');
+        }
+    };
+    xhr.send('id=' + id);
+    alert("Playlist borrada exitosamente.");
+    location.reload(true);
 }

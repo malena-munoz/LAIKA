@@ -110,3 +110,12 @@
     cursor: pointer;
     background-image: url(../img/default-add-darker.png);
 }
+
+.playlist{
+    transition: all ease-in 0.2s;
+}
+
+.playlist:hover{
+    cursor: pointer;
+    box-shadow: inset 0 0 30px rgba(36, 42, 41, 0.6);
+}

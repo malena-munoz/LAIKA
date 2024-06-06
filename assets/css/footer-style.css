@@ -1,0 +1,118 @@
+#content{
+    display: grid;
+    place-items: center;
+    width: fit-content;
+    padding: 25px;
+    padding-bottom: 30px;
+    background: linear-gradient(45deg, var(--high-lilac-slate-gray) 50%, var(--slate-lavender)) fixed;
+    box-shadow: 0px 15px 60px var(--mid-lilac);
+    outline: 1px solid var(--mid-lilac);
+    border-radius: 10px;
+    gap: 20px;
+}
+
+#scrollable-modal{
+    width: 700px;
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    border-top: 3px solid var(--high-lilac);
+    border-bottom: 3px solid var(--high-lilac);
+    border-left: 3px solid var(--high-lilac);
+    border-radius: var(--radius);
+}
+
+#policy, #about{
+    display: flex;
+    flex-direction: column;
+}
+
+#scrollable-modal p{
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+#scrollable-modal::-webkit-scrollbar {
+    width: 3px;
+}
+
+#scrollable-modal::-webkit-scrollbar-track {
+    background-color: var(--high-lilac);
+}
+
+#scrollable-modal::-webkit-scrollbar-thumb {
+    background-color: var(--mid-lilac);
+    border-radius: 2px;
+}
+
+.to-be-scrolled{
+    width: 100%;
+    height: inherit;
+    color: var(--low-lilac);
+    padding: 0 20px;
+    text-align: justify;
+}
+
+.to-be-scrolled .filler:last-child{
+    display: fixed;
+    bottom: 0;
+}
+
+.to-be-scrolled .filler:first-child{
+    display: fixed;
+    top: 0;
+}
+
+.accept{
+    padding: 10px;
+    font-size: 20px;
+    border-radius: var(--radius);
+    color: var(--low-lilac);
+    background-color: var(--high-lilac);
+    transition: all ease-in 0.2s;
+}
+
+.accept:hover{
+    background-color: var(--slate-lilac);
+    cursor: pointer;
+}
+
+.title{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.subtitle-date{
+    margin-top: 5px;
+}
+
+.left-title{
+    color: var(--mid-lilac);
+}
+
+.update-date{
+    color: var(--low-blue-slate-gray);
+    text-decoration: underline;
+}
+
+.linkedin{
+    width: 25px;
+}
+
+.creator{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 10px;
+    border-radius: var(--radius);
+    transition: all ease-in 0.2s;
+    padding-right: 10px;
+}
+
+.creator:hover{
+    background-color: var(--slate-lilac);
+}
+
+.creator > *{
+    height: fit-content;
+}

@@ -155,7 +155,7 @@ input[type="range"]::-moz-range-thumb {
 
 .dropdown-lists{
     position: absolute;
-    bottom: 155.8px;
+    bottom: 112px;
     right: 170px;
     padding: var(--nav-padding-y) var(--nav-padding-x);
     background-color: var(--high-lilac-slate-gray);

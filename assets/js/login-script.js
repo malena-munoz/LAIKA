@@ -19,6 +19,7 @@ document.getElementById("login-submit-button").addEventListener("click", functio
                     document.getElementById("login-submit-button").style.display = "none";
                     document.getElementById("not-logged").style.display = "none";
                     document.getElementById("close-modal").style.display = "none";
+                    document.getElementById('presentation').style.display = 'none';
 
                     // Mostrar mensaje de bienvenida al usuario
                     document.getElementById("welcome-user-logged").textContent = "¡Bienvenido/a de nuevo, " + response.nombreUsuario + "!";

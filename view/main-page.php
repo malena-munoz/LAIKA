@@ -46,7 +46,6 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
             </div>
         </div>
         <?php include 'policy-about.php';?>
-        <!-- <php include 'presentation.php';?> -->
         <!-- Canción en reproducción -->
         <audio id="playing-song-audio" ontimeupdate="refreshProgressBar(), changeMaxValueSongProgress()">
             <source type="audio/mp3">
@@ -67,6 +66,7 @@ if (isset($_SESSION['idUsuario']) && isset($_SESSION['nombreUsuario'])) {
         </div>
         <!-- Reproductor -->
         <?php include 'player.php';?>
+        <?php include 'presentation.php';?>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://widget.deezer.com/widget/dynamic/deezer-widget-loader.js" defer></script>

@@ -228,6 +228,7 @@ document.getElementById('player-add-song').addEventListener('click', function() 
         }
     };
     xhr.send('id_playlist=' + encodeURIComponent(idPlaylist) + '&nombre_cancion=' + encodeURIComponent(songTitle) + '&artista_cancion=' + encodeURIComponent(songArtists));
+    alert("Canción agregada exitosamente a '" + select.textContent + "'");
 });
 
 
@@ -465,3 +466,24 @@ document.addEventListener('mouseover', function() {
         document.getElementById('playing-song-buttons').style.display = 'flex';
     }
 });
+
+function openFooterModal(footer){
+    var footerTxt = footer.textContent;
+    document.querySelector('#content h3').textContent = footerTxt;
+    console.log(document.getElementById('scrollable-modal').scrollTop)
+    if(footerTxt === 'Sobre nosotros'){
+        document.getElementById('policy').style.display = 'none';
+        document.getElementById('about').style.display = 'flex';
+        document.querySelector('.accept').textContent = 'Entiendo';
+    }else{
+        document.getElementById('policy').style.display = 'flex';
+        document.getElementById('about').style.display = 'none';
+        document.querySelector('.accept').textContent = 'Acepto las condiciones';
+    }
+    document.getElementById('footer-modal').style.display = 'block';
+    document.getElementById('scrollable-modal').scrollTop = 0;
+}
+
+function closeFooterModal(){
+    document.getElementById('footer-modal').style.display = 'none';
+}

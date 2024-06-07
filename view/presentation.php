@@ -1,17 +1,26 @@
-<div id="presentation">
-    <section id="main-options">
-            <a href="">Register</a>
-            <button id="log-in-btn">Log In</button>
+<?php
+$style = '';
+
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
+    $style = 'none';
+} else {
+    $style = 'block';
+}
+
+?>
+<div id="presentation" style="display: <?php echo $style; ?>">
+        <section id="presentation-login">
+            <?php include 'components/header-buttons.php';?>
         </section>
         <div class="full-screen">
             <div class="present-container">
-                <img src="./assets/img/laika-big.png" alt="Laika" id="laika">
-                <section class="info-card">
+                <img src="./assets/img/laika-logo.png" alt="Laika" id="laika">
+                <section class="info-card main">
                     <span id="name-app">LAIKA</span>
-                    <span class="subtitle">The music player that will accompany you from now on.</span>
+                    <span class="subtitle">El reproductor que te acompañará a partir de hoy.</span>
                     <p>
-                        LAIKA is a song player (web and desktop) that allows users to listen and<br>discover new songs, artists and albums.
-                        With its minimalist design, immerse<br>yourself in its additional functions, such as purchasing products and tracking concerts.
+                        LAIKA es un reproductor de música moderno a disposición del usuario, para<br>recomendarle contenido según a sus
+                        reproducciones y, descubrir nuevas<br>canciones, géneros u artistas.
                     </p>
                 </section>
             </div>
@@ -25,33 +34,32 @@
                     <img src="./assets/img/rocks.png" alt="Rocks">
                     <img src="./assets/img/rocks.png" alt="Rocks">
                 </section>
-                <div class="letter-container">
-                    <section class="letter">L</section>
-                    <section class="meaning">ightweight</section>
-                    <img src="./assets/img/arrow1.png" alt="Arrow" style="left: 56vw; top: 121vh;">
-                    <span style="left: 69.2vw; top: 130.5vh;">Fast like light.</span>
-                </div>
-                <div class="letter-container">
-                    <section class="letter">A</section>
-                    <section class="meaning">ccesible</section>
-                    <img src="./assets/img/arrow2.png" alt="Arrow" style="left: 32.5vw; top: 128vh;">
-                    <span style="left: 15vw; top: 124vh;">Use it on the web... or not.</span>
-                </div>
-                <div class="letter-container">
-                    <section class="letter">I</section>
-                    <section class="meaning">ntuitive</section>
-                    <img src="./assets/img/arrow3.png" alt="Arrow" style="left: 54.5vw; top: 147.5vh;">
-                    <span style="left: 68vw; top: 150vh;">You won't need to google<br>to learn how to use it.</span>
-                </div>
-                <div class="letter-container">
-                    <section class="letter">K</section>
-                    <section class="meaning">aleidoscopic</section>
-                    <img src="./assets/img/arrow4.png" alt="Arrow" style="left: 33vw; top: 162vh; width: 200px;">
-                    <span style="left: 15.2vw; top: 162.5vh; text-align: right;">Varied music in a visually<br>attractive environment.</span>
-                </div>
-                <div class="letter-container">
-                    <section class="letter">A</section>
-                    <section class="meaning">pp</section>
+                <h3>LAIKA fue desarrollado con los lenguajes y tecnologías...</h3>
+                <div class="tech">
+                    <section>
+                        <img src="assets/img/php.png" alt="">
+                        <h2>PHP</h2>
+                    </section>
+                    <section>
+                        <img src="assets/img/css.png" alt="">
+                        <h2>CSS</h2>
+                    </section>
+                    <section>
+                        <img src="assets/img/js.png" alt="">
+                        <h2>JavaScript</h2>
+                    </section>
+                    <section>
+                        <img src="assets/img/jquery.png" alt="">
+                        <h2>JQuery</h2>
+                    </section>
+                    <section>
+                        <img src="assets/img/spotify.png" alt="">
+                        <h2>Spotify API</h2>
+                    </section>
+                    <section>
+                        <img src="assets/img/beekeeper.png" alt="">
+                        <h2>Beekeeper Stu.</h2>
+                    </section>
                 </div>
                 <section class="marquee">
                     <img src="./assets/img/rocks.png" alt="Rocks">
@@ -63,18 +71,111 @@
             </div>
         </div>
         <div class="full-screen">
-            <!-- <div id="rocket"></div> -->
-            <img src="./assets/img/rocket.png" alt="Rocket" style="width: 300px;">
-            <section class="info-card">
-                <span class="title">Lightweight</span>
-                <p>
-                    LAIKA was designed as minimalist as a white room. It offers a simple design and non-repeated code to make a light song player.
-                </p>
-                <img src="./assets/img/player.png" alt="Player" style="width: 1000px;">
+            <section class="diagram">
+                <span class="subtitle bigger">¿Qué puedes hacer con LAIKA?</span>
+                <section class="info-card">
+                    <section class="v-line"></section>
+                    <section class="info-functionalities">
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Escuchar toda la música que quieras.</h2>
+                        </div>
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Obtener recomendaciones en base a tus reproducciones.</h2>
+                        </div>
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Personalizar tu perfil y mostrar tus "favoritos".</h2>
+                        </div>
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Guardar playlists o álbumes públicos.</h2>
+                        </div>
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Crear tus propias playlists y personalizarlas.</h2>
+                        </div>
+                    </section>
+                </section>
             </section>
         </div>
-        <div class="full-screen" style="background-color: blue;"></div>
-        <div class="full-screen" style="background-color: orange;"></div>
-        <div class="full-screen" style="background-color: green;"></div>
-    </body>
+        <div class="full-screen">
+            <section class="diagram">
+                <span class="subtitle bigger">Dificultades durante el proceso...</span>
+                <section class="info-card">
+                    <section class="v-line"></section>
+                    <section class="info-functionalities">
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Comprender el funcionamiento de la API de Spotify.</h2>
+                        </div>
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Crear el argoritmo de recomendaciones al usuario.</h2>
+                        </div>
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Diseñar la interfaz de usuario más responsiva posible sin 'media screen'.</h2>
+                        </div>
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Funcionamiento del reproductor: play/pause, mezcla, etc.</h2>
+                        </div>
+                        <div class="functionality">
+                            <section class="h-line"></section>
+                            <h2>Maniputación de la base de datos.</h2>
+                        </div>
+                    </section>
+                </section>
+            </section>
+        </div>
+        <div class="full-screen">
+            <div id="circle-orbit-container">
+                <div id="inner-orbit">
+                    <div class="inner-orbit-cirlces"></div>
+                </div>
+                <div id="middle-orbit">
+                    <div class="middle-orbit-cirlces"></div>
+                </div>
+                <div id="outer-orbit">
+                    <div class="outer-orbit-cirlces"></div>
+                </div>
+            </div>
+            <div class="present-container available">
+                <span class="subtitle bigger" style="border-bottom:0">Disponible en...</span>
+                <div class="tech" style="flex-wrap:nowrap;width: fit-content;">
+                    <section>
+                        <img src="assets/img/web.png" alt="">
+                        <h2>Web</h2>
+                    </section>
+                    <section style="width: fit-content">
+                        <section style="flex-direction:row;width: fit-content">
+                            <img src="assets/img/pc.png" alt="">
+                            <img src="assets/img/nativefier.png" alt="" style="height: 130px;width: auto;">
+                        </section>
+                        <h2>Escritorio mediante 'Nativefier'</h2>
+                    </section>
+                </div>
+                <span class="subtitle">¿Quieres tener la versión de escritorio? 
+                    Haz click <a href="https://drive.google.com/file/d/1vnZtPt_VBKhz8f9tGCI5CGGjTmIt6QpU/view?usp=sharing" target="_blank" >aquí</a> para descargarlo.</span>
+            </div>
+        </div>
+        <div class="full-screen" style="flex-direction:column">
+            <img src="assets/img/moon.png" alt="Moon" style="width: 100%; padding-top:300px">
+            <img src="./assets/img/laika-big.png" alt="Laika" id="laika" style="width:280px; margin-top:-700px">
+        </div>
+        <div class="stars">
+            <?php
+                $num_stars = 500; // Número de estrellas
+
+                for ($i = 0; $i < $num_stars; $i++) {
+                    $x = rand(0, 100);
+                    $y = rand(0, 100);
+                    $size = rand(1, 3);
+                    echo "<div class='star' style='left: $x%; top: $y%; width: ${size}px; height: ${size}px;'></div>";
+                }
+            ?>
+        </div>
 </div>
+

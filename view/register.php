@@ -13,7 +13,7 @@
                 <div class="form-inp" id="nombre-inp">
                     <input type="text" autocomplete="off" id="nombre" name="nombre" placeholder="Nombre de usuario">
                 </div>
-                <div id="nombre-error"></div>
+                <div id="nombre-error" style="display: none"></div>
 
                 <div id="instruccion-email" class="instruccion" style="display: none;">Email</div>
                 <div class="form-inp" id="email-inp" style="display: none;">

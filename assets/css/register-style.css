@@ -1,7 +1,7 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 11;
+    z-index: 35;
     left: 0;
     top: 0;
     width: 100%;
@@ -229,4 +229,9 @@
     font-size: 20px; 
     color: white; 
     outline: none; 
+}
+
+#nombre-error, #email-error, #clave-error, #claveRepetida-error{
+    margin-top: 10px;
+    color: #eba928;
 }

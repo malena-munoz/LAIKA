@@ -47,12 +47,12 @@ async function setupPlaylistUser(playlistCard) {
             var playlistImage = playlist.image ? playlist.image : './assets/img/default-song.png';
 
             var html = '<div class="main-content" id="playlist-display" style="display: flex">' +
-                '<div id="playlist-info" playlist-id="' + id +'"><section>' +
+                '<div id="playlist-info" playlist-id="' + id +'" playlist-type="id_playlist"><section>' +
                 '<input id="playlist-name" type="text" value="' + playlistName + '" /><div id="playlist-owner">';
             html += '<span id="owner-name">' + playlist.owner + '</span></div><div id="playlist-controls">';
             html += '<span class="material-symbols-rounded" id="play-playlist" onclick="changePlaylistControlStyle(\'play-playlist\'); addPlaylist(); playAtIndex(0);">play_arrow</span>';
             html += '<span class="material-symbols-rounded" id="shuffle-playlist" onclick="shuffleBegin(\'playlist\');">shuffle</span>';
-            html += '<span class="material-symbols-rounded" id="add-playlist" onclick="changePlaylistControlStyle(\'add-playlist\');">delete_forever</span>';
+            html += '<span class="material-symbols-rounded" id="delete-playlist" onclick="changePlaylistControlStyle(\'add-playlist\');">delete_forever</span>';
             html += '</div></section><div id="playlist-img-container" style="background-image: url(\'' + playlistImage + '\');width: 300px;height: 300px;object-fit: cover;object-position: top;border-left: 5px solid var(--mid-lilac);border-top: 5px solid var(--mid-lilac);border-right: 5px solid var(--mid-lilac);border-top-right-radius: 5px;border-top-left-radius: 5px;background-size: cover;background-repeat: no-repeat;background-position: center center;"><input type="file" id="playlist-img-upload" accept=".png" style="display: none;"></div></div>';
             html += '<div id="song-list"><table class="playlist-table"><thead><tr>';
             html += '<th>#</th><th>Canción</th><th>Álbum</th><th><span class="material-symbols-rounded">timer</span></th></tr></thead>';
@@ -66,6 +66,7 @@ async function setupPlaylistUser(playlistCard) {
             tracks.forEach(async track => {
                 try {
                     var songData = await fetchSpotifyTrack(track.nombre_cancion, track.artista_cancion);
+                    console.log(songData);
                     var tr = '<tr ondblclick="playSongPlaylist(this);" onmouseover="hoverRowIn(this);" onmouseout="hoverRowOut(this);">';
                     tr += '<td song-id="' + songData.id + '" preview-url="' + songData.preview_url + '">' + (index++) + '</td>';
                     tr += '<td>' + '<img class="song-playlist-img" src="' + songData.image + '" alt="Playlist-Img"/>' +
@@ -89,10 +90,20 @@ async function setupPlaylistUser(playlistCard) {
                         }
                     });
                     tr += '</span></section></td>';
-                    tr += '<td><span onclick="setupAlbum(this);" class="artist-redirect" id="' + songData.album.id + '">' + songData.album + '</span></td>';
-                    tr += '<td>' + minutes(songData.duration_ms) + '</td>';
-                    tr += '</tr>';
-                    $('#playlist-tbody').append(tr);
+                    returnAccessToken()
+                        .then(function(accessToken) {
+                            return getTrack(songData.id, accessToken);
+                        })
+                        .then(function(track) {
+                            console.log(track);
+                            tr += '<td><span onclick="setupAlbum(this);" class="artist-redirect" id="' + track.album.id + '">' + track.album.name + '</span></td>';
+                            tr += '<td>' + minutes(songData.duration_ms) + '</td>';
+                            tr += '</tr>';
+                            $('#playlist-tbody').append(tr);
+                        })
+                        .catch(function(err) {
+                            console.error('Error:', err);
+                        });
                 } catch (error) {
                     console.error('Error fetching Spotify track:', error);
                 }
@@ -119,8 +130,8 @@ async function setupPlaylistUser(playlistCard) {
                 }
             });
 
-            document.getElementById('add-playlist').addEventListener('click', function(e) {
-                deletePlaylist(id);
+            document.getElementById('delete-playlist').addEventListener('click', function(e) {
+                deletePlaylist(id, document.getElementById('playlist-info').getAttribute('playlist-type'));
             });
 
             var imgContainer = document.getElementById('playlist-img-container');
@@ -223,6 +234,7 @@ function updatePlaylistName(id, name) {
     };
     xhr.send('id=' + id + '&name=' + encodeURIComponent(name));
     alert("Nombre de la playlist cambiado exitosamente.");
+    location.reload(true);
 }
 
 function updatePlaylistImage(id, imageData) {
@@ -239,16 +251,17 @@ function updatePlaylistImage(id, imageData) {
     location.reload(true);
 }
 
-function deletePlaylist(id) {
+function deletePlaylist(id, type) {
+    var typePHP = (type === 'id_playlist') ? 'playlist' : 'spotify';
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', './controller/delete_playlist.php', true);
+    xhr.open('POST', './controller/delete_' + typePHP + '.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
         if (xhr.status !== 200) {
             console.error('Error al borrar la playlist.');
         }
     };
-    xhr.send('id=' + id);
+    xhr.send('id=' + id + '&type=' + type);
     alert("Playlist borrada exitosamente.");
     location.reload(true);
 }

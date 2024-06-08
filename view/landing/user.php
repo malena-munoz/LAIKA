@@ -38,9 +38,9 @@
             </div>
         </section>
     </div>
-    <h3>Playlists</h3>
+    <h3 style="margin-bottom: -15px;">Playlists</h3>
     <div id="user-playlist-container" class="scroll-container">
-        <button id="albums-scroll-left" class="scroll-left">
+        <button id="albums-scroll-left" class="scroll-left" onclick="scrollLeft();">
             <span class="material-symbols-rounded">chevron_left</span>
         </button>
         <div id="main-user-playlists">
@@ -95,7 +95,7 @@
                 <div class="card__skeleton card__artist"></div>
             </div>
         </div>
-        <button id="albums-scroll-right" class="scroll-right">
+        <button id="albums-scroll-right" class="scroll-right" onclick="scrollRight();">
             <span class="material-symbols-rounded">chevron_right</span>
         </button>
     </div>
@@ -111,15 +111,77 @@
                     var container = document.getElementById('main-user-playlists');
                     
                     playlists.forEach(playlist => {
-                        var html = '<a href="#" class="card-a" data-id="' + playlist.id_playlist +'" onclick="setupPlaylistUserProfile(this);"><div class="card">';
-                        if (playlist.foto_playlist) {
-                            html += '<img src="' + playlist.foto_playlist + '">';
-                        } else {
-                            html += '<img src="./assets/img/default-song.png">';
+                        var html = '<a href="#" class="card-a" data-id="' + playlist.id_playlist;
+                        if(playlist.editable == 0){
+                            document.querySelectorAll('.spotify-playlist-item').forEach(item => {
+                                var uri = item.getAttribute('data-uri');
+                                if(uri === playlist.link_playlist){
+                                    var link = uri.split(':');
+                                    if(link[1]==='album'){
+                                        html +='" id="' + uri.split(':')[2] +'" onclick="setupAlbum(this);"><div class="card">';
+                                        returnAccessToken()
+                                        .then(function(accessToken) {
+                                            return getAlbum(link[2], accessToken);
+                                        })
+                                        .then(function(album) {
+                                            html += '<img src="' + album.images[0].url + '">';
+                                            html += '<h3>' + album.name + '</h3><h4>';
+                                            var exceededLimit = album.artists.map(artist => artist.name).join(', ').length > 30;
+                                            for(var i=0; i<album.artists.length; i++){
+                                                var characters = 0;
+                                                if(i != album.artists.length-1){
+                                                    html += '<span class="artist-redirect" artist-id="' + album.artists[i].id + '">';
+                                                    html += album.artists[i].name + '</span>, ';
+                                                    characters += album.artists[i].name.length;
+                                                }else{
+                                                    if(exceededLimit){
+                                                        html += '<span class="artist-redirect" artist-id="' + album.artists[i].id + '">';
+                                                        html += album.artists[i].name.substring(0, 30-characters) + '</span>';
+                                                    }else{
+                                                        html += '<span class="artist-redirect" artist-id="' + album.artists[i].id + '">';
+                                                        html += album.artists[i].name + '</span>';
+                                                    }
+                                                }
+                                            }
+                                            html += '</div></a>';
+                                            container.insertAdjacentHTML('beforeend', html);
+                                        })
+                                        .catch(function(err) {
+                                            console.error('Error:', err);
+                                        });
+                                    }else{
+                                        html +='" id="' + uri.split(':')[2] +'" onclick="setupPlaylist(this);"><div class="card">';
+                                        returnAccessToken()
+                                        .then(function(accessToken) {
+                                            return getPlaylist(link[2], accessToken);
+                                        })
+                                        .then(function(playlist) {
+                                            html += '<img src="' + playlist.images[0].url + '">';
+                                            html += '<h3>' + (playlist.name.length !=0 ? playlist.name : ' ') + '</h3>';
+                                            html += '<h4>' + (playlist.owner.display_name.length > 30 ? 
+                                            playlist.owner.display_name.substring(0, 30) + '...' : playlist.owner.display_name) + '</h4>';
+                                            html += '</div></a>';
+                                            container.insertAdjacentHTML('beforeend', html);
+                                        })
+                                        .catch(function(err) {
+                                            console.error('Error:', err);
+                                        });
+                                    }
+                                }
+                            });
+                        }else{
+                            html +='" onclick="setupPlaylistUserProfile(this);"><div class="card">';
+                            if (playlist.foto_playlist) {
+                                html += '<img src="' + playlist.foto_playlist + '">';
+                            } else {
+                                html += '<img src="./assets/img/default-song.png">';
+                            }
+                            html += '<h3>' + ((playlist.nombre_playlist === null) ? 'Sin Nombre' : playlist.nombre_playlist) + '</h3>';
+                            html += '<h4><?php echo htmlspecialchars($nombreUsuario); ?></h4>';
+                            html += '</div></a>';
+                            container.insertAdjacentHTML('beforeend', html);
                         }
-                        html += '<h3>' + playlist.nombre_playlist + '</h3>';
-                        html += '</div></a>';
-                        container.insertAdjacentHTML('beforeend', html);
+    
                     });
                 })
                 .catch(err => console.error('Error loading playlists:', err));
@@ -151,7 +213,6 @@
                 var playlistImage = playlist.image ? playlist.image : './assets/img/default-song.png';
 
                 if (playlist.editable == 1) {
-
                     var html = '<div class="main-content" id="playlist-display" style="display: flex">' +
                         '<div id="playlist-info" playlist-id="' + id +'"><section>' +
                         '<input id="playlist-name" type="text" value="' + playlistName + '" /><div id="playlist-owner">';
@@ -164,7 +225,6 @@
                     html += '<tbody id="playlist-tbody"></tbody></table></div></div>';
 
                 }else {
-
                     var html = '<div class="main-content" id="playlist-display" style="display: flex">' +
                         '<div id="playlist-info" playlist-id="' + id +'"><section>' +
                         '<span id="playlist-name"/>' + playlistName + '</span><div id="playlist-owner">';
@@ -209,10 +269,20 @@
                             }
                         });
                         tr += '</span></section></td>';
-                        tr += '<td><span onclick="setupAlbum(this);" class="artist-redirect" id="' + songData.album.id + '">' + songData.album + '</span></td>';
-                        tr += '<td>' + minutes(songData.duration_ms) + '</td>';
-                        tr += '</tr>';
-                        $('#playlist-tbody').append(tr);
+                        returnAccessToken()
+                            .then(function(accessToken) {
+                                return getTrack(songData.id, accessToken);
+                            })
+                            .then(function(track) {
+                                console.log(track);
+                                tr += '<td><span onclick="setupAlbum(this);" class="artist-redirect" id="' + track.album.id + '">' + track.album.name + '</span></td>';
+                                tr += '<td>' + minutes(songData.duration_ms) + '</td>';
+                                tr += '</tr>';
+                                $('#playlist-tbody').append(tr);
+                            })
+                            .catch(function(err) {
+                                console.error('Error:', err);
+                            });
                     } catch (error) {
                         console.error('Error fetching Spotify track:', error);
                     }

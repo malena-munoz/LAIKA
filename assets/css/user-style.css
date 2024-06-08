@@ -125,8 +125,12 @@
     border-bottom-right-radius: 10px;
 }
 
-.user-display h3{
+#user-display h3{
     margin-top: var(--separation);
+}
+
+#user-display .artist-redirect:hover{
+    text-decoration: none;
 }
 
 .stats-note{
@@ -179,4 +183,32 @@
 .user-stats span{
     font-size: 20px;
     color: var(--low-lilac);
+}
+
+#user-display .scroll-left, #user-display .scroll-right{
+    display: none;
+}
+
+#main-user-playlists{
+    overflow-x: auto;
+    padding-bottom: var(--separation);
+}
+
+/* Ancho de la barra de desplazamiendo del contenedor 'scrollable-content' */
+#main-user-playlists::-webkit-scrollbar {
+    height: 5px;
+}
+
+/* Fondo de la barra de desplazamiendo del contenedor 'scrollable-content' */
+#main-user-playlists::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: var(--radius);
+}
+
+
+/* Cursor de la barra de desplazamiendo del contenedor 'scrollable-content' */
+#main-user-playlists::-webkit-scrollbar-thumb {
+    background: linear-gradient(79deg, rgba(55,58,81,1) 18%, rgba(117,91,125,1) 58%, rgba(173,136,176,1) 86%);
+    border-radius: var(--radius);
+    cursor: pointer;
 }

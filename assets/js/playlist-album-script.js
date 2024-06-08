@@ -37,6 +37,8 @@ function savePlaylistLink() {
         data: data,
         success: function(response) {
             console.log('Enlace de playlist guardado exitosamente en la base de datos.');
+            alert("Playlist/álbum guardado correctamente");
+            location.reload(true);
         },
         error: function(xhr, status, error) {
             console.error('Error al guardar el enlace de la playlist en la base de datos:', error);

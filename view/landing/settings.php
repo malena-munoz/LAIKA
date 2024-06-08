@@ -56,7 +56,7 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'Cambios guardados',
-                    text: 'Los cambios que has hecho se han guardado con exito. CIerre e inicie sesión de nuevo para verlos.'
+                    text: 'Los cambios que has hecho se han guardado con exito. Cierre e inicie sesión de nuevo para verlos.'
                 });
             } else {
                 Swal.fire({
@@ -82,7 +82,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Código enviado',
-                            text: 'Revisa tu correo para obtener el código de recuperación.'
+                            text: 'El código de recuperación ha sido enviado, por favor revise su correo.'
                         });
 
                         // Habilitar inputs de código

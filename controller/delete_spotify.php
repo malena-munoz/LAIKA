@@ -15,7 +15,7 @@ $idPlaylist = isset($_POST['id']) ? $conn->real_escape_string($_POST['id']) : ''
 $idUsuario = $_SESSION['idUsuario'];
 
 if ($idPlaylist && $idUsuario) {
-    $sql = "DELETE FROM usuario_playlists WHERE id_playlist = '$idPlaylist' AND id_usuario = '$idUsuario'";
+    $sql = "DELETE FROM usuario_playlists WHERE link_playlist = '$idPlaylist' AND id_usuario = '$idUsuario'";
     if ($conn->query($sql) === TRUE) {
         echo "Playlist eliminada exitosamente";
     } else {

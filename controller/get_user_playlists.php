@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 
 $idUsuario = $conn->real_escape_string($idUsuario);
 
-$sql = "SELECT id_playlist, nombre_playlist, foto_playlist, editable FROM usuario_playlists WHERE id_usuario = '$idUsuario'";
+$sql = "SELECT id_playlist, nombre_playlist, foto_playlist, editable, link_playlist FROM usuario_playlists WHERE id_usuario = '$idUsuario'";
 $result = $conn->query($sql);
 
 $playlists = [];

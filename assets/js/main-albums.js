@@ -22,7 +22,7 @@ $(document).ready(function() {
             type: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(clientId3 + ':' + clientSecret3)
+                'Authorization': 'Basic ' + btoa(clientId2 + ':' + clientSecret2)
             },
             data: 'grant_type=client_credentials',
             success: function(response) {
@@ -248,7 +248,7 @@ $(document).ready(function() {
         let trackCount = 0;
         let sectionCount = 0;
         let $currentSection;
-    
+        document.querySelectorAll('h3')[15].textContent = "Según tus artistas favoritos...";
         topArtists.forEach(function(artistName) {
             getArtistId(accessToken, artistName, function(artistId) {
                 if (artistId) {
@@ -374,6 +374,7 @@ $(document).ready(function() {
         var sectionCount = 0;
         var trackCount = 0;
         var $currentSection = $('<section id="viral-50-section-' + sectionCount + '"></section>');
+        document.querySelectorAll('h3')[16].textContent = "Según tus gustos musicales...";
         $('#viral-50-songs').append($currentSection);
     
         topGenres.forEach(function(genre) {
@@ -521,7 +522,7 @@ $(document).ready(function() {
     // Función para imprimir los artistas
     function printArtists(accessToken, topArtists) {
         var artistIds = new Set();
-
+        document.querySelectorAll('h3')[13].textContent = "¿Y tus artistas más escuchados?";
         topArtists.forEach(function(artist) {
             $.ajax({
                 url: 'https://api.spotify.com/v1/search',
@@ -762,7 +763,7 @@ function returnAccessToken() {
             type: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa(clientId3 + ':' + clientSecret3)
+                'Authorization': 'Basic ' + btoa(clientId2 + ':' + clientSecret2)
             },
             data: 'grant_type=client_credentials',
             success: function(response) {
@@ -1000,6 +1001,14 @@ function setupPlaylist(playlistCard) {
                         document.getElementById('shuffle-playlist').style.color = '#E8DAED';
                     }
                 }
+
+                document.querySelectorAll('.spotify-playlist-item').forEach(item => {
+                    var uri = item.getAttribute('data-uri');
+                    if(uri === playlist.uri){
+                        document.getElementById('add-playlist').style.display = 'none';
+                    }
+                });
+
                 openPlaylistAlbum();
             });
         })
@@ -1108,6 +1117,14 @@ function setupAlbum(albumCard) {
                         document.getElementById('shuffle-playlist').style.color = '#E8DAED';
                     }
                 }
+
+                document.querySelectorAll('.spotify-playlist-item').forEach(item => {
+                    var uri = item.getAttribute('data-uri');
+                    if(uri === album.uri){
+                        document.getElementById('add-playlist').style.display = 'none';
+                    }
+                });
+
                 openPlaylistAlbum();
             });
         })

@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 }
 
 // Insertar nueva playlist
-$sql = "INSERT INTO usuario_playlists (id_usuario, nombre_playlist, foto_playlist, editable) VALUES ('$idUsuario', NULL, NULL, 1)";
+$sql = "INSERT INTO usuario_playlists (id_usuario, nombre_playlist, foto_playlist, editable) VALUES ('$idUsuario', 'Sin Nombre', NULL, 1)";
 if ($conn->query($sql) === TRUE) {
     echo json_encode(['status' => 'success']);
 } else {

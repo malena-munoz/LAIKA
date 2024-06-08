@@ -228,13 +228,26 @@ function updatePlaylistName(id, name) {
     xhr.open('POST', './controller/update_playlist.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
-        if (xhr.status !== 200) {
+        if (xhr.status === 200) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: "Nombre de la playlist cambiado exitosamente.",
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                location.reload(true);
+            });
+        } else {
             console.error('Error al actualizar el nombre de la playlist.');
+            Swal.fire({
+                title: 'Error',
+                text: 'Error al actualizar el nombre de la playlist.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
         }
     };
     xhr.send('id=' + id + '&name=' + encodeURIComponent(name));
-    alert("Nombre de la playlist cambiado exitosamente.");
-    location.reload(true);
 }
 
 function updatePlaylistImage(id, imageData) {
@@ -242,13 +255,26 @@ function updatePlaylistImage(id, imageData) {
     xhr.open('POST', './controller/update_playlist.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
-        if (xhr.status !== 200) {
+        if (xhr.status === 200) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: "Imagen de la playlist cargada exitosamente.",
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                location.reload(true);
+            });
+        } else {
             console.error('Error al actualizar la imagen de la playlist.');
+            Swal.fire({
+                title: 'Error',
+                text: 'Error al actualizar la imagen de la playlist.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
         }
     };
     xhr.send('id=' + id + '&image=' + encodeURIComponent(imageData));
-    alert("Imagen de la playlist cargada exitosamente.");
-    location.reload(true);
 }
 
 function deletePlaylist(id, type) {
@@ -257,11 +283,24 @@ function deletePlaylist(id, type) {
     xhr.open('POST', './controller/delete_' + typePHP + '.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
-        if (xhr.status !== 200) {
+        if (xhr.status === 200) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: "Playlist borrada exitosamente.",
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                location.reload(true);
+            });
+        } else {
             console.error('Error al borrar la playlist.');
+            Swal.fire({
+                title: 'Error',
+                text: 'Error al borrar la playlist.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
         }
     };
     xhr.send('id=' + id + '&type=' + type);
-    alert("Playlist borrada exitosamente.");
-    location.reload(true);
 }

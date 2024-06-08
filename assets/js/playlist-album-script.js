@@ -37,11 +37,23 @@ function savePlaylistLink() {
         data: data,
         success: function(response) {
             console.log('Enlace de playlist guardado exitosamente en la base de datos.');
-            alert("Playlist/álbum guardado correctamente");
-            location.reload(true);
+            Swal.fire({
+                title: '¡Éxito!',
+                text: "Playlist/álbum guardado correctamente",
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                location.reload(true);
+            });
         },
         error: function(xhr, status, error) {
             console.error('Error al guardar el enlace de la playlist en la base de datos:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Error al guardar el enlace de la playlist en la base de datos.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
         }
     });
 }

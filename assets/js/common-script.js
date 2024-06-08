@@ -213,6 +213,7 @@ function loadUserPlaylists() {
 // Guardar canción en la playlist seleccionada
 document.getElementById('player-add-song').addEventListener('click', function() {
     var select = document.getElementById('lists');
+    var selectedOption = select.options[select.selectedIndex]; // Obtener la opción seleccionada
     var idPlaylist = select.value;
     var songTitle = document.getElementById('song-title').textContent;
     var songArtists = document.getElementById('song-artists').textContent;
@@ -223,12 +224,23 @@ document.getElementById('player-add-song').addEventListener('click', function() 
     xhr.onload = function() {
         if (xhr.status === 200) {
             console.log('Canción agregada exitosamente.');
+            Swal.fire({
+                title: '¡Éxito!',
+                text: "Canción agregada exitosamente a " + selectedOption.textContent + "",
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
         } else {
             console.error('Error al agregar la canción a la playlist.');
+            Swal.fire({
+                title: 'Error',
+                text: 'Error al agregar la canción a la playlist.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
         }
     };
     xhr.send('id_playlist=' + encodeURIComponent(idPlaylist) + '&nombre_cancion=' + encodeURIComponent(songTitle) + '&artista_cancion=' + encodeURIComponent(songArtists));
-    alert("Canción agregada exitosamente a '" + select.textContent + "'");
 });
 
 

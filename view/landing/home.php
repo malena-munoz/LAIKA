@@ -64,7 +64,7 @@
     <section class="contact">
         <section>
             <span class="material-symbols-rounded">call</span>
-            <span class="contact-info">(+34) 000 00 00 00</span>
+            <span class="contact-info">(+34) 651 41 87 41</span>
         </section>
         <section>
             <span class="material-symbols-rounded">mail</span>

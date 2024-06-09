@@ -38,7 +38,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
                 <div class="tech">
                     <section>
                         <img src="assets/img/php.png" alt="">
-                        <h2>PHP</h2>
+                        <h2>HTML5 en PHP</h2>
                     </section>
                     <section>
                         <img src="assets/img/css.png" alt="">

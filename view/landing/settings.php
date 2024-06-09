@@ -14,7 +14,7 @@
         </div>
         <div class="form-inp settings-inp" id="profile-inp">
             <section>
-                <h3>Profile icon</h3>
+                <h3>Foto de perfil</h3>
                 <input type="file" id="profile" name="profile" accept=".png, .gif, .jpg" placeholder="Foto de perfil...">
             </section>
             <section>

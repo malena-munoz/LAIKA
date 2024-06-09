@@ -32,7 +32,7 @@
 
     <!-- ,---------- ALBUMES ----------, -->
 
-    <h3>Álbumes que lo están petando</h3>
+    <h3 id="albums-home">Álbumes que lo están petando</h3>
     <div id="albums-container" class="scroll-container">
         <button id="albums-scroll-left" class="scroll-left">
             <span class="material-symbols-rounded">chevron_left</span>
@@ -99,7 +99,7 @@
 
     <!-- ,---------- ARTISTAS ----------, -->
 
-    <h3>Artistas del momento</h3>
+    <h3 id="artists-home">Artistas del momento</h3>
     <div id="artists-container" class="scroll-container">
         <button id="albums-scroll-left" class="scroll-left">
             <span class="material-symbols-rounded">chevron_left</span>
@@ -213,7 +213,7 @@
 
     <!-- ,---------- CANCIONES ----------, -->
 
-    <h3>Top 50 mundial</h3>
+    <h3 id="top-home">Top 50 mundial</h3>
     <div id="top-50" class="scroll-container">
         <button id="albums-scroll-left" class="scroll-left">
             <span class="material-symbols-rounded">chevron_left</span>
@@ -275,7 +275,7 @@
         </button>
     </div>
 
-    <h3>Viral 50 mundial</h3>
+    <h3 id="viral-home">Viral 50 mundial</h3>
     <div id="viral-50" class="scroll-container">
         <button id="albums-scroll-left" class="scroll-left">
             <span class="material-symbols-rounded">chevron_left</span>

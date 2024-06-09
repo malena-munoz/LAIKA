@@ -124,7 +124,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
                         </div>
                         <div class="functionality">
                             <section class="h-line"></section>
-                            <h2>Maniputación de la base de datos.</h2>
+                            <h2>Manipulación de la base de datos.</h2>
                         </div>
                     </section>
                 </section>

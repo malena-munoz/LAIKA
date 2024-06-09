@@ -98,7 +98,7 @@ $(document).ready(function() {
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
-    
+        document.getElementById('albums-home').textContent = 'Álbumes de tus artistas preferidos';
         // Función para mostrar los álbumes
         function displayAlbums(albums) {
             albums.forEach(function(album) {
@@ -248,7 +248,7 @@ $(document).ready(function() {
         let trackCount = 0;
         let sectionCount = 0;
         let $currentSection;
-        document.querySelectorAll('h3')[15].textContent = "Según tus artistas favoritos...";
+        document.getElementById('top-home').textContent = "Según tus artistas favoritos...";
         topArtists.forEach(function(artistName) {
             getArtistId(accessToken, artistName, function(artistId) {
                 if (artistId) {
@@ -374,7 +374,7 @@ $(document).ready(function() {
         var sectionCount = 0;
         var trackCount = 0;
         var $currentSection = $('<section id="viral-50-section-' + sectionCount + '"></section>');
-        document.querySelectorAll('h3')[16].textContent = "Según tus gustos musicales...";
+        document.getElementById('viral-home').textContent = "Según tus gustos musicales...";
         $('#viral-50-songs').append($currentSection);
     
         topGenres.forEach(function(genre) {
@@ -522,7 +522,7 @@ $(document).ready(function() {
     // Función para imprimir los artistas
     function printArtists(accessToken, topArtists) {
         var artistIds = new Set();
-        document.querySelectorAll('h3')[13].textContent = "¿Y tus artistas más escuchados?";
+        document.getElementById('artists-home').textContent = "¿Y tus artistas más escuchados?";
         topArtists.forEach(function(artist) {
             $.ajax({
                 url: 'https://api.spotify.com/v1/search',

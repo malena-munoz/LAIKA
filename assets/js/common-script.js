@@ -225,18 +225,30 @@ document.getElementById('player-add-song').addEventListener('click', function() 
         if (xhr.status === 200) {
             console.log('Canción agregada exitosamente.');
             Swal.fire({
-                title: '¡Éxito!',
-                text: "Canción agregada exitosamente a " + selectedOption.textContent + "",
+                toast: true,
                 icon: 'success',
-                confirmButtonText: 'Aceptar'
+                title: "Canción agregada exitosamente a " + selectedOption.textContent + "",
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#28a745',
+                iconColor: '#fff',
+                color: '#fff'
             });
         } else {
             console.error('Error al agregar la canción a la playlist.');
             Swal.fire({
-                title: 'Error',
-                text: 'Error al agregar la canción a la playlist.',
+                toast: true,
                 icon: 'error',
-                confirmButtonText: 'Aceptar'
+                title: 'Error al agregar la canción a la playlist.',
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#dc3545',
+                iconColor: '#fff',
+                color: '#fff'
             });
         }
     };

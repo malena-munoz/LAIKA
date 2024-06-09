@@ -38,10 +38,17 @@ function savePlaylistLink() {
         success: function(response) {
             console.log('Enlace de playlist guardado exitosamente en la base de datos.');
             Swal.fire({
-                title: '¡Éxito!',
-                text: "Playlist/álbum guardado correctamente",
+                toast: true,
+                position: 'top-end',
                 icon: 'success',
-                confirmButtonText: 'Aceptar'
+                title: 'Playlist/álbum guardado correctamente',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
             }).then(() => {
                 location.reload(true);
             });
@@ -49,10 +56,17 @@ function savePlaylistLink() {
         error: function(xhr, status, error) {
             console.error('Error al guardar el enlace de la playlist en la base de datos:', error);
             Swal.fire({
-                title: 'Error',
-                text: 'Error al guardar el enlace de la playlist en la base de datos.',
+                toast: true,
+                position: 'top-end',
                 icon: 'error',
-                confirmButtonText: 'Aceptar'
+                title: 'Error al guardar la playlist',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
             });
         }
     });

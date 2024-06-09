@@ -15,11 +15,13 @@
                 </div>
 
                 <div id="instruccion-code" class="instruccion" style="display: none;">Le hemos enviado un código a su correo electrónico</div>
-                <div class="password" id="code-inp" style="display: none;">
-                    <input maxlength="1" class="input" name="text" type="text" />
-                    <input maxlength="1" class="input" name="text" type="text" />
-                    <input maxlength="1" class="input" name="text" type="text" />
-                    <input maxlength="1" class="input" name="text" type="text" />
+                <div id="code-inp" style="display: none;">
+                    <div class="password">
+                        <input maxlength="1" class="input" name="text" type="text" />
+                        <input maxlength="1" class="input" name="text" type="text" />
+                        <input maxlength="1" class="input" name="text" type="text" />
+                        <input maxlength="1" class="input" name="text" type="text" />
+                    </div>
                 </div>
 
                 <div id="instruccion-recover-clave" class="instruccion" style="display: none;">Contraseña</div>
@@ -41,7 +43,6 @@
                 <input type="button" class="btn primary" value="Cambiar Contraseña" id="cambiar-password-button" style="display: none;">
             </div>
             <div id="forgot-pass">
-                <a href="#" id="already-logged">Ya tengo una cuenta.</a>
                 <div id="bar"></div>
             </div>
         </div>

@@ -6,9 +6,31 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
             if (xhr.status === 200) {
-                location.reload();
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Playlist creada exitosamente.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#4caf50', // Color verde para éxito
+                    color: '#ffffff'
+                });
+                setTimeout(function() {
+                    location.reload(true);
+                }, 2000); // Esperar 3 segundos antes de recargar
             } else {
                 console.error('Error al insertar la playlist.');
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Error al insertar la playlist.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f44336', // Color rojo para error
+                    color: '#ffffff'
+                });
             }
         };
         xhr.send('nombre_playlist=New Playlist');
@@ -230,20 +252,29 @@ function updatePlaylistName(id, name) {
     xhr.onload = function() {
         if (xhr.status === 200) {
             Swal.fire({
-                title: '¡Éxito!',
-                text: "Nombre de la playlist cambiado exitosamente.",
+                toast: true,
+                position: 'top-end',
                 icon: 'success',
-                confirmButtonText: 'Aceptar'
-            }).then(() => {
-                location.reload(true);
+                title: 'Nombre de la playlist cambiado exitosamente.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#4caf50', // Color verde para éxito
+                color: '#ffffff'
             });
+            setTimeout(function() {
+                location.reload(true);
+            }, 2000); // Esperar 3 segundos antes de recargar
         } else {
             console.error('Error al actualizar el nombre de la playlist.');
             Swal.fire({
-                title: 'Error',
-                text: 'Error al actualizar el nombre de la playlist.',
+                toast: true,
+                position: 'top-end',
                 icon: 'error',
-                confirmButtonText: 'Aceptar'
+                title: 'Error al actualizar el nombre de la playlist.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f44336', // Color rojo para error
+                color: '#ffffff'
             });
         }
     };
@@ -257,20 +288,29 @@ function updatePlaylistImage(id, imageData) {
     xhr.onload = function() {
         if (xhr.status === 200) {
             Swal.fire({
-                title: '¡Éxito!',
-                text: "Imagen de la playlist cargada exitosamente.",
+                toast: true,
+                position: 'top-end',
                 icon: 'success',
-                confirmButtonText: 'Aceptar'
-            }).then(() => {
-                location.reload(true);
+                title: 'Imagen de la playlist cargada exitosamente.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#4caf50', // Color verde para éxito
+                color: '#ffffff'
             });
+            setTimeout(function() {
+                location.reload(true);
+            }, 2000); // Esperar 3 segundos antes de recargar
         } else {
             console.error('Error al actualizar la imagen de la playlist.');
             Swal.fire({
-                title: 'Error',
-                text: 'Error al actualizar la imagen de la playlist.',
+                toast: true,
+                position: 'top-end',
                 icon: 'error',
-                confirmButtonText: 'Aceptar'
+                title: 'Error al actualizar la imagen de la playlist.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f44336', // Color rojo para error
+                color: '#ffffff'
             });
         }
     };
@@ -285,20 +325,29 @@ function deletePlaylist(id, type) {
     xhr.onload = function() {
         if (xhr.status === 200) {
             Swal.fire({
-                title: '¡Éxito!',
-                text: "Playlist borrada exitosamente.",
+                toast: true,
+                position: 'top-end',
                 icon: 'success',
-                confirmButtonText: 'Aceptar'
-            }).then(() => {
-                location.reload(true);
+                title: 'Playlist borrada exitosamente.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#4caf50', // Color verde para éxito
+                color: '#ffffff'
             });
+            setTimeout(function() {
+                location.reload(true);
+            }, 2000); // Esperar 3 segundos antes de recargar
         } else {
             console.error('Error al borrar la playlist.');
             Swal.fire({
-                title: 'Error',
-                text: 'Error al borrar la playlist.',
+                toast: true,
+                position: 'top-end',
                 icon: 'error',
-                confirmButtonText: 'Aceptar'
+                title: 'Error al borrar la playlist.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f44336', // Color rojo para error
+                color: '#ffffff'
             });
         }
     };

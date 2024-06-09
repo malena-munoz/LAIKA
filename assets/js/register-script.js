@@ -43,17 +43,27 @@ document.getElementById("continuar-button").addEventListener("click", function()
                 } else {
                     // Nombre de usuario no disponible, mostrar SweetAlert de error
                     Swal.fire({
+                        toast: true,
+                        position: 'top-end',
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'El nombre de usuario ya está en uso. Por favor, elija otro.'
+                        title: 'El nombre de usuario ya está en uso. Por favor, elija otro.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f44336', // Color rojo para error
+                        color: '#ffffff'
                     });
                 }
             } else {
                 // Error al realizar la solicitud AJAX, mostrar SweetAlert de error
                 Swal.fire({
+                    toast: true,
+                    position: 'top-end',
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'Se produjo un error al verificar el nombre de usuario. Por favor, inténtelo de nuevo.'
+                    title: 'Se produjo un error al verificar el nombre de usuario. Por favor, inténtelo de nuevo.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f44336', // Color rojo para error
+                    color: '#ffffff'
                 });
             }
         }
@@ -126,15 +136,32 @@ document.getElementById("submit-button").addEventListener("click", function() {
 
                                             // Agregar transición
                                             bar.style.transition = "width 0.5s ease-in-out";
+                                            
+                                            Swal.fire({
+                                                toast: true,
+                                                position: 'top-end',
+                                                icon: 'success',
+                                                title: 'Registro exitoso. Bienvenido/a ' + nombreUsuario,
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                background: '#4caf50', // Color verde para éxito
+                                                color: '#ffffff'
+                                            });
+                                            
                                             setTimeout(function(){
                                                 window.location.reload();
                                             }, 3000);
                                         } else {
                                             // Error al insertar la contraseña en la tabla notas, mostrar SweetAlert de error
                                             Swal.fire({
+                                                toast: true,
+                                                position: 'top-end',
                                                 icon: 'error',
-                                                title: 'Oops...',
-                                                text: 'Se produjo un error al registrar la contraseña. Por favor, inténtelo de nuevo.'
+                                                title: 'Se produjo un error al registrar la contraseña. Por favor, inténtelo de nuevo.',
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                background: '#f44336', // Color rojo para error
+                                                color: '#ffffff'
                                             });
                                         }
                                     }
@@ -143,9 +170,14 @@ document.getElementById("submit-button").addEventListener("click", function() {
                             } else {
                                 // Error al insertar los datos en la tabla usuarios, mostrar SweetAlert de error
                                 Swal.fire({
+                                    toast: true,
+                                    position: 'top-end',
                                     icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'Se produjo un error al registrar el usuario. Por favor, inténtelo de nuevo.'
+                                    title: 'Se produjo un error al registrar el usuario. Por favor, inténtelo de nuevo.',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    background: '#f44336', // Color rojo para error
+                                    color: '#ffffff'
                                 });
                             }
                         }
@@ -154,17 +186,27 @@ document.getElementById("submit-button").addEventListener("click", function() {
                 } else {
                     // Email no disponible, mostrar SweetAlert de error
                     Swal.fire({
+                        toast: true,
+                        position: 'top-end',
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'El email ya está en uso. Por favor, elija otro.'
+                        title: 'El email ya está en uso. Por favor, elija otro.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f44336', // Color rojo para error
+                        color: '#ffffff'
                     });
                 }
             } else {
                 // Error al realizar la solicitud AJAX, mostrar SweetAlert de error
                 Swal.fire({
+                    toast: true,
+                    position: 'top-end',
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'Se produjo un error al verificar el email. Por favor, inténtelo de nuevo.'
+                    title: 'Se produjo un error al verificar el email. Por favor, inténtelo de nuevo.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f44336', // Color rojo para error
+                    color: '#ffffff'
                 });
             }
         }

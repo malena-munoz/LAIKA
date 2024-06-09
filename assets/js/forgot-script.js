@@ -31,37 +31,66 @@ document.getElementById("continuar-recover-button").addEventListener("click", fu
                                     style.innerHTML = '#bar::after {display: none;}';
                                     document.head.appendChild(style);
                                     bar.style.transition = "width 0.5s ease-in-out";
+
+                                    Swal.fire({
+                                        toast: true,
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Código enviado exitosamente.',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        background: '#4caf50', // Color verde para éxito
+                                        color: '#ffffff'
+                                    });
                                 } else {
                                     Swal.fire({
+                                        toast: true,
+                                        position: 'top-end',
                                         icon: 'error',
-                                        title: 'Oops...',
-                                        text: 'No se pudo enviar el código. Por favor, inténtelo de nuevo.'
+                                        title: 'No se pudo enviar el código. Por favor, inténtelo de nuevo.',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        background: '#f44336', // Color rojo para error
+                                        color: '#ffffff'
                                     });
                                 }
                             } else {
                                 Swal.fire({
+                                    toast: true,
+                                    position: 'top-end',
                                     icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'Se produjo un error al verificar el email. Por favor, inténtelo de nuevo.'
+                                    title: 'Se produjo un error al verificar el email. Por favor, inténtelo de nuevo.',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    background: '#f44336', // Color rojo para error
+                                    color: '#ffffff'
                                 });
                             }
                         }
                     };
                     xhrPost.send("email=" + encodeURIComponent(emailRecover));
                 } else {
-                    // Email no disponible, mostrar SweetAlert de error
                     Swal.fire({
+                        toast: true,
+                        position: 'top-end',
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'El email no está registrado. Por favor, elija otro.'
+                        title: 'El email no está registrado. Por favor, elija otro.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f44336', // Color rojo para error
+                        color: '#ffffff'
                     });
                 }
             } else {
-                // Error al realizar la solicitud AJAX, mostrar SweetAlert de error
                 Swal.fire({
+                    toast: true,
+                    position: 'top-end',
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'Se produjo un error al verificar el email. Por favor, inténtelo de nuevo.'
+                    title: 'Se produjo un error al verificar el email. Por favor, inténtelo de nuevo.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f44336', // Color rojo para error
+                    color: '#ffffff'
                 });
             }
         }
@@ -72,7 +101,7 @@ document.getElementById("continuar-recover-button").addEventListener("click", fu
 document.getElementById("validar-recover-button").addEventListener("click", function() {
     var inputs = document.querySelectorAll("#code-inp .input");
     var code = Array.from(inputs).map(input => input.value).join("");
-    
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "./view/verifiers/validar_codigo.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -89,18 +118,39 @@ document.getElementById("validar-recover-button").addEventListener("click", func
                     document.getElementById("claveRepetida-recover-inp").style.display = "block";
                     document.getElementById("instruccion-recover-claveRepetida").style.display = "block";
                     document.getElementById("cambiar-password-button").style.display = "block";
+
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Código validado exitosamente.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#4caf50', // Color verde para éxito
+                        color: '#ffffff'
+                    });
                 } else {
                     Swal.fire({
+                        toast: true,
+                        position: 'top-end',
                         icon: 'error',
-                        title: 'Código incorrecto',
-                        text: 'El código de verificación es incorrecto. Por favor, inténtelo de nuevo.'
+                        title: 'El código de verificación es incorrecto. Por favor, inténtelo de nuevo.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f44336', // Color rojo para error
+                        color: '#ffffff'
                     });
                 }
             } else {
                 Swal.fire({
+                    toast: true,
+                    position: 'top-end',
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'Se produjo un error al verificar el código. Por favor, inténtelo de nuevo.'
+                    title: 'Se produjo un error al verificar el código. Por favor, inténtelo de nuevo.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f44336', // Color rojo para error
+                    color: '#ffffff'
                 });
             }
         }
@@ -114,9 +164,14 @@ document.getElementById("cambiar-password-button").addEventListener("click", fun
 
     if (newPassword !== repeatPassword) {
         Swal.fire({
+            toast: true,
+            position: 'top-end',
             icon: 'error',
-            title: 'Oops...',
-            text: 'Las contraseñas no coinciden. Por favor, inténtelo de nuevo.'
+            title: 'Las contraseñas no coinciden. Por favor, inténtelo de nuevo.',
+            showConfirmButton: false,
+            timer: 3000,
+            background: '#f44336', // Color rojo para error
+            color: '#ffffff'
         });
         return;
     }
@@ -135,27 +190,50 @@ document.getElementById("cambiar-password-button").addEventListener("click", fun
                     document.getElementById("instruccion-recover-claveRepetida").style.display = "none";
                     document.getElementById("cambiar-password-button").style.display = "none";
                     document.getElementById("password-changed").style.display = "block";
-                    document.getElementById("cambiar-password-button").style.display = "none";
-                                            
-                    // Cambiar estilos del bar y bar:before
+
                     var bar = document.getElementById("bar");
                     var barBefore = bar.previousElementSibling;
                     bar.style.width = "66px";
                     var style = document.createElement('style');
                     style.innerHTML = '#bar::after, #bar::before {display: none;}';
                     document.head.appendChild(style);
+
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Contraseña cambiada exitosamente.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#4caf50', // Color verde para éxito
+                        color: '#ffffff'
+                    });
+
+                    setTimeout(function() {
+                        location.reload(true);
+                    }, 3000); // Esperar 3 segundos antes de recargar
                 } else {
                     Swal.fire({
+                        toast: true,
+                        position: 'top-end',
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'No se pudo cambiar la contraseña. Por favor, inténtelo de nuevo.'
+                        title: 'No se pudo cambiar la contraseña. Por favor, inténtelo de nuevo.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f44336', // Color rojo para error
+                        color: '#ffffff'
                     });
                 }
             } else {
                 Swal.fire({
+                    toast: true,
+                    position: 'top-end',
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'Se produjo un error al cambiar la contraseña. Por favor, inténtelo de nuevo.'
+                    title: 'Se produjo un error al cambiar la contraseña. Por favor, inténtelo de nuevo.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f44336', // Color rojo para error
+                    color: '#ffffff'
                 });
             }
         }

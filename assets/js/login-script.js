@@ -24,33 +24,65 @@ document.getElementById("login-submit-button").addEventListener("click", functio
                     // Mostrar mensaje de bienvenida al usuario
                     document.getElementById("welcome-user-logged").textContent = "¡Bienvenido/a de nuevo, " + response.nombreUsuario + "!";
                     document.getElementById("welcome-user-logged").style.display = "block";
+                    
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Inicio de sesión exitoso',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#4caf50', // Color verde para éxito
+                        color: '#ffffff'
+                    });
+
                     setTimeout(function(){
                         window.location.reload();
-                    }, 3000);
+                    }, 3000); // Esperar 3 segundos antes de recargar
                 } else if (response.status === "unregistered_email") {
                     Swal.fire({
+                        toast: true,
+                        position: 'top-end',
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'El email no está registrado. Por favor, regístrate primero.'
+                        title: 'El email no está registrado. Por favor, regístrate primero.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f44336', // Color rojo para error
+                        color: '#ffffff'
                     });
                 } else if (response.status === "incorrect_password") {
                     Swal.fire({
+                        toast: true,
+                        position: 'top-end',
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'Contraseña incorrecta. Por favor, inténtalo de nuevo.'
+                        title: 'Contraseña incorrecta. Por favor, inténtalo de nuevo.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f44336', // Color rojo para error
+                        color: '#ffffff'
                     });
                 } else {
                     Swal.fire({
+                        toast: true,
+                        position: 'top-end',
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'Se produjo un error al iniciar sesión. Por favor, inténtalo de nuevo.'
+                        title: 'Se produjo un error al iniciar sesión. Por favor, inténtalo de nuevo.',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f44336', // Color rojo para error
+                        color: '#ffffff'
                     });
                 }
             } else {
                 Swal.fire({
+                    toast: true,
+                    position: 'top-end',
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'Se produjo un error al comunicarse con el servidor. Por favor, inténtalo de nuevo.'
+                    title: 'Se produjo un error al comunicarse con el servidor. Por favor, inténtalo de nuevo.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f44336', // Color rojo para error
+                    color: '#ffffff'
                 });
             }
         }

@@ -56,18 +56,33 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'Cambios guardados',
-                    text: 'Los cambios que has hecho se han guardado con exito. Cierre e inicie sesión de nuevo para verlos.'
+                    text: 'Los cambios que has hecho se han guardado con exito. Cierre e inicie sesión de nuevo para verlos.',
+                    customClass: {
+                        container: 'colored-toast-container',
+                        popup: 'colored-toast-popup',
+                        header: 'colored-toast-header',
+                        title: 'colored-toast-title',
+                        content: 'colored-toast-content'
+                    }
                 });
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Error al guardar los cambios.'
+                    text: 'Error al guardar los cambios.',
+                    customClass: {
+                        container: 'colored-toast-container',
+                        popup: 'colored-toast-popup',
+                        header: 'colored-toast-header',
+                        title: 'colored-toast-title',
+                        content: 'colored-toast-content'
+                    }
                 });
             }
         };
         xhr.send(formData);
     });
+
     document.getElementById("request-code").addEventListener("click", function() {
         var email = "<?php echo $emailUsuario; ?>";
 
@@ -82,7 +97,14 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Código enviado',
-                            text: 'El código de recuperación ha sido enviado, por favor revise su correo.'
+                            text: 'El código de recuperación ha sido enviado, por favor revise su correo.',
+                            customClass: {
+                                container: 'colored-toast-container',
+                                popup: 'colored-toast-popup',
+                                header: 'colored-toast-header',
+                                title: 'colored-toast-title',
+                                content: 'colored-toast-content'
+                            }
                         });
 
                         // Habilitar inputs de código
@@ -94,14 +116,28 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'No se pudo enviar el código. Por favor, inténtelo de nuevo.'
+                            text: 'No se pudo enviar el código. Por favor, inténtelo de nuevo.',
+                            customClass: {
+                                container: 'colored-toast-container',
+                                popup: 'colored-toast-popup',
+                                header: 'colored-toast-header',
+                                title: 'colored-toast-title',
+                                content: 'colored-toast-content'
+                            }
                         });
                     }
                 } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Se produjo un error al enviar el código. Por favor, inténtelo de nuevo.'
+                        text: 'Se produjo un error al enviar el código. Por favor, inténtelo de nuevo.',
+                        customClass: {
+                            container: 'colored-toast-container',
+                            popup: 'colored-toast-popup',
+                            header: 'colored-toast-header',
+                            title: 'colored-toast-title',
+                            content: 'colored-toast-content'
+                        }
                     });
                 }
             }
@@ -128,7 +164,14 @@
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Código válido',
-                                        text: 'Ahora puedes ingresar tu nueva contraseña.'
+                                        text: 'Ahora puedes ingresar tu nueva contraseña.',
+                                        customClass: {
+                                            container: 'colored-toast-container',
+                                            popup: 'colored-toast-popup',
+                                            header: 'colored-toast-header',
+                                            title: 'colored-toast-title',
+                                            content: 'colored-toast-content'
+                                        }
                                     });
                                     document.getElementById("new-password").disabled = false;
                                     document.getElementById("new-password").classList.remove("disabled");
@@ -136,14 +179,28 @@
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Código incorrecto',
-                                        text: 'El código de verificación es incorrecto. Por favor, inténtelo de nuevo.'
+                                        text: 'El código de verificación es incorrecto. Por favor, inténtelo de nuevo.',
+                                        customClass: {
+                                            container: 'colored-toast-container',
+                                            popup: 'colored-toast-popup',
+                                            header: 'colored-toast-header',
+                                            title: 'colored-toast-title',
+                                            content: 'colored-toast-content'
+                                        }
                                     });
                                 }
                             } else {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Oops...',
-                                    text: 'Se produjo un error al verificar el código. Por favor, inténtelo de nuevo.'
+                                    text: 'Se produjo un error al verificar el código. Por favor, inténtelo de nuevo.',
+                                    customClass: {
+                                        container: 'colored-toast-container',
+                                        popup: 'colored-toast-popup',
+                                        header: 'colored-toast-header',
+                                        title: 'colored-toast-title',
+                                        content: 'colored-toast-content'
+                                    }
                                 });
                             }
                         }

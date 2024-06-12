@@ -42,6 +42,10 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
 }
 
+a[href*="utm_source=000webhostapp"] {
+    display: none !important;
+}
+
 body{
     min-height: 100vh;
     background: linear-gradient(45deg, var(--high-lilac-slate-gray) 50%, var(--slate-lavender)) fixed;

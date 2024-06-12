@@ -209,9 +209,9 @@ document.getElementById("cambiar-password-button").addEventListener("click", fun
                         color: '#ffffff'
                     });
 
-                    setTimeout(function() {
-                        location.reload(true);
-                    }, 3000); // Esperar 3 segundos antes de recargar
+                    // setTimeout(function() {
+                    //     location.reload(true);
+                    // }, 3000); // Esperar 3 segundos antes de recargar
                 } else {
                     Swal.fire({
                         toast: true,

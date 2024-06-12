@@ -10,6 +10,9 @@ $database = 'ReproductorTFC';
 // Obtener los datos enviados desde la solicitud AJAX
 $nombreUsuario = $_POST['nombreUsuario'];
 $emailUsuario = $_POST['emailUsuario'];
+$fotoUsuario = null;
+$fondoUsuario = null;
+$quoteUsuario = 'Que estas pensando...';
 
 // Establecer conexión con la base de datos
 $conn = new mysqli($hostname, $username, $password, $database);
@@ -20,7 +23,7 @@ if ($conn->connect_error) {
 }
 
 // Consulta para insertar los datos en la tabla usuarios
-$sql = "INSERT INTO usuarios (nombre_usuario, email_usuario) VALUES ('$nombreUsuario', '$emailUsuario')";
+$sql = "INSERT INTO usuarios (nombre_usuario, email_usuario, foto_usuario, fondo_usuario, quote_usuario) VALUES ('$nombreUsuario', '$emailUsuario', '$fotoUsuario', '$fondoUsuario', '$quoteUsuario')";
 if ($conn->query($sql) === TRUE) {
     // Obtener el ID de usuario generado
     $idUsuario = $conn->insert_id;

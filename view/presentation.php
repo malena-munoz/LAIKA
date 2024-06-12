@@ -158,7 +158,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
                     </section>
                 </div>
                 <span class="subtitle">¿Quieres tener la versión de escritorio? 
-                    Haz click <a href="https://drive.google.com/file/d/1vnZtPt_VBKhz8f9tGCI5CGGjTmIt6QpU/view?usp=sharing" target="_blank" >aquí</a> para descargarlo.</span>
+                    Haz click <a href="https://drive.google.com/file/d/1AjaUz8kbzazn4btKQ6_WpBy1cBTWtjkV/view?usp=sharing" target="_blank" >aquí</a> para descargarlo.</span>
             </div>
         </div>
         <div class="full-screen" style="flex-direction:column">

@@ -112,7 +112,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
                         </div>
                         <div class="functionality">
                             <section class="h-line"></section>
-                            <h2>Crear el argoritmo de recomendaciones al usuario.</h2>
+                            <h2>Crear el algoritmo de recomendaciones al usuario.</h2>
                         </div>
                         <div class="functionality">
                             <section class="h-line"></section>

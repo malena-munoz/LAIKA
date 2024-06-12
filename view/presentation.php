@@ -152,7 +152,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
                     <section style="width: fit-content">
                         <section style="flex-direction:row;width: fit-content">
                             <img src="assets/img/pc.png" alt="">
-                            <img src="assets/img/nativefier.png" alt="" style="height: 130px;width: auto;">
+                            <img src="assets/img/nativefier.png" alt="" id="nativefier">
                         </section>
                         <h2>Escritorio mediante 'Nativefier'</h2>
                     </section>

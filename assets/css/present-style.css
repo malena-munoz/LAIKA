@@ -330,3 +330,8 @@ p{
 .subtitle a:hover{
     text-decoration: underline;
 }
+
+#nativefier{
+    height: 130px;
+    width: auto;
+}
